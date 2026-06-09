@@ -1,0 +1,234 @@
+Issue,Symptoms_Observed,Root_Cause_Problem,Solution,Category,Device,combined
+Remote connection issue,no network access,,PC restart after update,,PC,remote connection issue no network access 
+No remote control of PSU via RBS,Voltcraft PSU not detected,,Replace Voltcraft model with EA-PS Model,,PSU,no remote control of psu via rbs voltcraft psu not detected 
+Replace A2 sample with B0,,,,,ECU,replace a2 sample with b0  
+PC not connecting,no network access,,Require pre logged in user,,PC,pc not connecting no network access 
+Relay card not working,no power on relay card,,"Fuse blown, needs replacement",,Relay_Card,relay card not working no power on relay card 
+Sample power down,very little current (0.054 A),,,,ECU,sample power down very little current (0.054 a) 
+"B2 sample test failing, bench blocked",,,Sample Swap,,ECU,"b2 sample test failing, bench blocked  "
+"Bench Blocked (Debug port fail, bus error at address DAP:0x80038FE0) -> target rest detected",Target in continuous reset,,DebiProg – Flash Erase,,ECU,"bench blocked (debug port fail, bus error at address dap:0x80038fe0) -> target rest detected target in continuous reset "
+Sample in Reset mode,Target in Continuous reset,,DebiProg – Flash Erase,,ECU,sample in reset mode target in continuous reset 
+Bus address error,Sample drawing very little current,,RA6 recovery steps,,ECU,bus address error sample drawing very little current 
+Sample in Reset mode,Sample drawing very little current,,Debiprog – Flash Erase,,ECU,sample in reset mode sample drawing very little current 
+EA-PS PSU not showing,Voltage and Current values not showing on PC,,Configure connection address,,PC,ea-ps psu not showing voltage and current values not showing on pc 
+LED working troubleshoot,,,Try different connections,,Bench_HW,led working troubleshoot  
+BODA flash issue,Sample getting bricked,,"Pic of sample used for BODA test, need labels",,ECU,boda flash issue sample getting bricked 
+Sample with WatchDog feature disabled,,,,,ECU,sample with watchdog feature disabled  
+RASIX-86100,Sample getting bricked,,No,,ECU,rasix-86100 sample getting bricked 
+Sample bricked,Sample drawing very little current,,Debiprog – Flash Erase,,ECU,sample bricked sample drawing very little current 
+"Bench Offline, no remote connection",no network access,,Enable user access and internet access,,PC,"bench offline, no remote connection no network access "
+Change to FR C0,,,,,ECU,change to fr c0  
+"Sample Flashing, counters not running",,,,,ECU,"sample flashing, counters not running  "
+C0 sample power down,not connecting to Trace32,,"C0 not functioning, Sample change",,ECU,c0 sample power down not connecting to trace32 
+"Multiplexer implementation, T32 flashing",,,"Explain, troubleshooting",,ECU,"multiplexer implementation, t32 flashing  "
+Trace not working,Sample power fail,,,,ECU,trace not working sample power fail 
+Sample Bricked,Sample drawing very little current,,Debiprog – Flash Erase,,ECU,sample bricked sample drawing very little current 
+Sample change and harness fix,CAN & ETH link fail on Vector HW,,,,Bench_HW,sample change and harness fix can & eth link fail on vector hw 
+"Current Fluctuation, power down trace, PSU not working remotely",PSU detection fail,,PSU reconnection,,Bench_HW,"current fluctuation, power down trace, psu not working remotely psu detection fail "
+ESB box to C0,,,Connection and verification,,Bench_HW,esb box to c0  
+FR C1 sample not running,Target power fail,,Lauterbach troubleshooting,,Trace32,fr c1 sample not running target power fail 
+ETH & CAN connection,CAN & ETH link fail on CANoe,,Powercycle and reset connection,,ECU,eth & can connection can & eth link fail on canoe 
+Replace voltcraft with Toellner,Voltcraft PSU not programmable for automation,,Setup toellner and configure IP,,Bench_HW,replace voltcraft with toellner voltcraft psu not programmable for automation 
+Sample change,,,,,ECU,sample change  
+ETH link for new SW,CAN & ETH link fail on Vector HW,,"Troubleshooting, (maybe something wrong with the harness)",,Bench_HW,eth link for new sw can & eth link fail on vector hw 
+"Bench Offline, no remote connection",no network access,,Critical system failure,,PC,"bench offline, no remote connection no network access "
+MDC pin measurment,,,Physically holding pin on MDC pin,,Bench_HW,mdc pin measurment  
+PSU remote control,PSU detection fail,,Restart PSU and COM config,,Bench_HW,psu remote control psu detection fail 
+"Trace32 – target power fail , power fluctuation",Sample getting bricked,,Debiprog – Flash Erase,,ECU,"trace32 – target power fail , power fluctuation sample getting bricked "
+Toellner config,,,IP change and ping,,PC,toellner config  
+Need Toellner PSU,,,Replace from NM bench,,Bench_HW,need toellner psu  
+"Bench Offline, no remote connection",no network access,,Restart and IP config,,PC,"bench offline, no remote connection no network access "
+Unable to connect to bench,no network access,,IP change,,PC,unable to connect to bench no network access 
+"Canope SW, invalid IP address",,,Try reinstalling Canope22,,Vector_SW,"canope sw, invalid ip address  "
+No remote connection,No network on PC,"IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,PC,"no remote connection no network on pc ip change, bcn authentication"
+Sample drawing no power,Relay controllable but no voltage on Port1,Relay Card Port fail,Relay card change,Bench_HW,PMB,sample drawing no power relay controllable but no voltage on port1 relay card port fail
+CR sample not working,Sample not going into attach mode,Target power fail,Sample recovery via Trace32,Debugger,Trace32,cr sample not working sample not going into attach mode target power fail
+Debugger not working,Sample not going into prepare mode,Target power fail,B5 sample related to C => use SX601_C0 Trace,Debugger,Trace32,debugger not working sample not going into prepare mode target power fail
+Automated testcase not running,"Invalid IP address from windows ARP table, Automated flashing step not possible",POD IP mismatch,Change IP configuration,Vector_SW,Vector,"automated testcase not running invalid ip address from windows arp table, automated flashing step not possible pod ip mismatch"
+PSU not drawing current,Current very low (0.083 A),Target power down,Sample power cycle,Debugger,ECU,psu not drawing current current very low (0.083 a) target power down
+Trace32 device reset not possible remotely,No device connected to PDU,Device not connected,Setup Device according to setup configuration,Bench_HW,PDU,trace32 device reset not possible remotely no device connected to pdu device not connected
+Trace32 Device not detected,no Debugger Device detection,Trace32 detection fail,Device hard reset,Debugger,Trace32,trace32 device not detected no debugger device detection trace32 detection fail
+No remote connection,"Remote desktop service session ended, desktop shutting down",PC auto update,PC reset Required,Desktop,PC,"no remote connection remote desktop service session ended, desktop shutting down pc auto update"
+ETH connection fail,"ETH fail on CANoe, ETH physically connected",Connection detection fail,Disconnect and reconnect,ECU_HW,VN5650,"eth connection fail eth fail on canoe, eth physically connected connection detection fail"
+Sample power down,PSU not working Remotely,PSU detection fail,PSU reset,Bench_HW,PSU,sample power down psu not working remotely psu detection fail
+Target system down,Sample not going into prepare mode,Target system down,Powercycle and warm reset,Debugger,Trace32,target system down sample not going into prepare mode target system down
+EY PC duration expired,Old PC needs to be returned,PC expired,New PC RNG-C-004TG inplace,Desktop,PC,ey pc duration expired old pc needs to be returned pc expired
+Sensor Heating Setup required,,Special usecase testing,Setup Sensor Heating,Setup_Change,Bench,sensor heating setup required  special usecase testing
+Bench Offline,PC not connecting to Bosch network,"IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,PC,"bench offline pc not connecting to bosch network ip change, bcn authentication"
+new sensor required,,Special uscase testing,Swap sample,Setup_Change,Bench,new sensor required  special uscase testing
+bench sometimes does not connect,PC goes to sleep mode,PC sleeps,change system setting,Desktop,PC,bench sometimes does not connect pc goes to sleep mode pc sleeps
+Invalid CANope liscense,unable to open Vector SW,Vector SW fail,"Restart PC, install correct Canape TBE license",Vector_SW,PC,invalid canope liscense unable to open vector sw vector sw fail
+No remote connection,"No network on PC, after update","IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,PC,"no remote connection no network on pc, after update ip change, bcn authentication"
+Sample Change B to A required,,New sample,Swap sample,Setup_Change,ECU,sample change b to a required  new sample
+Canape offline,Canope license not detected,Vector license connection,"PC restart, License update",Vector_SW,Vector,canape offline canope license not detected vector license connection
+Bench offline,Network authentication required,New IP not updated on RTB,New IP,PC_Connection,PC,bench offline network authentication required new ip not updated on rtb
+no current for VX box,Relay 15 not on,Incorrect_relay usage,toggle relay 15 for VX box,Vector_HW,VX1161,no current for vx box relay 15 not on incorrect_relay usage
+Target power down,Sample not detected properly on Trace32,2 Trace32 devices detected,Turn off second Trace32 device,Debugger,Trace32,target power down sample not detected properly on trace32 2 trace32 devices detected
+Sample counters not running,Counters not incrementing,Incorrect Flashing,"Restart Device, ReFlash",Debugger,Trace32,sample counters not running counters not incrementing incorrect flashing
+No remote connection,"Unable to login in, requires known User",No network,IT support,PC_Connection,PC,"no remote connection unable to login in, requires known user no network"
+Lauterbach not detected,Trace32 device not powered on,Trace32 device not powered,Use PMB to switch on Trace32 device,Debugger,Trace32,lauterbach not detected trace32 device not powered on trace32 device not powered
+Sample not going into attach mode,bus error at address DAP:0x80038FE0  & EC14:0x7,Sample Bricked,DediProg Flash erase and RA6 recovery steps,ECU_SW,ECU,sample not going into attach mode bus error at address dap:0x80038fe0  & ec14:0x7 sample bricked
+Debugger not working,Sample not going into prepare mode,Incorrect Trace32 device usage,Correct Device and configuration,Debugger,Trace32,debugger not working sample not going into prepare mode incorrect trace32 device usage
+L4 PC duration expired,Old PC needs to be returned,PC expired,New PC RNG-C-004RY inplace,Desktop,PC,l4 pc duration expired old pc needs to be returned pc expired
+FR TI testing blocked,5P6 broken,PC broken,Move 5P6 sample to 5PC,Desktop,Bench,fr ti testing blocked 5p6 broken pc broken
+Trace32 device not detected,no Debugger Device detection,Trace32 detection fail,Device hard reset,Debugger,Trace32,trace32 device not detected no debugger device detection trace32 detection fail
+PC not reachable,"Unable to login in, black screen after login",No network,PC needs replacement,PC_Connection,PC,"pc not reachable unable to login in, black screen after login no network"
+Sensor Heating Setup  change required,,Special usecase testing,Setup Sensor Heating,Setup_Change,Bench,sensor heating setup  change required  special usecase testing
+Canape 22 security issue,"Security issue, some functions unavailable",Old version,Install CANape 23,Vector_SW,Bench,"canape 22 security issue security issue, some functions unavailable old version"
+VX Pod cable discoonected,Slot 3 (2) is not configured or not working,Port configuration,Port change to Port 4 (3),Vector_HW,VX1161,vx pod cable discoonected slot 3 (2) is not configured or not working port configuration
+Sample not flashable,target power fail,Sample Bricked,DediProg flash erase,ECU_SW,,sample not flashable target power fail sample bricked
+Sample showing unusual behaviour,Running reset state,ECU OTP programming,DediProg flash erase,ECU_SW,ECU,sample showing unusual behaviour running reset state ecu otp programming
+Trace32 device swap,Trace32 connected to CR,Hardware connection swap,Change JTAG board to FR,Setup_Change,Trace32,trace32 device swap trace32 connected to cr hardware connection swap
+Sample bench change for OTP,Sample in 5PC,Need Trace32 device,move sample to 183F bench,Setup_Change,ECU,sample bench change for otp sample in 5pc need trace32 device
+Bench Blocked,Current PC is Broken,PC Broken,New PC on Bench,Desktop,PC,bench blocked current pc is broken pc broken
+Target power fail,"Counters ran, after powercycle bricked -> target power fail",ECU_SW unstable with Trace32,Check SW programming,ECU_SW,ECU,"target power fail counters ran, after powercycle bricked -> target power fail ecu_sw unstable with trace32"
+Sample dead,Continous reset mode,Sample Bricked,DediProg flash erase,ECU_SW,ECU,sample dead continous reset mode sample bricked
+Sample Change A to B required,,New sample,,Setup_Change,Bench,sample change a to b required  new sample
+CANape Issue,"Connection issue with ECU, IP fail",POD IP address mismatch,Change IP configuration on Canape to match that of ECU POD,Vector_SW,VX1161,"canape issue connection issue with ecu, ip fail pod ip address mismatch"
+No flashing,B1 gigabit still empty after flashing,ECU not flashing,Try B2 gigbit sample,Setup_Change,Bench,no flashing b1 gigabit still empty after flashing ecu not flashing
+Trace32 not working,Error with intercom drivers,Port in use,Trace32 reset  and PC reset,Debugger,Trace32,trace32 not working error with intercom drivers port in use
+Continous Reset,,,,,ECU,continous reset  
+Task counters not running,Device in continous reset mode on Trace 32,Sample Bricked,DediProg flash erase,ECU_SW,ECU,task counters not running device in continous reset mode on trace 32 sample bricked
+Eth communication fail,MAC address of ECU not matching,No ETH communication,Revisit COM SW,ECU_SW,ECU,eth communication fail mac address of ecu not matching no eth communication
+Sample changes,,New Sample,Swap sample,Setup_Change,Bench,sample changes  new sample
+ETH communication fail,CR sample using ETH1,Configured to ETH 3,Change IP configuration,Vector_SW,Vector,eth communication fail cr sample using eth1 configured to eth 3
+Bench not in active state for connecting,"PC Shutdown, restart required",IP on RTB tool incorrect,PC reset and auto IP change,Desktop,PC,"bench not in active state for connecting pc shutdown, restart required ip on rtb tool incorrect"
+No Diagnose response from ECU,"VN box detecting connection but no messages flowing, SW was working before",,,ECU_SW,ECU,"no diagnose response from ecu vn box detecting connection but no messages flowing, sw was working before "
+Sample Change for different testing,,New sample,,Setup_Change,Bench,sample change for different testing  new sample
+Remote access denied,User not in list of allowed Remote access,No Remote access permission,Give remote access,Desktop,PC,remote access denied user not in list of allowed remote access no remote access permission
+ETH not working,Ethernet link not detected,VN box configuration,Change ETH configuration settings,Vector_HW,Vector,eth not working ethernet link not detected vn box configuration
+No remote connection,PC restarting,"IP change, BCN authentication",configure IP authentication settings,PC_Connection,PC,"no remote connection pc restarting ip change, bcn authentication"
+Relay Box (PMB) not working,No current change when Relay Switchs toggled,Netgear Switch diconnected,Reconnect Switch to PC,Bench_HW,PMB,relay box (pmb) not working no current change when relay switchs toggled netgear switch diconnected
+ECU not working,"Sample connected powered up, No messages observed",SW not fully integrated,"Attach to debugger bench, erase flash working Sw and check for messages",ECU_SW,ECU,"ecu not working sample connected powered up, no messages observed sw not fully integrated"
+different Configuration as PV node,"Lauterbach port not correct, sample connecte to different channels",Need same configurations,"Change lauterbach port to 4, sample to CH2",Setup_Change,Bench,"different configuration as pv node lauterbach port not correct, sample connecte to different channels need same configurations"
+PSU not connecting,"PSU on, but not connecting remotely",PSU connection,PSU reset,Bench_HW,PSU,"psu not connecting psu on, but not connecting remotely psu connection"
+Too low voltage and current on CH2 for sample,when sample connected voltage drops with no current,CH2 not fuctioning properly,Switch to CH1 as its wroking fine,Bench_HW,PSU,too low voltage and current on ch2 for sample when sample connected voltage drops with no current ch2 not fuctioning properly
+sample bricked,Continous reset mode,ECU_SW not working properly,DediProg flash erase,ECU_SW,ECU,sample bricked continous reset mode ecu_sw not working properly
+CANoe not working,"CANoe 19 in use, old version",CANoe SW upgrade,install CANoe19 SP2,Vector_SW,Vector,"canoe not working canoe 19 in use, old version canoe sw upgrade"
+RBS not allowing to run,RBS simulation not starting,VN box communication fail,Restart VN box,Vector_HW,VN5650,rbs not allowing to run rbs simulation not starting vn box communication fail
+Bench required for B2 ETH100 with CAN2 testing,No Bench available with B2 CAN2,"Lack of B2 Benches, CAN2 rarely used",Setup LR-C-003UK for temperary testing,Setup_Change,Bench,"bench required for b2 eth100 with can2 testing no bench available with b2 can2 lack of b2 benches, can2 rarely used"
+Target power fail on debugger,PDU strip malfunctioning,PDU defect,PDU replace,Bench_HW,PDU,target power fail on debugger pdu strip malfunctioning pdu defect
+Counters stops incrementing after a few seconds,Counters stop incrementing after some time,Boda not flashed,Flash Boda first,ECU_SW,ECU,counters stops incrementing after a few seconds counters stop incrementing after some time boda not flashed
+Needs RA7 B2 sample,C1 sample connected,Swap sample,Change sample,Setup_Change,Bench,needs ra7 b2 sample c1 sample connected swap sample
+LR-C-000FA bench replaced with RNG-C-004RY,LR-C-000FA bench expiring,Bench expiring,Setup RNG-C-004RY,Desktop,PC,lr-c-000fa bench replaced with rng-c-004ry lr-c-000fa bench expiring bench expiring
+New bench users,,New bench users,Bench usage explanation,Bench_HW,Bench,new bench users  new bench users
+ECU not detected on VXConsole,"ECU on, Sample not accesible on VX",SW config Mismatch,SW team escalation,ECU_SW,ECU,"ecu not detected on vxconsole ecu on, sample not accesible on vx sw config mismatch"
+SW flashed but counters not running,"Lauterbach flash success, counters not running",OTP programming required for new C1 samples,Do OTP and try again,ECU_SW,ECU,"sw flashed but counters not running lauterbach flash success, counters not running otp programming required for new c1 samples"
+No ETH msgs,"ETH link up but no msgs, TCP/IP issue, counters running",ETH Port connection,Change Bench and try different ETH port,ECU_SW,ECU,"no eth msgs eth link up but no msgs, tcp/ip issue, counters running eth port connection"
+Remote connection not possible,Network not detecting,BCN not connected,Check LAN cable,Desktop,PC,remote connection not possible network not detecting bcn not connected
+Needs RA7 B2 sample,B2 not connected,Swap sample,Change sample,Setup_Change,Bench,needs ra7 b2 sample b2 not connected swap sample
+Needs RA7 B2 Gigabit sample,Previous Sample Erase issue,Swap sample,Change sample,Setup_Change,Bench,needs ra7 b2 gigabit sample previous sample erase issue swap sample
+MDC Pin Measurement,,,Oscilliscope pin on MDC resistor,Setup_Change,Bench,mdc pin measurement  
+ECU not detected on VXConfig,FR ECU not detecting,SW dependency blocking detection,Trace32 flash erase,ECU_SW,VX1161,ecu not detected on vxconfig fr ecu not detecting sw dependency blocking detection
+No CAN communication from ECU,no messeges from ECU recieved,"SW programmed fro CAN2, Sample has only CAN1",New sample needed B2_01,ECU_SW,ECU,"no can communication from ecu no messeges from ecu recieved sw programmed fro can2, sample has only can1"
+Identification no. on VN561A,,Need to order CANoe.run license,FInd IDN number,Bench_HW,VN Box,identification no. on vn561a  need to order canoe.run license
+Connect debugger to sample,Connected to,Debugger not connected to required sample,Swap Debugger Connection,Bench_HW,Trace32,connect debugger to sample connected to debugger not connected to required sample
+Bench is not working,on Trace32 - target power fail,Incorrect flash SW not compatibale with HW,"Complete Flash Erase, and Flash steps",ECU_SW,ECU,bench is not working on trace32 - target power fail incorrect flash sw not compatibale with hw
+Replace with EX node,Old PC expiring,EX PC expiring,Setup and intall Sw on New PC,Desktop,PC,replace with ex node old pc expiring ex pc expiring
+Required B sample,A sample connected,Swap sample,Change sample,Setup_Change,Bench,required b sample a sample connected swap sample
+Sample stuck in a Reset Loop,Trace32 Continous Reset Mode,Sample Bricked,DediProg Flash erase,ECU_SW,ECU,sample stuck in a reset loop trace32 continous reset mode sample bricked
+ECU not detected on VXConfig,ECU not powering on,KL30 sample needs wakeup trigger,Explain user wakeup trigger,ECU_HW,ECU,ecu not detected on vxconfig ecu not powering on kl30 sample needs wakeup trigger
+ETH not detected,Full Bench powered Down,PDU defect,Replace PDU,Bench_HW,PDU,eth not detected full bench powered down pdu defect
+Flashing via VXtool failed,"Flash Download Failed, ECU detected by VX",Brand new Sample requires OTP programming,New sample bringup process with lauterbach,ECU_SW,ECU,"flashing via vxtool failed flash download failed, ecu detected by vx brand new sample requires otp programming"
+CANoe 19 SP2 required,SW not installed,Older versions in use,Install new Sw,Vector_SW,PC,canoe 19 sp2 required sw not installed older versions in use
+Replace ABT-C-004DK,Small PC lacking storage and performance,"PC in heavy use, storage too small",Setup NEW PC ABT-C-008PY and replace,Desktop,PC,"replace abt-c-004dk small pc lacking storage and performance pc in heavy use, storage too small"
+Power fail issue on Trace32,PSU not fuctioning properly,PSU defect,Replace PSU,Bench_HW,PSU,power fail issue on trace32 psu not fuctioning properly psu defect
+Relay box not working,PMB not functioning properly,PMB defect,Replace and setup new PMB,Bench_HW,PMB,relay box not working pmb not functioning properly pmb defect
+Setup ESB3 box application,,integrate ESB3 box in Bench,integrate ESB3 box in Bench,Setup_Change,Bench,setup esb3 box application  integrate esb3 box in bench
+"Flashing not possible via VX, try with lauterbach","Lauterbach attach fail, target power down. No lights",CR is KL30 needs wakeup trigger,Wakeup trigger to activate ECU,ECU_HW,ECU,"flashing not possible via vx, try with lauterbach lauterbach attach fail, target power down. no lights cr is kl30 needs wakeup trigger"
+fault sensor blockage as active,Antenna covered,Antenna blocked,face antenna towards wall,Bench_HW,ECU,fault sensor blockage as active antenna covered antenna blocked
+PSU not controlled remotly,PSU on but not connecting on PC,PSU detection issue,PSU hard reset,Bench_HW,PSU,psu not controlled remotly psu on but not connecting on pc psu detection issue
+X3 sample not flashable via VX,Flash Download fail,VX flashing fail,Move sample to Debugger bench,ECU_HW,VX1161,x3 sample not flashable via vx flash download fail vx flashing fail
+Remote connection not possible,Network authentication settings not correct,"Auto update, BCN authentication",Change Network authentication settings,Desktop,PC,"remote connection not possible network authentication settings not correct auto update, bcn authentication"
+"No communication, Sample in continuous reset mode",Sample Bricked,"incorrect SW on HW, incompatibility",Move to Debugger bench and Flash,ECU_SW,ECU,"no communication, sample in continuous reset mode sample bricked incorrect sw on hw, incompatibility"
+Sample not Flashing with VX,With Debugger sample in continuous reset mode,Incorrect SW compatibility,Flash with Dediprog,ECU_SW,ECU,sample not flashing with vx with debugger sample in continuous reset mode incorrect sw compatibility
+"Configuration File changed, Automation not working",Error: Serial port COM3 could not be opened,"Configuration change, no fall back",Revert config back to normal,Bench_HW,PSU,"configuration file changed, automation not working error: serial port com3 could not be opened configuration change, no fall back"
+RelayCard not detecting Remotely,Detection fail on PC,Relay card detection,Reset device and PC,Bench_HW,PMB,relaycard not detecting remotely detection fail on pc relay card detection
+Debugger board not connecting on Trace32,PowerDebug device has been Disconnected,Detection fail,Hard_Reset,Debugger,Trace32,debugger board not connecting on trace32 powerdebug device has been disconnected detection fail
+No ETH communication,"Link up detected, but no communication",SW unstable,,,VN Box,"no eth communication link up detected, but no communication sw unstable"
+Changing Samples to and from Dev bench,,"SW Testing, issue with MT tool",Change samples,Setup_Change,ECU,"changing samples to and from dev bench  sw testing, issue with mt tool"
+New PC for bench required,Old PC expiring duration,Old PC expiring,Setup New PC in place of old EY PC,Desktop,PC,new pc for bench required old pc expiring duration old pc expiring
+sample change to B0,A2 currently connected,incorrect sample target,Sample Change,Setup_Change,ECU,sample change to b0 a2 currently connected incorrect sample target
+"Old CANoe version installed, needed SP2",Normal version installed,Old SW version,Upgrade SW version,Vector_SW,PC,"old canoe version installed, needed sp2 normal version installed old sw version"
+"NFO feature failing, suspecting NVM issue",Feature failing,Base NVM SW issue,Flash erase with lauterbach,ECU_SW,ECU,"nfo feature failing, suspecting nvm issue feature failing base nvm sw issue"
+New C1 SW OTP flashing,"Steps to follow, not possible via VX box",New SW stability,Follow OTP and Flash steps,ECU_SW,ECU,"new c1 sw otp flashing steps to follow, not possible via vx box new sw stability"
+Lauterbach Debugger not being detected,Debugger not Detected,Lauterbach connectivity issue,Restart PC and Lauterbach,Debugger,Traces32,lauterbach debugger not being detected debugger not detected lauterbach connectivity issue
+Samples not communicating,Samples flashed with C1 SW,Incorrect SW flash. C1 SW on B2 HW,Flash Erase to recover sample,ECU_SW,ECU,samples not communicating samples flashed with c1 sw incorrect sw flash. c1 sw on b2 hw
+C1 FR for Fuzz test,,User needed bench info,explain setup,Bench_HW,ECU,c1 fr for fuzz test  user needed bench info
+PMB is not working,PMB not recieving data,IP configuration changed after PC update,Reconfigure IP of PC and PMB to be in same subnet,Bench_HW,PMB,pmb is not working pmb not recieving data ip configuration changed after pc update
+not able to enter into BAS session,Incorrect COM channel usage,COM3 used but COM4 for ESB,Use correct COM channel,Bench_HW,ESB3,not able to enter into bas session incorrect com channel usage com3 used but com4 for esb
+Sample bricked,Bus error at address Cx01,Sample Bricked,DediProg - Flash erase,ECU_SW,ECU,sample bricked bus error at address cx01 sample bricked
+XCP connection fail with ECU,CANape not connecting to ECU properly,"XCP connection, SW dependency",Flash Sw with lauterbach,ECU_SW,ECU,"xcp connection fail with ecu canape not connecting to ecu properly xcp connection, sw dependency"
+"SW issue, Sample bricked",Sample bricked,SW bug,DediProg - Flash erase,ECU_SW,ECU,"sw issue, sample bricked sample bricked sw bug"
+No ECU detected with VX tool,CANape not connecting to ECU properly,SW Dependency,Flash Sw with lauterbach,ECU_SW,ECU,no ecu detected with vx tool canape not connecting to ecu properly sw dependency
+Outdated CANoe version,CANoe 19 only,Needed CANoe 19 SP2,Install new SW,Vector_SW,PC,outdated canoe version canoe 19 only needed canoe 19 sp2
+Sample power down,No detection by Lauterbach device,Trace32 detection issue,run recovery script multiple times,Debugger,Traces32,sample power down no detection by lauterbach device trace32 detection issue
+Unable to Flash using VX,Sample Detection issue,SW dependency with MT flashing,Flash erase with lauterbach,Debugger,ECU,unable to flash using vx sample detection issue sw dependency with mt flashing
+SW has problem with CANape flash,Sample Detection issue,SW dependency with MT flashing,Flash using lauterbach,ECU_SW,ECU,sw has problem with canape flash sample detection issue sw dependency with mt flashing
+Remote connection not available,PC updating,BCN authentication and IP Change,Configure authentication settings,Desktop,PC,remote connection not available pc updating bcn authentication and ip change
+"ETS testing, Siganls delta too high",Signal delta more that 3 microseconds,Suspect real time RBS,Try running after downloading on VN5650,Vector_HW,VN5650,"ets testing, siganls delta too high signal delta more that 3 microseconds suspect real time rbs"
+Sample bricked,lauterbach attach fail,Sw issue with linker and MPU,Dediprog Flash erase,ECU_SW,ECU,sample bricked lauterbach attach fail sw issue with linker and mpu
+No ETH communication or lauterbach attach,Bench setup changed for Different testing,Setup changed,Change setup back for SSH testing,Bench_HW,Bench,no eth communication or lauterbach attach bench setup changed for different testing setup changed
+"Sample is down, no MT detection",Sample in Reset Mode,,,ECU_SW,ECU,"sample is down, no mt detection sample in reset mode "
+Tp points on debugger needs soldering,´no female adapters,Soldering of female adapters,solder from lab,Bench_HW,ECU,tp points on debugger needs soldering ´no female adapters soldering of female adapters
+Sample not working,Sample in reset state,Incorrect SW version flashed,Lauterbach erase and Flash,ECU_SW,ECU,sample not working sample in reset state incorrect sw version flashed
+Vector Hardware config not opening,Application in loading state,Drivers corrupted,Reinstall vector drivers,Desktop,PC,vector hardware config not opening application in loading state drivers corrupted
+Lauterbach SW installation not done,no Lauterbach Sw installed,,Install Lauterbach Installation,Desktop,PC,lauterbach sw installation not done no lauterbach sw installed 
+Relay card not working,No remote control possible remotely,Relay Card detection issue,Hard reset and wiring check,Bench_HW,Relay,relay card not working no remote control possible remotely relay card detection issue
+Sample not connecting via MT,Flashing failed via VX tool,SW unstability,Flash Sw via T32,ECU_SW,ECU,sample not connecting via mt flashing failed via vx tool sw unstability
+Bus off testing,,,Support for ETH disconnect test,Bench_HW,Bench,bus off testing  
+Lauterbach not detecting,T32 device not attaching to ECU,T32 connection issue,Hard rest and reconnect wiring,Debugger,Trace32,lauterbach not detecting t32 device not attaching to ecu t32 connection issue
+Remote connection not possible,BCN authentication failed,Windows update,Authenticate BCN via Smartcard,Desktop,PC,remote connection not possible bcn authentication failed windows update
+Lauterbach debugger JTAG check,2 JTAG on RA7P samples,,Verify master and slave connection is correct,Bench_HW,Bench,lauterbach debugger jtag check 2 jtag on ra7p samples 
+Modulation not happening,Antenna face covered,Antenna blocked,Face Antenna towards Room,Bench_HW,ECU,modulation not happening antenna face covered antenna blocked
+B0 sample bricked,Sample in continous reset,incorrect SW Flash,dediprog Flash erase,ECU_SW,ECU,b0 sample bricked sample in continous reset incorrect sw flash
+Lauterbach not connecting,target power fail,ECu not detecting,Recovery and rest script,Debugger,Trace32,lauterbach not connecting target power fail ecu not detecting
+Lauertbach not detecting,T32 device not attaching to ECU,T32 connection issue,Hard rest and reconnect wiring,Debugger,Trace32,lauertbach not detecting t32 device not attaching to ecu t32 connection issue
+PC freezing often,PC lagging,PC too slow,PC restart,Desktop,PC,pc freezing often pc lagging pc too slow
+Bench Offline,Remote connection not possible,BCN Authentication,Authenticate BCN via Smartcard,Desktop,PC,bench offline remote connection not possible bcn authentication
+Remote user access disabled,ftd8fe user not in allwed remote users,,Grant access to ftd8fe user,Desktop,PC,remote user access disabled ftd8fe user not in allwed remote users 
+Lauterbach connection fail,target power down,Relay not toggled,turn on relay for ECU power,Debugger,PC,lauterbach connection fail target power down relay not toggled
+ESB3 box setup,,Bench bottle neck,setup new bench with ESB3,Setup_Change,Bench,esb3 box setup  bench bottle neck
+Configuring Vector hardware for testcase,multitest with different hardware mapping,conflicting Hardware mapping for different tests,Create seperate config files for each test,Vector_HW,PC,configuring vector hardware for testcase multitest with different hardware mapping conflicting hardware mapping for different tests
+Importing .vhp configuration,,how to import config files,teach user,Bench_HW,PC,importing .vhp configuration  how to import config files
+CR Sample not working,no communication observed,incorrect multiplexer use,setup correct mux,Bench_HW,Mux,cr sample not working no communication observed incorrect multiplexer use
+ESB box not entering BAS,BAS access fail,,Restart Bench,Bench_HW,ESB3,esb box not entering bas bas access fail 
+Sample corrupted,Sample bricked,incorrect SW type flashed,Dediprog flash erase,ECU_SW,ECU,sample corrupted sample bricked incorrect sw type flashed
+Canoe RBS not running,RBS not opening IP conflicts,RBS not correctly configured,Raise request with RBS team,Vector_SW,PC,canoe rbs not running rbs not opening ip conflicts rbs not correctly configured
+Communication not happening,no communication observed,ETH harness not connected,connect ETH cable,Bench_HW,VN5650,communication not happening no communication observed eth harness not connected
+HPC load connection,,,testcase setup change,Setup_Change,Bench,hpc load connection  
+Lauterbach and ECu communication check,no communication observed,config matching issue,reconfigure Vector hardware config and verify,Debugger,VN5650,lauterbach and ecu communication check no communication observed config matching issue
+Lauterbach Flashing,Flashing failed via VX tool,MT flash fail,flash via lauterbach,Debugger,Trace32,lauterbach flashing flashing failed via vx tool mt flash fail
+Remote connection not possible,BCN authentication failed,New windows update,reconfigure BCN authentication via smartcard,Desktop,PC,remote connection not possible bcn authentication failed new windows update
+Relay card not working,Relay not powering up,Drivers uninstalled,install Drivers,Bench_HW,PC,relay card not working relay not powering up drivers uninstalled
+Lauterbach not working,target power fail,lauterbach JTAg not connected,connect Lauterbach properly,Debugger,Trace32,lauterbach not working target power fail lauterbach jtag not connected
+Bus off testing,,,Support for ETH disconnect test,Vector_HW,Bench,bus off testing  
+Flashing failed via VX Box,Flashing failed via VX tool,SW unstability,flash with lauterbach,Debugger,ECU,flashing failed via vx box flashing failed via vx tool sw unstability
+Relay card not working,incorrect Relay card use,user bench knowledge lacking,teach setup and use,Bench_HW,Bench,relay card not working incorrect relay card use user bench knowledge lacking
+Luaterbach boot failing,Lauterbach application not opening,scripts issues,reinstall lauterbach installation,PC,PC,luaterbach boot failing lauterbach application not opening scripts issues
+Monitor setup on 47Q,monitor required for smartcard access,,setup monitor,Setup_Change,Bench,monitor setup on 47q monitor required for smartcard access 
+ETH and lauterbach connection check,no communication observed,"sample not flashed properly, counters not running",erase and reflash,ECU_SW,ECU,"eth and lauterbach connection check no communication observed sample not flashed properly, counters not running"
+Sample changes required,sample swapping as per use case,,change samples,Setup_Change,Bench,sample changes required sample swapping as per use case 
+Sample Flashing not working via lauterbach,Sample bricked,sample showing unusual behaviour,change samples,ECU,ECU,sample flashing not working via lauterbach sample bricked sample showing unusual behaviour
+CR sample COM Debugging,Communication not happening,vector hardware manager config changed,configure ethernet ports again,Vector_HW,VN5650,cr sample com debugging communication not happening vector hardware manager config changed
+CR sample recovery,sample bricked,Incorrect SW flashing,dediprog Flash erase,ECU_SW,ECU,cr sample recovery sample bricked incorrect sw flashing
+Fatal Error from InterCOM-Driver for T32 Device,Cannot bind read socket,previous lauterbach session not closed properly,Restart PC,Debugger,Trace32,fatal error from intercom-driver for t32 device cannot bind read socket previous lauterbach session not closed properly
+Bench not reachable remotely,"Windows update, BCN Blocked",Windows update,reconfigure BCN authentication settings,PC,PC,"bench not reachable remotely windows update, bcn blocked windows update"
+No Sample communication,Communication not happening,Unknown,,ECU,ECU,no sample communication communication not happening unknown
+No Sample Communication,Communication not happening,VHM config correction,swap communication channels on RBS,Vector_HW,Bench,no sample communication communication not happening vhm config correction
+Bench not reachable remotely,"Windows update, BCN Blocked",Windows update,take PC to IT space as login blocked,PC,PC,"bench not reachable remotely windows update, bcn blocked windows update"
+Target power fail on Lauterbach,ECU not detecting,sample not drawing power,check relay and reopen T32 application,Debugger,Trace32,target power fail on lauterbach ecu not detecting sample not drawing power
+Lauterbach connection fail,lauterbach not powering on,wiring setup wrong,change wiring,Bench_HW,Bench,lauterbach connection fail lauterbach not powering on wiring setup wrong
+Powersupply unit not connecting,no remote control for PSU,connection loose,reconnect and hard reset,Bench_HW,Bench,powersupply unit not connecting no remote control for psu connection loose
+VN box to PC connection,D-Link not established,using USB-C,change with D-Link,Bench_HW,Bench,vn box to pc connection d-link not established using usb-c
+lauterbach connection fail,lauterbach not connected,check lauterbach connection,connect JTAG properly,Bench_HW,Bench,lauterbach connection fail lauterbach not connected check lauterbach connection
+lauterbach not allowing erase,flash erase script not running fully,suspect issue with ECU SW,dediprog Flash erase,Debugger,Trace32,lauterbach not allowing erase flash erase script not running fully suspect issue with ecu sw
+Failure injection test,CAN off testing,,setup MPR,ECU,Bench,failure injection test can off testing 
+Sample bricked,,,,,,sample bricked  
+Antenna Status detection not working,,,,,,antenna status detection not working  
+Sample counters run only for 1 second and then breaks,,,,,,sample counters run only for 1 second and then breaks  
+PDU not connecting,,,,,,pdu not connecting  
+Connect T32 to Cr sample,,,,,,connect t32 to cr sample  
+Communication not happening,,,,,,communication not happening  
+New Testbench build,,,,,,new testbench build  
+Relay Card not functioning,,,,,,relay card not functioning  
