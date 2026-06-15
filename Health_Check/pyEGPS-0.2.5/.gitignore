@@ -1,0 +1,31 @@
+# Temporary and binary files
+*~
+*.py[cod]
+*.so
+*.cfg
+!.isort.cfg
+!setup.cfg
+*.orig
+*.log
+*.pot
+__pycache__/*
+.cache/*
+.*.swp
+*/.ipynb_checkpoints/*
+.DS_Store
+
+# Per-project virtualenvs
+.venv*/
+
+# Package files
+*.egg
+*.eggs/
+.installed.cfg
+*.egg-info
+dist/
+
+# Testing and Linting
+.tox
+
+# runtime files
+_version.py

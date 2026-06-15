@@ -28,6 +28,7 @@ DEVICE_KEYWORDS = {
     # PSU
     "psu": "PSU",
     "power supply": "PSU",
+    "powersupply unit": "PSU",
     "ea-ps": "PSU",
     "pps": "PSU",
 
