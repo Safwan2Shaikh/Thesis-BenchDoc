@@ -1,3 +1,2 @@
-eaps2000==1.2.1
-pyserial==3.5
-pytest==9.0.3
+pyserial
+eaps2000
