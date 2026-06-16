@@ -56,8 +56,8 @@ def run_pmb_command(command):
 # =========================
 def get_device_info():
     print("\n===================================")
-    print("         DEVICE INFO (ASCII)")
-    print("===================================")
+    print("          DEVICE INFO                ")
+    print("=====================================")
 
     try:
         with eaps2k(SERIAL_PORT, verbosity_level=0) as ps:
@@ -141,7 +141,7 @@ def read_output(ser, dn):
 def main():
 
     print("===================================")
-    print("     FULL HEALTH CHECK START")
+    print("            PMB CHECK              ")
     print("===================================")
 
     # Store results
@@ -171,7 +171,7 @@ def main():
 
         print("\n===================================")
         print(f" TESTING RELAY SR_{relay}")
-        print("===================================")
+        print("=====================================")
 
         # Turn ON
         if not run_pmb_command(f"SR_{relay}_on"):
@@ -201,8 +201,8 @@ def main():
     # FINAL SUMMARY
     # =========================
     print("\n===================================")
-    print("         FINAL SUMMARY")
-    print("===================================")
+    print("             Results                 ")
+    print("=====================================")
 
     for entry in results:
         relay = entry["relay"]
@@ -222,7 +222,7 @@ def main():
         else:
             print("Output 2 -> No Data")
 
-    print("\n✅ HEALTH CHECK COMPLETE")
+    print("\n✅ RELAY CHECK COMPLETE")
 
 
 # =========================
