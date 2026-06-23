@@ -3,111 +3,173 @@ import subprocess
 import serial.tools.list_ports
 
 
-# -------------------------------
-# Run PowerShell and return structured list
-# -------------------------------
+# --------------------------------------------------
+# Get all Windows PnP devices
+# --------------------------------------------------
+
 def get_pnp_devices():
+
     try:
+
         cmd = [
             "powershell",
             "-Command",
-            "Get-PnpDevice | Select-Object FriendlyName,Class,Status | ConvertTo-Json"
+            (
+                "Get-PnpDevice | "
+                "Select-Object FriendlyName,Class,Status,InstanceId | "
+                "ConvertTo-Json -Depth 2"
+            )
         ]
-        output = subprocess.check_output(cmd, text=True)
 
-        data = json.loads(output)
+        output = subprocess.check_output(
+            cmd,
+            text=True
+        )
 
-        # Handle case: single device vs list
-        if isinstance(data, dict):
-            return [data]
-        return data
+        return json.loads(output)
 
     except Exception as e:
+
+        print(f"Error getting PnP devices: {e}")
+
         return []
 
 
-# -------------------------------
-# CATEGORY: Ports (COM & LPT)
-# -------------------------------
+# --------------------------------------------------
+# Get COM ports
+# --------------------------------------------------
+
 def get_com_ports():
-    ports = serial.tools.list_ports.comports()
 
     devices = []
-    for port in ports:
-        devices.append({
-            "name": port.description,
-            "port": port.device,
-            "manufacturer": port.manufacturer
-        })
 
-    return {
-        "count": len(devices),
-        "devices": devices
-    }
+    try:
+
+        ports = serial.tools.list_ports.comports()
+
+        for port in ports:
+
+            devices.append(
+                {
+                    "port": port.device,
+                    "description": port.description,
+                    "hwid": port.hwid
+                }
+            )
+
+    except Exception as e:
+
+        print(f"Error scanning COM ports: {e}")
+
+    return devices
 
 
-# -------------------------------
-# CATEGORY: Pico Technology Instruments
-# -------------------------------
+# --------------------------------------------------
+# Pico Technology Devices
+# --------------------------------------------------
+
 def get_picoscope_devices(pnp_devices):
+
     devices = []
 
-    for dev in pnp_devices:
-        name = str(dev.get("FriendlyName", "")).lower()
+    for device in pnp_devices:
 
-        if "pico" in name:
-            devices.append({
-                "name": dev.get("FriendlyName"),
-                "status": dev.get("Status")
-            })
+        name = str(device.get("FriendlyName", ""))
 
-    return {
-        "count": len(devices),
-        "devices": devices
-    }
+        if "Pico" in name:
+
+            devices.append(
+                {
+                    "name": name,
+                    "status": device.get("Status"),
+                    "instance_id": device.get("InstanceId")
+                }
+            )
+
+    return devices
 
 
-# -------------------------------
-# CATEGORY: TRACE32 Devices
-# -------------------------------
+# --------------------------------------------------
+# TRACE32 / Lauterbach
+# --------------------------------------------------
+
 def get_trace32_devices(pnp_devices):
+
     devices = []
 
-    for dev in pnp_devices:
-        name = str(dev.get("FriendlyName", "")).lower()
+    keywords = [
+        "TRACE32",
+        "Lauterbach"
+    ]
 
-        if "lauterbach" in name or "trace32" in name:
-            devices.append({
-                "name": dev.get("FriendlyName"),
-                "status": dev.get("Status")
-            })
+    for device in pnp_devices:
 
-    return {
-        "count": len(devices),
-        "devices": devices
-    }
+        name = str(device.get("FriendlyName", ""))
+
+        if any(keyword.lower() in name.lower()
+               for keyword in keywords):
+
+            devices.append(
+                {
+                    "name": name,
+                    "status": device.get("Status"),
+                    "instance_id": device.get("InstanceId")
+                }
+            )
+
+    return devices
 
 
-# -------------------------------
-# MAIN SYSTEM SCAN
-# -------------------------------
+# --------------------------------------------------
+# Generic USB devices
+# --------------------------------------------------
+
+def get_usb_devices(pnp_devices):
+
+    devices = []
+
+    for device in pnp_devices:
+
+        if device.get("Class") == "USB":
+
+            devices.append(
+                {
+                    "name": device.get("FriendlyName"),
+                    "status": device.get("Status"),
+                    "instance_id": device.get("InstanceId")
+                }
+            )
+
+    return devices
+
+
+# --------------------------------------------------
+# Full scan
+# --------------------------------------------------
+
 def system_scan():
+
     pnp_devices = get_pnp_devices()
 
-    result = {
-        "device_manager_view": {
-            "ports_com_lpt": get_com_ports(),
-            "pico_technology_instruments": get_picoscope_devices(pnp_devices),
-            "trace32_devices": get_trace32_devices(pnp_devices)
-        }
+    return {
+        "com_ports": get_com_ports(),
+        "picoscopes": get_picoscope_devices(pnp_devices),
+        "trace32_devices": get_trace32_devices(pnp_devices),
+        "usb_devices": get_usb_devices(pnp_devices)
     }
 
-    return result
 
+# --------------------------------------------------
+# Standalone test
+# --------------------------------------------------
 
-# -------------------------------
-# RUN
-# -------------------------------
 if __name__ == "__main__":
-    data = system_scan()
-    print(json.dumps(data, indent=2))
+
+    result = system_scan()
+
+    print(
+        json.dumps(
+            result,
+            indent=4
+        )
+    )
