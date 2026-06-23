@@ -2,17 +2,16 @@ import can
 
 configs = can.detect_available_configs(interfaces=["vector"])
 
-if configs:
-    config = configs[0]
+print(f"Found {len(configs)} device(s)")
+
+for i, config in enumerate(configs):
+    print(f"\nDevice {i + 1}")
 
     serial = config.get("serial")
     if serial is not None:
-        print(f"Serial Number: {serial:06d}")
-        print(type(serial))
-        print("Last 4 Digit Serial:", str(serial)[-4:])
+        print("Serial:", serial)
+        print("Last 4 Digits:", str(serial)[-4:])
 
     channel_cfg = config.get("vector_channel_config")
     if channel_cfg:
-        print("Device Name:", channel_cfg.name[:6])
-else:
-    print("No Vector device found")
+        print("Name:", channel_cfg.name)
