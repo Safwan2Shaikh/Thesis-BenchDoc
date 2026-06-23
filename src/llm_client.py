@@ -19,7 +19,7 @@ class LLMClient:
         self.api_key = os.getenv("MODEL_FARM_API_KEY")
 
         if not self.api_key:
-            raise ValueError("❌ MODEL_FARM_API_KEY not found")
+            raise ValueError("WARNING - MODEL_FARM_API_KEY not found")
 
         self.deployment = "askbosch-prod-farm-openai-gpt-4o-mini-2024-07-18"
 

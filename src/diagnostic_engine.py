@@ -2,6 +2,7 @@
 diagnostic_engine.py
 
 LLM diagnostic reasoning layer
+with retrieval support.
 """
 
 from llm_client import LLMClient
@@ -9,90 +10,259 @@ from llm_client import LLMClient
 llm = LLMClient()
 
 
-# ==========================================
+# ==================================================
+# BUILD RETRIEVAL CONTEXT
+# ==================================================
+
+def build_retrieval_context(retrieval_context):
+
+    context_text = ""
+
+    # =============================================
+    # INVENTORY
+    # =============================================
+
+    inventory = retrieval_context.get(
+        "inventory"
+    )
+
+    if inventory:
+
+        context_text += """
+
+==========================
+BENCH INVENTORY
+==========================
+
+"""
+
+        context_text += str(inventory)
+
+        context_text += "\n\n"
+
+    # =============================================
+    # HISTORICAL ISSUES
+    # =============================================
+
+    issues = retrieval_context.get(
+        "similar_issues",
+        []
+    )
+
+    if issues:
+
+        context_text += """
+
+==========================
+KNOWN HISTORICAL ISSUES
+==========================
+
+"""
+
+        for issue in issues:
+
+            context_text += f"""
+
+Issue:
+{issue.get('issue', '')}
+
+Root Cause:
+{issue.get('root_cause', '')}
+
+Solution:
+{issue.get('solution', '')}
+
+Symptoms:
+{issue.get('symptoms', '')}
+
+-----------------------------------
+
+"""
+
+    # =============================================
+    # KNOWLEDGE CHUNKS
+    # =============================================
+
+    chunks = retrieval_context.get(
+        "knowledge_chunks",
+        []
+    )
+
+    if chunks:
+
+        context_text += """
+
+==========================
+KNOWLEDGE BASE
+==========================
+
+"""
+
+        for chunk in chunks:
+
+            context_text += f"""
+
+File:
+{chunk.get('file_name', '')}
+
+Category:
+{chunk.get('category', '')}
+
+Content:
+{chunk.get('content', '')}
+
+-----------------------------------
+
+"""
+
+    return context_text
+
+
+# ==================================================
 # BUILD PROMPT
-# ==========================================
+# ==================================================
 
-def build_prompt(query, bench, device_result):
+def build_prompt(
+    query,
+    bench,
+    device_result,
+    retrieval_context
+):
 
-    bench_name = bench["bench"]
-
-    bench_devices = ", ".join(device_result["bench_devices"])
-
-    query_devices = ", ".join(device_result["query_devices"])
-
-    valid_devices = ", ".join(device_result["valid_devices"])
-
-    invalid_devices = ", ".join(device_result["invalid_devices"])
+    retrieval_text = build_retrieval_context(
+        retrieval_context
+    )
 
     prompt = f"""
 You are a professional ECU testbench troubleshooting assistant.
 
 The inventory system is the source of truth.
 
-User Query:
+================================================
+USER QUERY
+================================================
+
 {query}
 
-Bench:
-{bench_name}
+================================================
+BENCH
+================================================
+
+{bench}
+
+================================================
+DEVICE IDENTIFICATION
+================================================
 
 Available Devices On Bench:
-{bench_devices}
+
+{device_result.get('bench_devices', [])}
 
 Devices Mentioned By User:
-{query_devices}
+
+{device_result.get('query_devices', [])}
 
 Validated Devices:
-{valid_devices}
+
+{device_result.get('valid_devices', [])}
 
 Invalid Devices:
-{invalid_devices}
 
-Instructions:
+{device_result.get('invalid_devices', [])}
 
-1. If invalid devices exist:
-- Explain clearly that the requested device is not configured on this bench.
+================================================
+RETRIEVED KNOWLEDGE
+================================================
+
+{retrieval_text}
+
+================================================
+INSTRUCTIONS
+================================================
+
+Use ALL available information:
+
+1. Inventory Information
+2. Historical Issues
+3. Knowledge Base Files
+4. Workflow Documents
+5. Failure Analyses
+
+If invalid devices exist:
+
+- Clearly explain that the device is not
+  configured on the bench.
+
 - Mention possible reasons:
-    - wrong bench specified
-    - outdated inventory
-    - external hardware manually connected
+  * wrong bench selected
+  * outdated inventory
+  * manually connected hardware
 
-2. If valid devices exist:
-- Explain what component is likely involved.
-- Suggest practical troubleshooting checks.
+If historical issues match:
 
-3. Be concise and engineering-focused.
+- mention them as supporting evidence
 
-4. Do NOT hallucinate hardware.
+If knowledge base files match:
 
-Format:
+- use them as troubleshooting evidence
+
+Do not invent hardware.
+Do not invent log messages.
+
+Provide practical engineering advice.
+
+================================================
+RESPONSE FORMAT
+================================================
 
 Issue Analysis:
-Possible Causes:
-Suggested Checks:
+
+Likely Root Cause:
+
+Supporting Evidence:
+
+Relevant Historical Issues:
+
+Recommended Checks:
+
+Confidence:
 """
 
     return prompt
 
 
-
-# ==========================================
+# ==================================================
 # RUN DIAGNOSTIC
-# ==========================================
+# ==================================================
 
-def run_diagnostic(query, bench, device_result):
+def run_diagnostic(
+    user_input,
+    bench,
+    device_result,
+    retrieval_context
+):
 
     prompt = build_prompt(
-        query,
-        bench,
-        device_result
+        query=user_input,
+        bench=bench,
+        device_result=device_result,
+        retrieval_context=retrieval_context
     )
 
-    response = llm.ask([
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are an ECU testbench troubleshooting "
+                "assistant."
+            )
+        },
         {
             "role": "user",
             "content": prompt
         }
-    ])
+    ]
+
+    response = llm.ask(messages)
 
     return response["reply"]

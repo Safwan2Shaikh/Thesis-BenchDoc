@@ -1,83 +1,217 @@
 """
 chat_agent.py
-
-Constraint-aware diagnostic chat agent
 """
 
-from inventory_retriever import get_bench_info
-from device_identifier import identify_devices
-from diagnostic_engine import run_diagnostic
+from retrievers.bench_retriever import identify_bench
+
+from retrievers.inventory_retriever import (
+    get_bench_inventory
+)
+
+from device_identifier import (
+    identify_devices
+)
+
+from diagnostic_engine import (
+    run_diagnostic
+)
+
+from retrievers.master_retriever import (
+    retrieve_context
+)
 
 
-# ==========================================
-# MAIN CHAT ROUTER
-# ==========================================
+DEVICE_LIST_INTENTS = [
+
+    "available devices",
+    "devices available",
+    "show devices",
+    "list devices",
+
+    "what devices",
+    "which devices",
+
+    "connected devices",
+
+    "available hardware",
+    "show hardware",
+
+    "what hardware",
+
+    "bench configuration",
+    "bench setup"
+]
+
 
 def chat(user_input):
 
-    # ==========================================
-    # STEP 1 — BENCH DETECTION
-    # ==========================================
+    # ============================================
+    # BENCH IDENTIFICATION
+    # ============================================
 
-    bench = get_bench_info(user_input)
+    bench_result = identify_bench(
+        user_input
+    )
 
-    if not bench:
+    if not bench_result:
 
         return """
-❌ No valid bench detected.
+❌ Bench could not be identified.
 
-Please specify a bench name.
+Please specify:
 
-Examples:
-- ABT-C-003WE
-- 3WE
-- 483
+• Full Bench Name
+
+Example:
+ABT-C-00483
+
+OR
+
+• Bench IP Address
+
+Example:
+10.10.10.15
+
+Short names such as:
+
+483
+3WE
+
+are not supported.
 """
 
-    # ==========================================
-    # STEP 2 — DEVICE IDENTIFICATION
-    # ==========================================
+    bench_name = bench_result[
+        "bench_name"
+    ]
+
+    # ============================================
+    # INVENTORY
+    # ============================================
+
+    bench_inventory = (
+        get_bench_inventory(
+            bench_name
+        )
+    )
+
+    if not bench_inventory:
+
+        return f"""
+❌ Bench found:
+
+{bench_name}
+
+But no inventory exists.
+"""
+
+    # ============================================
+    # SPECIAL DEVICE LIST INTENT
+    # ============================================
+
+    query_lower = user_input.lower()
+
+    if any(
+        phrase in query_lower
+        for phrase in DEVICE_LIST_INTENTS
+    ):
+
+        response = [
+            f"Bench: {bench_name}",
+            ""
+        ]
+
+        for key, value in (
+            bench_inventory.items()
+        ):
+
+            if not value:
+                continue
+
+            if value.strip():
+
+                response.append(
+                    f"{key}: {value}"
+                )
+
+        return "\n".join(response)
+
+    # ============================================
+    # DEVICE IDENTIFICATION
+    # ============================================
 
     device_result = identify_devices(
         user_input,
-        bench
+        bench_inventory
     )
 
-    # ==========================================
-    # STEP 3 — LLM DIAGNOSTIC
-    # ==========================================
+    # ============================================
+    # RETRIEVAL
+    # ============================================
 
-    response = run_diagnostic(
-        user_input,
-        bench,
-        device_result
+    retrieval_context = (
+        retrieve_context(
+            user_query=user_input,
+            bench=bench_name
+        )
     )
 
-    return response
+    # ============================================
+    # LLM
+    # ============================================
 
+    return run_diagnostic(
+        user_input=user_input,
+        bench=bench_name,
+        device_result=device_result,
+        retrieval_context=retrieval_context
+    )
 
-# ==========================================
-# MAIN LOOP
-# ==========================================
 
 def main():
 
-    print("🤖 Constraint-Aware ECU Diagnostic Agent\n")
+    print(
+        "\n========================================"
+    )
+
+    print(
+        " Radar ECU Diagnostic Assistant"
+    )
+
+    print(
+        "========================================"
+    )
 
     while True:
 
-        user = input("You: ")
+        user_input = input(
+            "\nYou: "
+        ).strip()
 
-        if user.lower() == "exit":
+        if not user_input:
+            continue
+
+        if user_input.lower() in [
+            "exit",
+            "quit",
+            "q"
+        ]:
             break
 
-        print("\nAgent:\n")
+        try:
 
-        result = chat(user)
+            result = chat(
+                user_input
+            )
 
-        print(result)
+            print(
+                f"\nAssistant:\n\n{result}"
+            )
 
-        print("\n==================================================")
+        except Exception as e:
+
+            print(
+                f"\n❌ Error: {e}"
+            )
 
 
 if __name__ == "__main__":

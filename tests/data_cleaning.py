@@ -23,7 +23,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 INPUT_FILE = os.path.join(BASE_DIR, "knowledgeBase", "Logged_Issues.csv")
-OUTPUT_FILE = os.path.join(BASE_DIR, "processed", "cleaned_issues.csv")
+OUTPUT_FILE = os.path.join(BASE_DIR, "processed_kb", "cleaned_issues.csv")
 
 # =============================
 # REQUIRED COLUMNS (ALREADY FIXED IN CSV)
@@ -42,23 +42,23 @@ REQUIRED_COLUMNS = [
 # LOAD DATA
 # =============================
 
-print("📂 Loading raw dataset...")
+print("Loading raw dataset...")
 df = pd.read_csv(INPUT_FILE)  # ✅ UTF-8 works now
 
-print(f"✅ Loaded {len(df)} raw records")
+print(f"SUCCESS - Loaded {len(df)} raw records")
 
 # =============================
 # SELECT REQUIRED COLUMNS
 # =============================
 
-print("🔍 Selecting relevant columns...")
+print("Selecting relevant columns...")
 df = df[REQUIRED_COLUMNS]
 
 # =============================
 # CLEAN TEXT DATA
 # =============================
 
-print("🧹 Cleaning text...")
+print("Cleaning text...")
 
 # Fill missing values
 df = df.fillna("")
@@ -71,21 +71,21 @@ for col in df.columns:
 # REMOVE EMPTY ENTRIES
 # =============================
 
-print("🚫 Removing empty issues...")
+print("Removing empty issues...")
 df = df[df["Issue"] != ""]
 
 # =============================
 # REMOVE DUPLICATES
 # =============================
 
-print("♻️ Removing duplicates...")
+print("Removing duplicates...")
 df = df.drop_duplicates()
 
 # =============================
 # CREATE COMBINED SEARCH COLUMN
 # =============================
 
-print("🔗 Creating search field...")
+print("Creating search field...")
 
 df["combined"] = (
     df["Issue"] + " " +
@@ -105,8 +105,8 @@ print("💾 Saving cleaned dataset...")
 # Ensure processed folder exists
 os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
-# ✅ Overwrites automatically
+# Overwrites automatically
 df.to_csv(OUTPUT_FILE, index=False)
 
-print(f"✅ Saved cleaned data to: {OUTPUT_FILE}")
-print(f"✅ Final number of records: {len(df)}")
+print(f"SUCCESS - Saved cleaned data to: {OUTPUT_FILE}")
+print(f"SUCCESS - Final number of records: {len(df)}")
