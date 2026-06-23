@@ -38,7 +38,7 @@ def connect(instance_id):
     return result
 
 
-def reset(instance_id, wait_time=3):
+def reset(instance_id, wait_time=10):
 
     disconnect_result = disconnect(instance_id)
 
