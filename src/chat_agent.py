@@ -27,11 +27,13 @@ DEVICE_LIST_INTENTS = [
     "devices available",
     "show devices",
     "list devices",
+    "list all device",
 
     "what devices",
     "which devices",
 
     "connected devices",
+    "devices connected"
 
     "available hardware",
     "show hardware",
@@ -56,7 +58,7 @@ def chat(user_input):
     if not bench_result:
 
         return """
-❌ Bench could not be identified.
+WARNING - Bench could not be identified.
 
 Please specify:
 
@@ -97,7 +99,7 @@ are not supported.
     if not bench_inventory:
 
         return f"""
-❌ Bench found:
+WARNING - Bench found:
 
 {bench_name}
 
