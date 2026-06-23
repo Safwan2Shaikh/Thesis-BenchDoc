@@ -3,7 +3,7 @@
 import subprocess
 import time
 
-from PC_ports.logger import info
+from logger import info
 
 
 def disconnect(instance_id):
