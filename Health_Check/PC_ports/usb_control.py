@@ -1,5 +1,3 @@
-# controls/usb_control.py
-
 import subprocess
 import time
 
@@ -8,34 +6,47 @@ from logger import info
 
 def disconnect(instance_id):
 
-    info(f"Disabling USB device")
+    info("Disabling USB device")
 
-    subprocess.run(
+    result = subprocess.run(
         [
             "pnputil",
             "/disable-device",
             instance_id
-        ]
+        ],
+        capture_output=True,
+        text=True
     )
+
+    return result
 
 
 def connect(instance_id):
 
-    info(f"Enabling USB device")
+    info("Enabling USB device")
 
-    subprocess.run(
+    result = subprocess.run(
         [
             "pnputil",
             "/enable-device",
             instance_id
-        ]
+        ],
+        capture_output=True,
+        text=True
     )
+
+    return result
 
 
 def reset(instance_id, wait_time=3):
 
-    disconnect(instance_id)
+    disconnect_result = disconnect(instance_id)
 
     time.sleep(wait_time)
 
-    connect(instance_id)
+    connect_result = connect(instance_id)
+
+    return {
+        "disconnect": disconnect_result,
+        "connect": connect_result
+    }
