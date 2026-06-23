@@ -6,7 +6,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from usb_control import reset
 
 
-INSTANCE_ID = r"USB\\VID_0897&PID_0004\\5&AC91B4A&0&11"
+INSTANCE_ID = r"USB\\VID_0897&PID_0004\\5&AC91B4A&0&11" #Lauterbach ID
 
 result = reset(INSTANCE_ID)
 

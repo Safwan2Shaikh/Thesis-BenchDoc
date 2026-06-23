@@ -18,6 +18,15 @@ def disconnect(instance_id):
         text=True
     )
 
+    print("STDOUT:")
+    print(result.stdout)
+
+    print("STDERR:")
+    print(result.stderr)
+
+    print("RETURN CODE:")
+    print(result.returncode)
+
     return result
 
 
@@ -34,6 +43,15 @@ def connect(instance_id):
         capture_output=True,
         text=True
     )
+
+    print("STDOUT:")
+    print(result.stdout)
+
+    print("STDERR:")
+    print(result.stderr)
+
+    print("RETURN CODE:")
+    print(result.returncode)
 
     return result
 
