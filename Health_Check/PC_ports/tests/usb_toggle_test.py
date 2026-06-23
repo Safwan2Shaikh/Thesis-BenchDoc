@@ -1,6 +1,6 @@
 # test_usb.py
 
-from controls.usb_control import reset
+from PC_ports.usb_control import reset
 
 
 INSTANCE_ID = r"PASTE_INSTANCE_ID_HERE"
