@@ -1,5 +1,7 @@
 """
 master_retriever.py
+
+Central retrieval orchestrator.
 """
 
 from retrievers.inventory_retriever import (
@@ -14,6 +16,10 @@ from retrievers.chunk_md_retriever import (
     retrieve_chunks
 )
 
+from retrievers.bench_topology_retriever import (
+    get_bench_context
+)
+
 
 def retrieve_context(
     user_query,
@@ -23,8 +29,13 @@ def retrieve_context(
     context = {
         "inventory": None,
         "similar_issues": [],
-        "knowledge_chunks": []
+        "knowledge_chunks": [],
+        "bench_topology": None
     }
+
+    # ======================================
+    # INVENTORY
+    # ======================================
 
     try:
 
@@ -40,6 +51,10 @@ def retrieve_context(
             f"Inventory retrieval failed: {e}"
         )
 
+    # ======================================
+    # HISTORICAL ISSUES
+    # ======================================
+
     try:
 
         context["similar_issues"] = (
@@ -54,6 +69,10 @@ def retrieve_context(
             f"Issue retrieval failed: {e}"
         )
 
+    # ======================================
+    # KNOWLEDGE CHUNKS
+    # ======================================
+
     try:
 
         context["knowledge_chunks"] = (
@@ -66,6 +85,24 @@ def retrieve_context(
 
         print(
             f"Chunk retrieval failed: {e}"
+        )
+
+    # ======================================
+    # BENCH TOPOLOGY
+    # ======================================
+
+    try:
+
+        context["bench_topology"] = (
+            get_bench_context(
+                user_query
+            )
+        )
+
+    except Exception as e:
+
+        print(
+            f"Bench topology retrieval failed: {e}"
         )
 
     return context

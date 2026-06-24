@@ -115,6 +115,110 @@ Content:
 
 """
 
+    # =============================================
+    # BENCH TOPOLOGY
+    # =============================================
+
+    topology = retrieval_context.get(
+        "bench_topology"
+    )
+
+    if topology:
+
+        context_text += """
+
+==========================
+BENCH TOPOLOGY
+==========================
+
+"""
+
+        # -------------------------
+        # Bench Definition
+        # -------------------------
+
+        context_text += "Bench Information:\n\n"
+
+        context_text += str(
+            topology.get(
+                "bench_info",
+                {}
+            )
+        )
+
+        context_text += "\n\n"
+
+        # -------------------------
+        # Connections
+        # -------------------------
+
+        connections = topology.get(
+            "connections",
+            []
+        )
+
+        if connections:
+
+            context_text += (
+                "Relevant Connections:\n\n"
+            )
+
+            for edge in connections:
+
+                context_text += (
+                    f"{edge.get('source')} "
+                    f"--{edge.get('relation')}--> "
+                    f"{edge.get('target')}\n"
+                )
+
+            context_text += "\n"
+
+        # -------------------------
+        # Troubleshooting Rules
+        # -------------------------
+
+        rules = topology.get(
+            "rules",
+            []
+        )
+
+        if rules:
+
+            context_text += (
+                "Relevant Troubleshooting Rules:\n\n"
+            )
+
+            for rule in rules:
+
+                condition = rule.get(
+                    "condition",
+                    ""
+                )
+
+                context_text += (
+                    f"Condition: "
+                    f"{condition}\n"
+                )
+
+                check_order = rule.get(
+                    "check_order",
+                    []
+                )
+
+                if check_order:
+
+                    context_text += (
+                        "Check Order:\n"
+                    )
+
+                    for step in check_order:
+
+                        context_text += (
+                            f" - {step}\n"
+                        )
+
+                context_text += "\n"
+
     return context_text
 
 
@@ -136,7 +240,7 @@ def build_prompt(
     prompt = f"""
 You are a professional ECU testbench troubleshooting assistant.
 
-The inventory system is the source of truth.
+The inventory system and bench topology are the source of truth.
 
 ================================================
 USER QUERY
@@ -185,8 +289,20 @@ Use ALL available information:
 1. Inventory Information
 2. Historical Issues
 3. Knowledge Base Files
-4. Workflow Documents
-5. Failure Analyses
+4. Bench Topology
+5. Device Relationships
+6. Power Connections
+7. Communication Paths
+8. Troubleshooting Rules
+
+When bench topology is available:
+
+- Use connection paths as evidence.
+- Use troubleshooting rules as guidance.
+- Consider power dependencies.
+- Consider CAN dependencies.
+- Consider Ethernet dependencies.
+- Consider debugger connections.
 
 If invalid devices exist:
 
@@ -207,6 +323,7 @@ If knowledge base files match:
 - use them as troubleshooting evidence
 
 Do not invent hardware.
+Do not invent connections.
 Do not invent log messages.
 
 Provide practical engineering advice.
