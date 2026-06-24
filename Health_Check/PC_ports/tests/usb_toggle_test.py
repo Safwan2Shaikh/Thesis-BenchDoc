@@ -1,17 +1,38 @@
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+sys.path.append(
+    str(
+        Path(__file__).resolve().parent.parent
+    )
+)
 
-from usb_control import reset
+from COM_check import find_com_device
 
 
-INSTANCE_ID = r"USB\\VID_0897&PID_0004\\5&AC91B4A&0&11" #Lauterbach ID
+TARGET_COM = "COM5"
 
-result = reset(INSTANCE_ID)
 
-print(result["disconnect"].stdout)
-print(result["disconnect"].stderr)
+device = find_com_device(TARGET_COM)
 
-print(result["connect"].stdout)
-print(result["connect"].stderr)
+if device is None:
+
+    print(
+        f"{TARGET_COM} not found"
+    )
+
+else:
+
+    print("\nDevice Found\n")
+
+    print(
+        f"Name       : {device['name']}"
+    )
+
+    print(
+        f"Status     : {device['status']}"
+    )
+
+    print(
+        f"InstanceID : {device['instance_id']}"
+    )
