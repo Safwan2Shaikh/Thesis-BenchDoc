@@ -20,6 +20,14 @@ from retrievers.bench_topology_retriever import (
     get_bench_context
 )
 
+from agents.agent_router import (
+    needs_trace32_agent
+)
+
+from agents.trace32_agent import (
+    Trace32Agent
+)
+
 
 def retrieve_context(
     user_query,
@@ -30,7 +38,8 @@ def retrieve_context(
         "inventory": None,
         "similar_issues": [],
         "knowledge_chunks": [],
-        "bench_topology": None
+        "bench_topology": None,
+        "trace32_advice": None
     }
 
     # ======================================
@@ -103,6 +112,62 @@ def retrieve_context(
 
         print(
             f"Bench topology retrieval failed: {e}"
+        )
+
+    # ======================================
+    # TRACE32 AGENT
+    # ======================================
+
+    try:
+
+        if needs_trace32_agent(
+            user_query
+        ):
+
+            topology = context.get(
+                "bench_topology"
+            )
+
+            inventory = context.get(
+                "inventory"
+            )
+
+            trace32_prompt = f"""
+Bench:
+{bench}
+
+Inventory:
+{inventory}
+
+Bench Topology:
+{topology}
+
+User Issue:
+{user_query}
+
+Provide:
+
+1. Trace32-specific root cause analysis
+2. Debugger-related troubleshooting
+3. Recommended checks
+4. Useful PRACTICE/CMM commands
+5. Engineering recommendations
+
+Focus only on Lauterbach / Trace32 expertise.
+"""
+
+            agent = Trace32Agent()
+
+            context["trace32_advice"] = (
+                agent.ask(
+                    trace32_prompt
+                )
+            )
+
+    except Exception as e:
+
+        print(
+            f"Trace32 agent failed: {e}"
         )
 
     return context

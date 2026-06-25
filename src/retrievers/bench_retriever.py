@@ -1,7 +1,7 @@
 """
 bench_retriever.py
 
-Bench identification from:
+Bench identification from: b   
 
 1. Full Bench Name
 2. IP Address

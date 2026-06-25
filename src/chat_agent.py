@@ -212,7 +212,7 @@ def main():
         except Exception as e:
 
             print(
-                f"\n❌ Error: {e}"
+                f"Error: {e}"
             )
 
 

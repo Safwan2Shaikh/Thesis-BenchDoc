@@ -5,6 +5,8 @@
 CAN Connection open
 
 Channel: VN5650 Channel 13
+OR
+Channel: VN5650 Channel 14
 
 Mask: 4096
 
