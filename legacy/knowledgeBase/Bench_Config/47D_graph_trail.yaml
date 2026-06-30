@@ -1,0 +1,118 @@
+nodes:
+
+  - pc
+  - pdu
+  - psu
+  - pmb
+  - vn5650
+  - lauterbach
+  - debugger_mux
+  - ecu_1
+  - ecu_2
+  - netgear_switch
+
+edges:
+
+  # PDU POWER
+
+  - source: pdu.port_1
+    target: psu
+    relation: powers
+
+  - source: pdu.port_2
+    target: vn5650
+    relation: powers
+
+  - source: pdu.port_3
+    target: pmb
+    relation: powers
+
+  - source: pdu.port_4
+    target: lauterbach
+    relation: powers
+
+  # PSU TO PMB
+
+  - source: psu.channel_1
+    target: pmb.ports_1_8
+    relation: powers
+
+  - source: psu.channel_2
+    target: pmb.ports_9_16
+    relation: powers
+
+  # PMB DUT CONNECTIONS
+
+  - source: pmb.port_1
+    target: ecu_1
+    relation: powers
+
+  - source: pmb.port_4
+    target: ecu_2
+    relation: powers
+
+  - source: pmb.port_3
+    target: debugger_mux
+    relation: powers
+
+  # VN5650 CAN
+
+  - source: vn5650.can13
+    target: ecu_1
+    relation: can
+
+  - source: vn5650.can14
+    target: ecu_2
+    relation: can
+
+  # VN5650 ETHERNET
+
+  - source: vn5650.eth1
+    target: ecu_1
+    relation: ethernet
+
+  - source: vn5650.eth2
+    target: ecu_2
+    relation: ethernet
+
+  # PC CONNECTIONS
+
+  - source: pc
+    target: psu
+    relation: usb
+
+  - source: pc
+    target: lauterbach
+    relation: usb
+
+  - source: pc
+    target: vn5650
+    relation: ethernet
+
+  - source: pc
+    target: vn5650
+    relation: subd9_usb
+
+  # NETWORK
+
+  - source: pmb
+    target: netgear_switch
+    relation: ethernet
+
+  - source: netgear_switch
+    target: pc
+    relation: ethernet
+
+  # DEBUG PATH
+
+  - source: lauterbach
+    target: debugger_mux
+    relation: debug
+
+  - source: debugger_mux
+    target: ecu_1
+    relation: debug
+
+  - source: debugger_mux
+    target: ecu_2
+    relation: debug

@@ -1,0 +1,17 @@
+# CAN Connection Established
+
+## Evidence
+
+CAN Connection open
+
+Channel: VN5650 Channel 13
+OR
+Channel: VN5650 Channel 14
+
+Mask: 4096
+
+## Interpretation
+
+CAN communication path is healthy.
+
+Vector configuration is valid.

@@ -1,0 +1,275 @@
+﻿Date,Test_Bench_Name,Sample,Bench_Type,Reporter ,Project,Issue,Symptoms_Observed,Root_Cause_Problem,Solution,Category,Root_Cause_Category,Solution_Type,Type,Device,Onsite_Support,Time_Invested
+,RNG-C-004LQ ,,Dev,Prasad Sunita (MS/ESF1-XC) ,RA7,Remote connection issue ,no network access,,PC restart after update ,,,,HW,PC,Yes,10
+,RNG-C-004VL ,,Dev,Shetty Trupthi Tulasidas (MS/EPE-SYT11-XC) ,RA7P,No remote control of PSU via RBS ,Voltcraft PSU not detected,,Replace Voltcraft model with EA-PS Model ,,,,HW,PSU,Yes,20
+,RNG-C-004VL ,,Dev,Shetty Trupthi Tulasidas (MS/EPE-SYT11-XC) ,RA7P,Replace A2 sample with B0 ,,, ,,,,HW,ECU,Yes,5
+,LR-C-002K8 ,,Dev,Kummara Subhash (MS/ENE-EAB1-XC) ,RA7,PC not connecting ,no network access,,Require pre logged in user ,,,,HW,PC,Yes,45
+,RNG-C-004LQ ,,Dev,Prasad Sunita (MS/ESF1-XC) ,RA7,Relay card not working ,no power on relay card,,"Fuse blown, needs replacement ",,,,HW,Relay_Card,Yes,30
+,EY ,,Dev,Sakthivel P (MS/ESF1-XC) ,RA7,Sample power down,very little current (0.054 A),, ,,,,SW,ECU,Yes,60
+,E4 Node ,,Dev,Sakthivel P (MS/ESF1-XC) ,RA7,"B2 sample test failing, bench blocked ",,,Sample Swap  ,,,,SW,ECU,Yes,5
+,ABT-C-00483 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6,"Bench Blocked (Debug port fail, bus error at address DAP:0x80038FE0) -> target rest detected ",Target in continuous reset,,DebiProg – Flash Erase ,,,,SW,ECU,Yes,20
+,E4 Node ,,Dev,Sakthivel P (MS/ESF1-XC) ,RA7,Sample in Reset mode ,Target in Continuous reset ,,DebiProg – Flash Erase ,,,,SW,ECU,Yes,10
+,ABT-C-00483 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6,Bus address error ,Sample drawing very little current,,RA6 recovery steps  ,,,,SW,ECU,Yes,90
+,EY setup ,,Dev,Gusinjac Aida (XC-AC/ENS3) ,RA7,Sample in Reset mode ,Sample drawing very little current,,Debiprog – Flash Erase ,,,,SW,ECU,Yes,10
+,ABT-C-003X8 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6, ,,,LED board connection ,,,,HW,Bench_HW,Yes,15
+,RNG-C-004VL ,,Dev,Shetty Trupthi Tulasidas (MS/EPE-SYT11-XC) ,RA7P,EA-PS PSU not showing ,Voltage and Current values not showing on PC,,Configure connection address ,,,,HW,PC,Yes,5
+,LR-C-000L4,,Dev,Gusinjac Aida (XC-AC/ENS3) ,RA7, ,,,Update primary user info  ,,,,Gen,PC,Yes,5
+,PV ,,Dev,Gusinjac Aida (XC-AC/ENS3) ,RA7,,,,Update primary user info  ,,,,Gen,PC,Yes,5
+,ABT-C-003X8 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6,LED working troubleshoot ,,,Try different connections ,,,,HW,Bench_HW,Yes,15
+,ABT-C-00483 ,,Sys,Schuhmann Martin (XC-AC/ENS2) / Harish Kumar (MS/EPE-SYT12-XC) ,RA6,BODA flash issue ,Sample getting bricked,,"Pic of sample used for BODA test, need labels ",,,,SW,ECU,Yes,10
+,EY ,,Dev,Gusinjac Aida (XC-AC/ENS3) ,RA7,Sample with WatchDog feature disabled ,,, ,,,,SW,ECU,Yes,15
+,ABT-C-00483 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6,RASIX-86100 ,Sample getting bricked,,No  ,,,,SW,ECU,Yes,20
+,ABT-C-00483 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6,Sample bricked ,Sample drawing very little current,,Debiprog – Flash Erase ,,,,SW,ECU,Yes,10
+,ABT-C-003W1 ,,Sys,Sravani Joshi (MS/EPE-SYT12-XC) ,RA7,"Bench Offline, no remote connection ",no network access,,Enable user access and internet access ,,,,SW,PC,Yes,30
+,LR-C-001NM ,,Dev,Gusinjac Aida (XC-AC/ENS3) ,RA7,Change to FR C0 ,,, ,,,,HW,ECU,Yes,10
+,ABT-C-00483 ,,Sys,Suerya Raja (MS/EPE-SYT12-XC) ,RA6,"Sample Flashing, counters not running ",,, ,,,,SW,ECU,Yes,45
+,LR-C-001NM ,,Dev,Anusha Shivanna (MS/EPE-SYT12-XC) ,RA7,C0 sample power down ,not connecting to Trace32,,"C0 not functioning, Sample change ",,,,SW,ECU,Yes,15
+,RNG-C-004HT ,,Dev,Kumar Sahu Rahul (MS/ESD1-BEG) ,RA7,"Multiplexer implementation, T32 flashing ",,,"Explain, troubleshooting ",,,,SW,ECU,Yes,30
+,LR-C-002D1 ,,Dev,Ahmed Mohamed Rady (XC-AC/ENS5) ,RA7,Trace not working ,Sample power fail,, ,,,,HW,ECU,Yes,10
+,ABT-C-00483 ,,Sys,Suerya Raja (MS/EPE-SYT12-XC) ,RA6,Sample Bricked ,Sample drawing very little current,,Debiprog – Flash Erase ,,,,SW,ECU,Yes,10
+,RNG-C-004G0 ,,Dev,Neuberg Jens (XC-AC/ENS3) ,RA7,Sample change and harness fix ,CAN & ETH link fail on Vector HW,, ,,,,HW,Bench_HW,Yes,5
+,PV ,,Dev,Nirmal Gautham (MS/EVV1-XC) ,RA7,"Current Fluctuation, power down trace, PSU not working remotely  ",PSU detection fail,,PSU reconnection ,,,,HW,Bench_HW,Yes,30
+,RNG-C-004LR ,,Dev,Garouachi Saber (XC-AC/ENS3) ,RA7,ESB box to C0 ,,,Connection and verification ,,,,HW,Bench_HW,Yes,20
+,RNG-C-004G0 ,,Dev,Neuberg Jens (XC-AC/ENS3) ,RA7,FR C1 sample not running ,Target power fail,,Lauterbach troubleshooting ,,,,SW,Trace32,Yes,10
+,BF4-C-002PM ,,Dev,Neuberg Jens (XC-AC/ENS3) ,RA7,ETH & CAN connection ,CAN & ETH link fail on CANoe,,Powercycle and reset connection ,,,,SW,ECU,Yes,90
+,PV ,,Dev,Gusinjac Aida (XC-AC/ENS3) ,RA7,Replace voltcraft with Toellner ,Voltcraft PSU not programmable for automation,,Setup toellner and configure IP ,,,,HW,Bench_HW,Yes,15
+,LR-C-003TD ,,Dev,Rao Divyashree (MS/ENE-ESH1-XC) ,RA7,Sample change ,,, ,,,,HW,ECU,Yes,5
+,BF4-C-002PM ,,Dev,Neuberg Jens (XC-AC/ENS3) ,RA7,ETH link for new SW ,CAN & ETH link fail on Vector HW,,"Troubleshooting, (maybe something wrong with the harness) ",,,,SW,Bench_HW,Yes,45
+,ABT-C-005PC ,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC) ,Cariad,"Bench Offline, no remote connection ",no network access,,Enable user access and internet access ,,,,HW,PC,Yes,30
+,ABT-C-005P6 ,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC) ,Cariad,"Bench Offline, no remote connection ",no network access,,Critical system failure ,,,,HW,PC,Yes,15
+,ABT-C-00483 ,,Sys,Lapasi Sankaranarayanan Sooraj (MS/EPE-SYT12-XC) ,RA7,MDC pin measurment ,,,Physically holding pin on MDC pin ,,,,HW,Bench_HW,Yes,25
+,EY ,,Dev,Nanasaheb Kalse Asavari (MS/ESF1-XC) ,RA7,PSU remote control ,PSU detection fail,,Restart PSU and COM config ,,,,HW,Bench_HW,Yes,10
+,EY ,,Dev,Nanasaheb Kalse Asavari (MS/ESF1-XC) ,RA7,"Trace32 – target power fail , power fluctuation ",Sample getting bricked,,Debiprog – Flash Erase ,,,,SW,ECU,Yes,15
+,ABT-C-003W1 ,,Sys,Bose Aswathy (MS/EOV4-SWC) ,RA7,"Bench Offline, no remote connection ",no network access,,Enable user access and internet access ,,,,HW,PC,Yes,45
+,PV ,,Dev,Metri Prashant (MS/ENE-ESH1-XC) ,RA7,Toellner config ,,,IP change and ping ,,,,HW,PC,Yes,10
+,NM ,,Dev,Anusha Shivanna (MS/EPE-SYT12-XC) ,RA7,Need Toellner PSU ,,,Replace from NM bench ,,,,HW,Bench_HW,Yes,10
+,LR-C-00348 ,,Sys,Vester Yannick (XC-AC/ENS5) ,RA6,"Bench Offline, no remote connection ",no network access,,Restart and IP config ,,,,HW,PC,Yes,10
+,LR-C-00471 ,,Dev,Shamkumar V H (XC-AC/ENS1) ,RA7,Unable to connect to bench  ,no network access,, IP change ,,,,HW,PC,Yes,20
+,ABT-C-003X8 ,,Sys,Harish Kumar (MS/EPE-SYT12-XC) ,RA6,"Canope SW, invalid IP address  ",,,Try reinstalling Canope22 ,,,,SW,Vector_SW,Yes,20
+04.03.26,LR-C-00348,,Dev,Ahmed Mohamed Rady (XC-AC/ENS5),RA7,No remote connection,No network on PC,"IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,Connectivity_Issue_Network,"Restart_PC, Configuration_Change",HW,PC,Yes,20
+04.03.26,LR-C-002D1,RA7 B5,Dev,Ahmed Mohamed Rady (XC-AC/ENS5),RA7,Sample drawing no power,Relay controllable but no voltage on Port1,Relay Card Port fail,Relay card change,Bench_HW,Hardware_Failure_Electrical,Replace_Component,HW,PMB,Yes,20
+05.03.26,ABT-C-0047D,RA7 C1 CR,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,CR sample not working,Sample not going into attach mode,Target power fail,Sample recovery via Trace32,Debugger,Connectivity_Issue_Debugger,Recover_Device,HW,Trace32,No,10
+05.03.26,LR-C-002D1,RA7 B5,Dev,Ahmed Mohamed Rady (XC-AC/ENS5),RA7,Debugger not working,Sample not going into prepare mode,Target power fail,B5 sample related to C => use SX601_C0 Trace,Debugger,Configuration_Mismatch,Configuration_Change,HW,Trace32,No,10
+05.03.26,ABT-C-003X8,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA6,Automated testcase not running,"Invalid IP address from windows ARP table, Automated flashing step not possible",POD IP mismatch,Change IP configuration,Vector_SW,Configuration_Mismatch,User_correction,SW,Vector,No,20
+05.03.26,LR-C-000PV,RA7 C1 FR,Dev,Sakthivel P (MS/ESF1-XC),RA7,PSU not drawing current,Current very low (0.083 A),Target power down,Sample power cycle,Debugger,Sample_Down,Sample_Reset,HW,ECU,No,10
+05.03.26,LR-C-000PV,RA7 C1 FR,Dev,Sakthivel P (MS/ESF1-XC),RA7,Trace32 device reset not possible remotely,No device connected to PDU,Device not connected,Setup Device according to setup configuration,Bench_HW,Device_Connection_Incorrect,Device_Connect,HW,PDU,Yes,5
+05.03.26,LR-C-000PV,RA7 C1 FR,Dev,Sakthivel P (MS/ESF1-XC),RA7,Trace32 Device not detected,no Debugger Device detection,Trace32 detection fail,Device hard reset,Debugger,Connectivity_Issue_Debugger,Hard_Reset,HW,Trace32,No,5
+05.03.26,ABT-C-005PC,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,No remote connection,"Remote desktop service session ended, desktop shutting down",PC auto update,PC reset Required,Desktop,Auto_Update,Restart_PC,HW,PC,Yes,10
+05.03.26,ABT-C-003WR,RA7 C1,Sys,Chethan B (MS/EOV4-SWC),RA7,ETH connection fail,"ETH fail on CANoe, ETH physically connected",Connection detection fail,Disconnect and reconnect,ECU_HW,Detection_Issue_CANoe,Disconnect_Reconnect,HW,VN5650,Yes,5
+05.03.26,ABT-C-003WR,RA7 C1,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Sample power down,PSU not working Remotely,PSU detection fail,PSU reset,Bench_HW,Hardware_Connection_Fail,Hard_Reset,HW,PSU,Yes,5
+06.03.26,LR-C-002CY,RA7 B2,Dev,Kummara Subhash (MS/ENE-EAB1-XC),RA7,Target system down,Sample not going into prepare mode,Target system down,Powercycle and warm reset,Debugger,Connectivity_Issue_Debugger,Warm_Reset,SW,Trace32,No,15
+06.03.26,LR-C-000EY,,Dev,Chandriah Lokpal Brahmapal (XC-AC/ENS2),RA7,EY PC duration expired,Old PC needs to be returned,PC expired,New PC RNG-C-004TG inplace,Desktop,Hardware_Expiration,PC_Replacement,HW,PC,Yes,30
+06.03.26,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sensor Heating Setup required,,Special usecase testing,Setup Sensor Heating,Setup_Change,New_Use_Case,New_Setup,HW,Bench,Yes,40
+06.03.26,LR-C-001F2,,Dev,Metri Prashant (MS/ENE-ESH1-XC),RA7P,Bench Offline,PC not connecting to Bosch network,"IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,Connectivity_Issue_Network,"Restart_PC, Configuration_Change",HW,PC,Yes,10
+06.03.26,ABT-C-00483,RA7 B5,Sys,Prathap Jayaramappa (MS/EPE-SYT12-XC),RA7,new sensor required,,Special uscase testing,Swap sample,Setup_Change,New_Use_Case,New_Setup,HW,Bench,Yes,10
+06.03.26,LR-C-00301,,Dev,Jeske Mark (XC-AC/ENS6),RA6,bench sometimes does not connect,PC goes to sleep mode,PC sleeps,change system setting,Desktop,PC_Settings,Configuration_Change,HW,PC,No,5
+06.03.26,ABT-C-003WE,,Sys,Sonnad Pooja (MS/EOV4-SWC),RA7,Invalid CANope liscense,unable to open Vector SW,Vector SW fail,"Restart PC, install correct Canape TBE license",Vector_SW,Missing_LIcense,Install_License,SW,PC,No,20
+06.03.26,ABT-C-0047D,,Sys,Nelamalli Naveenkumar (MS/EPE-SYT12-XC),Ra7,No remote connection,"No network on PC, after update","IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,Connectivity_Issue_Network,"Restart_PC, Configuration_Change",HW,PC,Yes,20
+09.03.26,RNG-C-004QP,RA7P ,,Sandra Dimpu Sai Prasad Chowdary (MS/ENE-ESH1-XC),RA7P,Sample Change B to A required,,New sample,Swap sample,Setup_Change,Sample_Swap,Sample_Swap,HW,ECU,Yes,5
+09.03.26,ABT-C-003X8,,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA6,Canape offline,Canope license not detected,Vector license connection,"PC restart, License update",Vector_SW,Connectivity_Issue_Vector,License_Update,SW,Vector,No,15
+09.03.26,LR-C-001F2,RA7P,Dev,Arunachalam Uma Saranya (XC-AC/ENS5),RA7P,Bench offline,Network authentication required,New IP not updated on RTB ,New IP,PC_Connection,Connectivity_Issue_Network,IP_change,HW,PC,Yes,30
+09.03.26,ABT-C-003WR,,Sys,Chethan B (MS/EOV4-SWC),RA7,no current for VX box,Relay 15 not on,Incorrect_relay usage,toggle relay 15 for VX box,Vector_HW,User_Incorrect_Use,User_correction,HW,VX1161,No,5
+09.03.26,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Target power down,Sample not detected properly on Trace32,2 Trace32 devices detected,Turn off second Trace32 device,Debugger,User_Incorrect_Use,User_correction,HW,Trace32,No,10
+09.03.26,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sample counters not running,Counters not incrementing,Incorrect Flashing,"Restart Device, ReFlash",Debugger,Improper_flash,Erase_Reflash,SW,Trace32,No,20
+09.03.26,LR-C-000FA,,Dev,Nayak Pabitra Kiran (XC-AC/ENS4),RA7,No remote connection,"Unable to login in, requires known User",No network,IT support,PC_Connection,Connectivity_Issue_Network,IT_support,HW,PC,Yes,45
+10.03.26,ABT-C-00483,RA6 C2 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA6,Lauterbach not detected,Trace32 device not powered on,Trace32 device not powered,Use PMB to switch on Trace32 device,Debugger,User_Incorrect_Use,User_Correction,HW,Trace32,No,5
+10.03.26,ABT-C-00483,RA6 C2 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA6,Sample not going into attach mode,bus error at address DAP:0x80038FE0  & EC14:0x7 ,Sample Bricked,DediProg Flash erase and RA6 recovery steps,ECU_SW,ECU_Bricked,Erase_Reflash,SW,ECU,Yes,30
+10.03.26,ABT-C-00483,RA7 B5,Sys,Prathap Jayaramappa (MS/EPE-SYT12-XC),RA7,Debugger not working,Sample not going into prepare mode,Incorrect Trace32 device usage,Correct Device and configuration,Debugger,Connectivity_Issue_Debugger,Configuration_Change,HW,Trace32,No,10
+11.03.26,RNG-C-004RY,,Dev,Lauff Uwe (XC-AC/ENS5),RA7,L4 PC duration expired ,Old PC needs to be returned,PC expired,New PC RNG-C-004RY inplace,Desktop,Hardware_Expiration,PC_Replacement,HW,PC,Yes,20
+11.03.26,ABT-C-005PC,RA7 TI FR,Sys,Tanveer Muhammad (XC-AC/ENS2),Cariad,FR TI testing blocked,5P6 broken,PC broken,Move 5P6 sample to 5PC,Desktop,PC_Broken,New_Setup,HW,Bench,Yes,5
+11.03.26 ,LR-C-000FA,,Dev,Nayak Pabitra Kiran (XC-AC/ENS4),RA7,Trace32 device not detected,no Debugger Device detection,Trace32 detection fail,Device hard reset,Debugger,Debugger,Hard_Reset,HW,Trace32,Yes,5
+11.03.26,LR-C-0000EX,,Dev,Sakthivel P (MS/ESF1-XC),RA7,PC not reachable,"Unable to login in, black screen after login",No network,PC needs replacement,PC_Connection,Connectivity_Issue_Network,IT_support,HW,PC,Yes,45
+11.03.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sensor Heating Setup  change required,,Special usecase testing,Setup Sensor Heating,Setup_Change,New_Use_Case,New_Setup,HW,Bench,Yes,20
+11.03.26,ABT-C-005PC,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,Canape 22 security issue,"Security issue, some functions unavailable",Old version,Install CANape 23,Vector_SW,Old_Version_SW,SW_installation,SW,Bench,No,10
+12.03.26,ABT-C-005PC,RA7 TI FR,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,VX Pod cable discoonected,Slot 3 (2) is not configured or not working,Port configuration,Port change to Port 4 (3),Vector_HW,Configuration_Mismatch,Configuration_Change,HW,VX1161,Yes,15
+12.03.26,LR-C-0018D,,Dev,Pratip Kumar Bavananthan (MS/ENS1-XC),RA7,Sample not flashable,target power fail,Sample Bricked,DediProg flash erase ,ECU_SW,,,,,,
+12.03.26,LR-C-002D1,RA7 B5,Dev,Padala Vineetha (MS/ESF1-XC),RA7,Sample showing unusual behaviour,Running reset state,ECU OTP programming,DediProg flash erase ,ECU_SW,ECU_Not_Functioning,Flash_Erase,SW,ECU,Yes,10
+12.03.26,ABT-C-0047D,RA7 C1 FR,Sys,Nelamalli Naveenkumar (MS/EPE-SYT12-XC),RA7,Trace32 device swap,Trace32 connected to CR,Hardware connection swap,Change JTAG board to FR,Setup_Change,Connection Change,Configuration_Change,HW,Trace32,Yes,5
+12.03.26,ABT-C-005PC,RA7 TI FR,Sys,Mairmadi Nagaraju Shreedevi (MS/EOV4-SWC),Cariad,Sample bench change for OTP ,Sample in 5PC,Need Trace32 device,move sample to 183F bench,Setup_Change,Missing_HW,Configuration_Change,HW,ECU,Yes,15
+12.03.26,ABT-C-005P6,,Sys,Tanveer Muhammad (XC-AC/ENS2),Cariad,Bench Blocked,Current PC is Broken,PC Broken,New PC on Bench,Desktop,PC_Broken,PC_Replacement,HW,PC,Yes,30
+12.03.26,FE-C-0183F,RA7 TI FR,Sys,Mushfar Jamil (MS/EPE-SYT11-XC),Cariad,Target power fail,"Counters ran, after powercycle bricked -> target power fail",ECU_SW unstable with Trace32,Check SW programming,ECU_SW,ECU_SW_Unstable,ECU_SW,SW,ECU,Yes,120
+12.03.26,LR-C-00458,RA7 B5,Dev,Lohse Rebecca (XC-AC/ENS1),RA7,Sample dead,Continous reset mode,Sample Bricked,DediProg flash erase ,ECU_SW,ECU_Bricked,Flash_Erase,SW,ECU,Yes,10
+13.03.26,ABT-C-003X8,RA7P A,Dev,Rao Divyashree (MS/ENE-ESH1-XC),RA7P,Sample Change A to B required,,New sample,,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,5
+13.03.26,ABT-C-003WE,,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,CANape Issue,"Connection issue with ECU, IP fail",POD IP address mismatch,Change IP configuration on Canape to match that of ECU POD ,Vector_SW,Configuration_Mismatch,Configuration_Mismatch,HW,VX1161,No,20
+13.03.26,LR-C-0018D,,,Nixdorf Jakob (XC-AC/ENS1 XC-AS/ECB1),RA7,No flashing,B1 gigabit still empty after flashing,ECU not flashing,Try B2 gigbit sample,Setup_Change,Sample_Swap,Sample_Swap,SW,Bench,Yes,5
+16.03.26,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Trace32 not working,Error with intercom drivers,Port in use,Trace32 reset  and PC reset,Debugger,Port_Connectivity,Device_Reset,HW,Trace32,No,20
+16.03.26,LR-C-0018D,RA7 B2 CR,Dev,Kolli Venkata Naga Sai Manikanta (MS/ENE-ESH2-XC),RA7,Continous Reset,,,,,,,SW,ECU,,
+16.03.26,LR-C-002CY,RA7,Dev,Kolli Venkata Naga Sai Manikanta (MS/ENE-ESH2-XC),RA7,Task counters not running,Device in continous reset mode on Trace 32,Sample Bricked,DediProg flash erase ,ECU_SW,ECU_Bricked,Flash_Erase,SW,ECU,Yes,10
+16.03.26,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Eth communication fail,MAC address of ECU not matching,No ETH communication,Revisit COM SW,ECU_SW,ECU_SW_Unstable,ECU_SW,SW,ECU,No,60
+16.03.26,LR-C-003TD,RA7,Dev,Rao Divyashree (MS/ENE-ESH1-XC),RA7,Sample changes,,New Sample,Swap sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,5
+16.03.26,ABT-C-003WE,RA7 CR B2,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,ETH communication fail,CR sample using ETH1,Configured to ETH 3,Change IP configuration,Vector_SW,Configuration_Mismatch,User_correction,HW,Vector,Yes,10
+16.03.26,LR-C-003GU,,Dev,Golla Gangabhavani (MS/ENE-EAB1-XC),RA7,Bench not in active state for connecting,"PC Shutdown, restart required ",IP on RTB tool incorrect,PC reset and auto IP change,Desktop,Connectivity_Issue_Network,Restart_PC,HW,PC,Yes,15
+17.03.26,ABT-C-003WR,RA7 B2 FR,Sys,Chethan B (MS/EOV4-SWC),RA7,No Diagnose response from ECU,"VN box detecting connection but no messages flowing, SW was working before",,,ECU_SW,ECU_SW_Unstable,,SW,ECU,No,20
+17.03.26,RNG-C-004TG,RA7 B2,Dev,Gusinjac Aida (XC-AC/ENS3),RA7,Sample Change for different testing,,New sample,,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,5
+17.03.26,RNG-C-004TG,,Dev,Mohan Akhil (MS/EBS5-SWC),RA7,Remote access denied,User not in list of allowed Remote access,No Remote access permission ,Give remote access ,Desktop,Remote_Access,Allow_Permissions ,HW,PC,No,10
+17.03.26,ABT-C-00483,RA7 C1 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,ETH not working,Ethernet link not detected,VN box configuration,Change ETH configuration settings,Vector_HW,Configuration_Mismatch,,HW,Vector,No,45
+17.03.26,ABT-C-0047Q,,Sys,Patil Divya (MS/EOV4-SWC),RA7,No remote connection,PC restarting,"IP change, BCN authentication",configure IP authentication settings,PC_Connection,Connectivity_Issue_Network,Configuration_Change,HW,PC,Yes,30
+18.03.26,ABT-C-0047Q,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Relay Box (PMB) not working,No current change when Relay Switchs toggled,Netgear Switch diconnected,Reconnect Switch to PC,Bench_HW,Netgear_Disconnected,Device_Connect,HW,PMB,Yes,20
+18.03.26,ABT-C-005PC,RA7 TI CR,Sys,Mushfar Jamil (MS/EPE-SYT11-XC),Cariad,ECU not working,"Sample connected powered up, No messages observed",SW not fully integrated,"Attach to debugger bench, erase flash working Sw and check for messages",ECU_SW,ECU_SW_Unstable,Flash_Erase,SW,ECU,Yes,30
+18.03.26,LR-C-000L4,,Dev,Gusinjac Aida (XC-AC/ENS3),,different Configuration as PV node,"Lauterbach port not correct, sample connecte to different channels",Need same configurations,"Change lauterbach port to 4, sample to CH2",Setup_Change,Bench_Configuration,New_Setup,HW,Bench,Yes,5
+18.03.26,ABT-C-003WR,,Sys,Sharma Kanika (MS/EPE-SYT12-XC),RA7,PSU not connecting,"PSU on, but not connecting remotely",PSU connection ,PSU reset,Bench_HW,Hardware_Connection_Fail,Hard_Reset,HW,PSU,No,10
+18.03.26,LR-C-000PV,RA7,Dev,Sakthivel P (MS/ESF1-XC),RA7,Too low voltage and current on CH2 for sample,when sample connected voltage drops with no current,CH2 not fuctioning properly,Switch to CH1 as its wroking fine,Bench_HW,PSU_Channel_Fail,Channel_Swap,HW,PSU,Yes,15
+18.03.26,LR-C-002CY,,Dev,Bergmann Heiko (XC-AS/PJ-CP),RA7,sample bricked,Continous reset mode,ECU_SW not working properly,DediProg flash erase ,ECU_SW,Continous_Reset,Flash_Erase,SW,ECU,Yes,20
+18.03.26,ABT-C-003WE,,Sys,Prathap Jayaramappa (MS/EPE-SYT12-XC),RA7,CANoe not working,"CANoe 19 in use, old version",CANoe SW upgrade,install CANoe19 SP2,Vector_SW,Old_Version_SW,SW_installation,SW,Vector,Yes,10
+18.03.26,ABT-C-00483,RA7 C1 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,RBS not allowing to run,RBS simulation not starting,VN box communication fail,Restart VN box,Vector_HW,Hardware_Connection_Fail,Hard_Reset,HW,VN5650,No,20
+18.03.26,LR-C-003UK,RA7 B2_01,Dev,Bleicher Matthias (XC-AC/ENS4),RA7,Bench required for B2 ETH100 with CAN2 testing,No Bench available with B2 CAN2,"Lack of B2 Benches, CAN2 rarely used",Setup LR-C-003UK for temperary testing,Setup_Change,Bench_Required,Setup_Bench,HW,Bench,Yes,15
+23.03.26,LR-C-000EY,,Dev,Mohan Akhil (MS/EBS5-SWC),RA7,Target power fail on debugger,PDU strip malfunctioning,PDU defect,PDU replace,Bench_HW,HW_Defect,PDU_Change,HW,PDU,Yes,20
+23.03.26,LR-C-003UK,RA7 B2_01,Dev,Shetty Shravya (MS/ENE-EAB1-XC),RA7,Counters stops incrementing after a few seconds,Counters stop incrementing after some time,Boda not flashed,Flash Boda first ,ECU_SW,SW_Flashing,Flash_SW,SW,ECU,No,20
+23.03.26,LR-C-000EY,RA7 B2_02,Dev,Mohan Akhil (MS/EBS5-SWC),RA7,Needs RA7 B2 sample,C1 sample connected,Swap sample,Change sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,10
+23.03.26,RNG-C-004RY,,Dev,Lauff Uwe (XC-AC/ENS5),RA7,LR-C-000FA bench replaced with RNG-C-004RY,LR-C-000FA bench expiring,Bench expiring,Setup RNG-C-004RY,Desktop,New_PC_Setup,PC_Setup,HW,PC,Yes,40
+23.03.26,LR-C-004LR,RA7 C1,Dev,Mbarek Ons (ME/PJ-SW4),RA7,New bench users,,New bench users,Bench usage explanation,Bench_HW,New_User,User_Explain,HW,Bench,No,60
+23.03.26,ABT-C-003X3,RA7 C1,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,ECU not detected on VXConsole,"ECU on, Sample not accesible on VX",SW config Mismatch,SW team escalation,ECU_SW,ECU_SW_Fail,SW_Team,SW,ECU,Yes,120
+23.03.26,ABT-C-0047Q,RA7 C1 FR,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,SW flashed but counters not running,"Lauterbach flash success, counters not running ",OTP programming required for new C1 samples,Do OTP and try again,ECU_SW,ECU_OTP,OTP_First,SW,ECU,No,45
+24.03.26,ABT-C-0047Q,RA7 C1,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,No ETH msgs,"ETH link up but no msgs, TCP/IP issue, counters running",ETH Port connection,Change Bench and try different ETH port,ECU_SW,ECU_COM,Connection,HW,ECU,Yes,120
+24.03.26,LR-C-000EY,,Dev,Gusinjac Aida (XC-AC/ENS3),RA7,Remote connection not possible,Network not detecting,BCN not connected,Check LAN cable,Desktop,LAN_Connection,Connection,HW,PC,Yes,10
+24.03.26,ABT-C-00483,RA7 B2,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,Needs RA7 B2 sample,B2 not connected,Swap sample,Change sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,10
+24.03.26,ABT-C-00483,RA7 B2,Sys,Lapasi Sankaranarayanan Sooraj (MS/EPE-SYT12-XC),RA7,Needs RA7 B2 sample,B2 not connected,Swap sample,Change sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,10
+24.03.26,LR-C-00018D,RA7 B2 CR,Dev,Pratip Kumar Bavananthan (MS/ENS1-XC),RA7,Needs RA7 B2 Gigabit sample,Previous Sample Erase issue,Swap sample,Change sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,10
+24.03.26,LR-C-002CY,RA7 B2 FR,Dev,Bergmann Heiko (XC-AS/PJ-CP),RA7,Needs RA7 B2 Gigabit sample,Previous Sample Erase issue,Swap sample,Change sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,10
+24.03.26,ABT-C-00483,RA7 C1 FR,Dev,Lapasi Sankaranarayanan Sooraj (MS/EPE-SYT12-XC),RA7,MDC Pin Measurement,,,Oscilliscope pin on MDC resistor,Setup_Change,,,,Bench,,30
+24.03.26,ABT-C003WE,RA7 B2 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,ECU not detected on VXConfig,FR ECU not detecting,SW dependency blocking detection,Trace32 flash erase,ECU_SW,SW_Blocking,Flash_Erase,SW,VX1161,Yes,120
+24.03.26,LR-C-002CY,RA7 B2_02,Dev,Bergmann Heiko (XC-AS/PJ-CP),RA7,No CAN communication from ECU,no messeges from ECU recieved,"SW programmed fro CAN2, Sample has only CAN1",New sample needed B2_01,ECU_SW,HW_SW_incompatible,Sample_Swap,SW,ECU,Yes,60
+25.03.26,LR-C-00301,,Dev,Jeske Mark (XC-AC/ENS6),RA7,Identification no. on VN561A,,Need to order CANoe.run license,FInd IDN number,Bench_HW,License_Order,IDN_Number,HW,VN Box,Yes,10
+25.03.26,ABT-C-0047Q,RA7 C1 CR,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,Connect debugger to sample,Connected to ,Debugger not connected to required sample,Swap Debugger Connection,Bench_HW,Connection_Change,Connection_Change,HW,Trace32,Yes,10
+25.03.26,LR-C-00018D,RA7 B2_02 CR,Dev,Preethi H M (MS/ENE-ESH2-XC),RA7,Bench is not working,on Trace32 - target power fail,Incorrect flash SW not compatibale with HW ,"Complete Flash Erase, and Flash steps",ECU_SW,Incorrect_Usage,Erase_Reflash,SW,ECU,No,30
+25.03.26,RNG-C-004TG,,Dev,Sakthivel P (MS/ESF1-XC),RA7,Replace with EX node,Old PC expiring,EX PC expiring,Setup and intall Sw on New PC ,Desktop,PC_Replacement,Setup_PC,HW,PC,Yes,40
+25.03.26,RNG-C-004QP,RA7P B,Dev,Khanna Gagandeep (XC-AC/ENS3),RA7P,Required B sample,A sample connected,Swap sample,Change sample,Setup_Change,Sample_Swap,Sample_Swap,HW,Bench,Yes,10
+25.03.26,RNG-C-004QP,RA7P B,Dev,Sandra Dimpu Sai Prasad Chowdary (MS/ENE-ESH1-XC),RA7P,Sample stuck in a Reset Loop,Trace32 Continous Reset Mode,Sample Bricked,DediProg Flash erase,ECU_SW,ECU_Bricked,Flash_Erase,SW,ECU,Yes,20
+25.03.26,ABT-C-003WE,RA7 B2 CR,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,ECU not detected on VXConfig,ECU not powering on,KL30 sample needs wakeup trigger,Explain user wakeup trigger,ECU_HW,Incorrect_Usage,Explain_User,HW,ECU,No,90
+26.03.26,ABT-C-003W1,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,ETH not detected,Full Bench powered Down,PDU defect,Replace PDU,Bench_HW,HW_Defect,Replace_HW,HW,PDU,Yes,15
+26.03.26,ABT-C-003WE,RA7 B2 CR,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,Flashing via VXtool failed,"Flash Download Failed, ECU detected by VX",Brand new Sample requires OTP programming,New sample bringup process with lauterbach,ECU_SW,New_Sample_Bringup,OTP_First,SW,ECU,Yes,60
+26.03.26,ABT-C-0047Q,,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,CANoe 19 SP2 required,SW not installed,Older versions in use,Install new Sw ,Vector_SW,Old_SW,SW_Install,SW,PC,No,20
+26.03.26,ABT-C-008PY,,Dev,Schuermann Ralf (XC-AC/ENS2),RA7,Replace ABT-C-004DK,Small PC lacking storage and performance,"PC in heavy use, storage too small",Setup NEW PC ABT-C-008PY and replace,Desktop,PC_Performance,PC_Setup,HW,PC,Yes,60
+26.03.26,LR-C-000EY,,Dev,Mohan Akhil (MS/EBS5-SWC),RA7,Power fail issue on Trace32,PSU not fuctioning properly,PSU defect,Replace PSU,Bench_HW,HW_Defect,Replace_HW,HW,PSU,Yes,10
+26.03.26,ABT-C-003W1,,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,Relay box not working,PMB not functioning properly,PMB defect,Replace and setup new PMB ,Bench_HW,HW_Defect,Replace_HW,HW,PMB,Yes,120
+26.03.26,ABT-C-0047Q,RA7 C1 CR,Sys,Garouachi Saber (XC-AC/ENS3),RA7,Setup ESB3 box application,,integrate ESB3 box in Bench,integrate ESB3 box in Bench,Setup_Change,New_Setup,New_Setup,HW,Bench,Yes,60
+26.03.26,ABT-C-003WE,RA7 B2 CR,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,"Flashing not possible via VX, try with lauterbach","Lauterbach attach fail, target power down. No lights",CR is KL30 needs wakeup trigger,Wakeup trigger to activate ECU,ECU_HW,User_Knowledge,user_Explain,HW,ECU,Yes,60
+27.03.26,LR-C-00018D,RA7 B2 CR,Dev,Patil Divya (MS/EOV4-SWC),RA7,fault sensor blockage as active,Antenna covered,Antenna blocked,face antenna towards wall,Bench_HW,ECU_Orientation,Change_Orientation,HW,ECU,Yes,15
+27.03.26,ABT-C-003W1,,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,PSU not controlled remotly,PSU on but not connecting on PC,PSU detection issue,PSU hard reset,Bench_HW,PSU_Detection,Hard_Reset,HW,PSU,No,15
+27.03.26,LR-C-004HT,RA7 C1 FR,Dev,Kumar Sahu Rahul (MS/ESD1-BEG),RA7,X3 sample not flashable via VX,Flash Download fail,VX flashing fail,Move sample to Debugger bench,ECU_HW,Flash_Fail,Lauterbach_Flashing,SW,VX1161,Yes,10
+30.04.26,ABT-C-003X3,,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,Remote connection not possible,Network authentication settings not correct,"Auto update, BCN authentication",Change Network authentication settings,Desktop,Network_Connection,Change_Settings,HW,PC,Yes,30
+30.04.26,ABT-C-003W1,RA7 B2 FR CR,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,"No communication, Sample in continuous reset mode",Sample Bricked,"incorrect SW on HW, incompatibility",Move to Debugger bench and Flash,ECU_SW,Incorrect_VX_Flashing,Debugger_Reflash,SW,ECU,Yes,60
+30.04.26,ABT-C-003X8,RA6 Lite,Sys,Kumar Anshumann (MS/EPE-SYT12-XC),RA6Lite,Sample not Flashing with VX,With Debugger sample in continuous reset mode,Incorrect SW compatibility ,Flash with Dediprog,ECU_SW,Incompatibile_SW,Dediprog_Flashing,SW,ECU,Yes,60
+30.04.26,LR-C-000EY,RA7,Dev,Mohan Akhil (MS/EBS5-SWC),RA7,"Configuration File changed, Automation not working",Error: Serial port COM3 could not be opened ,"Configuration change, no fall back ",Revert config back to normal,Bench_HW,Detection_Fail,Hard_Reset,HW,PSU,No,30
+30.04.26,LR-C-004G0,RA7 C1,Dev,Hussien Walid Farouk Mohamed (ME/PJ-SW4),RA7,RelayCard not detecting Remotely,Detection fail on PC,Relay card detection,Reset device and PC ,Bench_HW,Detection_Fail,Restart,HW,PMB,No,15
+30.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Debugger board not connecting on Trace32,PowerDebug device has been Disconnected,Detection fail,Hard_Reset,Debugger,Detection_Fail,Hard_Reset,HW,Trace32,Yes,15
+31.04.26,ABT-C-0047D,RA7 C1 FR,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,No ETH communication,"Link up detected, but no communication",SW unstable,,,,Hard_Reset,HW,VN Box,Yes,20
+31.04.26,ABT-C-003X3,RA7 C1 FR,Sys,Pratip Kumar Bavananthan (MS/ENS1-XC),RA7,Changing Samples to and from Dev bench,,"SW Testing, issue with MT tool",Change samples,Setup_Change,Sample_Swap,Sample_Swap,HW,ECU,Yes,45
+31.04.26,RNG-C-0050G,,Dev,Chandriah Lokpal Brahmapal (XC-AC/ENS2),RA7,New PC for bench required,Old PC expiring duration,Old PC expiring,Setup New PC in place of old EY PC,Desktop,HW_Exipring ,New_Setup,HW,PC,Yes,90
+01.04.26,RNG-C-004PQ,RA7P B,Dev,Aruna Gangala (MS/ENE-ESH1-XC),RA7P,sample change to B0,A2 currently connected,incorrect sample target,Sample Change,Setup_Change,Sample_Swap,Sample_Swap,HW,ECU,Yes,10
+01.04.26,ABT-C-003WE,,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,"Old CANoe version installed, needed SP2",Normal version installed,Old SW version,Upgrade SW version,Vector_SW,Old_SW,SW_Install,SW,PC,No,15
+01.04.26,ABT-C-003X9,RA6 C2 CR,Sys,Patil Divya (MS/EOV4-SWC),RA6,"NFO feature failing, suspecting NVM issue",Feature failing,Base NVM SW issue,Flash erase with lauterbach,ECU_SW,NVM_Issue,Erase_Reflash,SW,ECU,No,20
+01.04.26,ABT-C-003X3,RA7 C1 CR FR,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,New C1 SW OTP flashing,"Steps to follow, not possible via VX box",New SW stability,Follow OTP and Flash steps,ECU_SW,C!_Flashing_Issues,C1_Program_Steps,SW,ECU,Yes,45
+01.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Lauterbach Debugger not being detected,Debugger not Detected,Lauterbach connectivity issue,Restart PC and Lauterbach,Debugger,Connectivity_Issue,Restart_Bench,HW,Traces32,No,20
+07.04.26,ABT-C-003WR,"RA7 B2_02 CR,FR",Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,Samples not communicating,Samples flashed with C1 SW,Incorrect SW flash. C1 SW on B2 HW,Flash Erase to recover sample,ECU_SW,Incorrect_Flash_User,Flash_Erase,SW,ECU,Yes,45
+07.04.26,ABT-C-00483,,Sys,Lapasi Sankaranarayanan Sooraj (MS/EPE-SYT12-XC),RA7,C1 FR for Fuzz test,,User needed bench info,explain setup,Bench_HW,User_Knowledge,Explain_Bench,HW,ECU,No,10
+07.04.26,ABT-C-00483,,Sys,Lapasi Sankaranarayanan Sooraj (MS/EPE-SYT12-XC),RA7,PMB is not working,PMB not recieving data,IP configuration changed after PC update,Reconfigure IP of PC and PMB to be in same subnet,Bench_HW,IP_Configuration_Change,IP_Reconfigure,HW,PMB,No,30
+07.04.26,ABT-C-0047Q,,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,not able to enter into BAS session,Incorrect COM channel usage,COM3 used but COM4 for ESB ,Use correct COM channel,Bench_HW,Incorrect_COM_Usage,Change_COM_Channel,HW,ESB3,No,30
+07.04.26,LR-C-000NM,RA7 B2_02 FR ,Dev,Nirmal Gautham (MS/EVV1-XC),RA7,Sample bricked,Bus error at address Cx01,Sample Bricked,DediProg - Flash erase,ECU_SW,Sample_Bricked,Flash_Erase,SW,ECU,Yes,15
+07.04.26,ABT-C-003WR,"RA7 B2_02 CR,FR",Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,XCP connection fail with ECU,CANape not connecting to ECU properly,"XCP connection, SW dependency",Flash Sw with lauterbach,ECU_SW,XCP_Communication_Failed,Trace32_Flash,SW,ECU,Yes,45
+08.04.26,RNG-C-004PQ,RA7P B0,Dev,Aruna Gangala (MS/ENE-ESH1-XC),RA7P,"SW issue, Sample bricked",Sample bricked,SW bug,DediProg - Flash erase,ECU_SW,Sample_Bricked,Flash_Erase,SW,ECU,Yes,15
+08.04.26,ABT-C-003WR,RA7 B2_02 CR,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,No ECU detected with VX tool,CANape not connecting to ECU properly,SW Dependency,Flash Sw with lauterbach,ECU_SW,VX detection fail,Trace32_Flash,SW,ECU,Yes,30
+08.04.26,ABT-C-003WE,,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,Outdated CANoe version,CANoe 19 only,Needed CANoe 19 SP2,Install new SW,Vector_SW,Outdated_SW,SW_Installation,SW,PC,Yes,20
+09.04.26,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sample power down,No detection by Lauterbach device,Trace32 detection issue,run recovery script multiple times,Debugger,Trace32_Detection,Recovery_Script,SW,Traces32,No,45
+10.04.26,ABT-C-003X8,RA6,Sys,Kalisetty Sai Yaswanth (MS/EBV1-SWC),RA6,Unable to Flash using VX,Sample Detection issue,SW dependency with MT flashing,Flash erase with lauterbach ,Debugger,SW_MT_Issue ,Trace32_Flash,SW,ECU,Yes,30
+13.04.26,ABT-C-003X3,RA7,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,SW has problem with CANape flash,Sample Detection issue,SW dependency with MT flashing,Flash using lauterbach,ECU_SW,SW_MT_Issue ,Trace32_Flash,SW,ECU,Yes,30
+13.04.26,FE-C-183F,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,Remote connection not available,PC updating,BCN authentication and IP Change,Configure authentication settings,Desktop,PC_Update,Configuration_Change,HW,PC,Yes,45
+13.04.26,ABT-C-00483,,Sys,Lapasi Sankaranarayanan Sooraj (MS/EPE-SYT12-XC),RA7,"ETS testing, Siganls delta too high",Signal delta more that 3 microseconds,Suspect real time RBS,Try running after downloading on VN5650,Vector_HW,,Try_New_Method,HW,VN5650,Yes,45
+13.04.26,RNG-C-004PQ,,Dev,Aruna Gangala (MS/ENE-ESH1-XC),RA7P,Sample bricked,lauterbach attach fail,Sw issue with linker and MPU,Dediprog Flash erase,ECU_SW,Sample_Bricked,Flash_Erase,SW,ECU,Yes,10
+13.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,No ETH communication or lauterbach attach,Bench setup changed for Different testing ,Setup changed,Change setup back for SSH testing ,Bench_HW,Setup_Change,Setup_Change,HW,Bench,Yes,10
+14.04.26,ABT-C-003W1,,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,"Sample is down, no MT detection",Sample in Reset Mode,,,ECU_SW,,,SW,ECU,Yes,30
+14.04.26,ABT-C-003X3,RA7 C1,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,ECU not detected on VXConsole,"ECU on, Sample not accesible on VX",SW config Mismatch,SW team escalation,ECU_SW,ECU_SW_Fail,SW_Team,SW,ECU,Yes,120
+14.04.26,ABT-C-0047Q,RA7 C1 FR,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,SW flashed but counters not running,"Lauterbach flash success, counters not running ",OTP programming required for new C1 samples,Do OTP and try again,ECU_SW,ECU_OTP,OTP_First,SW,ECU,No,45
+14.04.26,ABT-C-0047Q,RA7 C1,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,No ETH msgs,"ETH link up but no msgs, TCP/IP issue, counters running",ETH Port connection,Change Bench and try different ETH port,ECU_SW,ECU_COM,Connection,HW,ECU,Yes,120
+14.04.26,LR-C-000EY,,Dev,Gusinjac Aida (XC-AC/ENS3),RA7,Remote connection not possible,Network not detecting,BCN not connected,Check LAN cable,Desktop,LAN_Connection,Connection,HW,PC,Yes,10
+14.04.26,ABT-C-00483,,Sys,Vester Yannick (XC-AC/ENS5),RA7,Tp points on debugger needs soldering ,´no female adapters ,Soldering of female adapters ,solder from lab,Bench_HW,testpoints missing,Soldering,HW,ECU,Yes,240
+16.04.26,ABT-C-003WE,RA7 B2 FR,Sys,Mithun B V (MS/EOV4-SWC),RA7,Sample not working,Sample in reset state,Incorrect SW version flashed,Lauterbach erase and Flash,ECU_SW,Incorrect_Flashing,Erase_Reflash,SW,ECU,Yes,30
+16.04.26,ABT-C-003X3,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Vector Hardware config not opening,Application in loading state,Drivers corrupted,Reinstall vector drivers,Desktop,Drivers_Mismatch,Reinstall,SW,PC,No,60
+16.04.26,LR-C-003VJ,,Sys,Dorenkamp Stephan (XC-AC/ENS4),RA7P,Lauterbach SW installation not done,no Lauterbach Sw installed,,Install Lauterbach Installation ,Desktop,Missing SW,Install_SW,SW,PC,No,20
+16.04.26,RNG-C-004G0,,Dev,Hussien Walid Farouk Mohamed (ME/PJ-SW4),RA7,Relay card not working,No remote control possible remotely,Relay Card detection issue,Hard reset and wiring check,Bench_HW,Detection_Issue,Hard_Reset,HW,Relay,Yes,20
+16.04.26,ABT-C-003W1,RA7 B2 CR,Sys,Mamatha Basagulla Subramani (MS/EPE-SYT12-XC),RA7,Sample not connecting via MT,Flashing failed via VX tool,SW unstability,Flash Sw via T32,ECU_SW,SW unstability,T32_Flash ,SW,ECU,Yes,40
+16.04.26,ABT-C-003WR,RA7 B2 FR,Sys,Bose Aswathy (MS/EOV4-SWC),RA7,Bus off testing,,,Support for ETH disconnect test,Bench_HW,Test_Support,Support,HW,Bench,Yes,30
+17.04.26,FE-C-0183F,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,Lauterbach not detecting,T32 device not attaching to ECU,T32 connection issue,Hard rest and reconnect wiring,Debugger,Detection_Issue,Hard_Reset,HW,Trace32,Yes,20
+17.04.26,LR-C-0040T,,Dev,Shamkumar V H (XC-AC/ENS1),RA7,Remote connection not possible,BCN authentication failed,Windows update,Authenticate BCN via Smartcard,Desktop,Windows_Update,Authentication ,SW,PC,Yes,30
+17.04.26,LR-C-001F2,,Dev,Popescu Serban-Alexandru (XC-AC/ENS4),RA7P,Lauterbach debugger JTAG check,2 JTAG on RA7P samples,,Verify master and slave connection is correct,Bench_HW,Verification,Verify,HW,Bench,Yes,10
+17.04.26,ABT-C-003WR,RA7 B2 CR,Sys,Chethan B (MS/EOV4-SWC),RA7,Modulation not happening,Antenna face covered,Antenna blocked,Face Antenna towards Room,Bench_HW,Antennas blocked,Oreintate_Antenna,HW,ECU,Yes,10
+17.04.26,RNG-C-004QP,RA7P B0,Dev,Aruna Gangala (MS/ENE-ESH1-XC),RA7P,B0 sample bricked,Sample in continous reset,incorrect SW Flash,dediprog Flash erase,ECU_SW,Unstable_SW,Flash_erase,SW,ECU,Yes,15
+20.04.26,ABT-C-0047Q,RA7 C1 CR,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,Lauterbach not connecting,target power fail,ECu not detecting,Recovery and rest script,Debugger,,,HW,Trace32,No,30
+20.04.26,FE-C-0183F,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,Lauertbach not detecting,T32 device not attaching to ECU,T32 connection issue,Hard rest and reconnect wiring,Debugger,,,HW,Trace32,No,10
+20.04.26,FE-C-0183F,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,PC freezing often,PC lagging ,PC too slow,PC restart,Desktop,,,HW,PC,Yes,45
+20.04.26,LR-C-000PV,,Dev,Sakthivel P (MS/ESF1-XC),RA7,Bench Offline,Remote connection not possible,BCN Authentication,Authenticate BCN via Smartcard,Desktop,,,SW,PC,Yes,30
+21.04.26,LR-C-003VJ,,Sys,Shetty Trupthi Tulasidas (MS/EPE-SYT11-XC),RA7P,Remote user access disabled,ftd8fe user not in allwed remote users,,Grant access to ftd8fe user,Desktop,,,SW,PC,Yes,15
+21.04.26,LR-C-000PV,,Dev,Nanasaheb Kalse Asavari (MS/ESF1-XC),RA7,Lauterbach connection fail,target power down,Relay not toggled,turn on relay for ECU power,Debugger,,,HW,PC,No,25
+21.04.26,ABT-C-0047D,,Sys,Singh Kuljeet (MS/EPE-SYT12-XC),RA7,ESB3 box setup,,Bench bottle neck,setup new bench with ESB3,Setup_Change,Bench_bottleneck,new setup,HW,Bench,Yes,240
+21.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Configuring Vector hardware for testcase,multitest with different hardware mapping,conflicting Hardware mapping for different tests,Create seperate config files for each test,Vector_HW,Conflicting_HWconfigs,Seperate_Config_Flies,HW,PC,No,120
+21.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Importing .vhp configuration ,,how to import config files,teach user,Bench_HW,User_Knowledge,User_teach,HW,PC,No,20
+21.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA6,CR Sample not working,no communication observed,incorrect multiplexer use,setup correct mux,Bench_HW,User_Knowledge,User_teach,HW,Mux,No,45
+21.04.26,RNG-C-004G0,,Dev,Hussien Walid Farouk Mohamed (ME/PJ-SW4),RA7,Relay card not working,No remote control possible remotely,Relay Card detection issue,Hard reset and wiring check,Bench_HW,,,HW,Relay,Yes,20
+21.04.26,ABT-C-0047Q,,Sys,Singh Kuljeet (MS/EPE-SYT12-XC),RA7,ESB box not entering BAS,BAS access fail,,Restart Bench,Bench_HW,,PC_restart,HW,ESB3,Yes,120
+22.04.26,ABT-C-003WE,,Sys,Mithun B V (MS/EOV4-SWC),RA7,Sample corrupted,Sample bricked ,incorrect SW type flashed,Dediprog flash erase,ECU_SW,Incorrect_flashing,Erase_Reflash,SW,ECU,Yes,60
+22.04.26,LR-C-0040T,,Dev,Sudheer Kumar T (MS/ENE-EAB1-XC),RA7,Canoe RBS not running,RBS not opening IP conflicts,RBS not correctly configured,Raise request with RBS team,Vector_SW,RBS_Issue,RBS_Team,SW,PC,No,60
+22.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Communication not happening,no communication observed,ETH harness not connected ,connect ETH cable,Bench_HW,,,HW,VN5650,Yes,15
+22.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,HPC load connection,,,testcase setup change,Setup_Change,,,HW,Bench,Yes,20
+22.04.26,ABT-C-0047Q,,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,Lauterbach and ECu communication check,no communication observed,config matching issue,reconfigure Vector hardware config and verify,Debugger,,,SW,VN5650,No,20
+22.04.26,ABT-C-003X3,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Lauterbach Flashing ,Flashing failed via VX tool,MT flash fail,flash via lauterbach,Debugger,,,HW,Trace32,Yes,40
+22.04.26,LR-C-000L4,,Dev,Sakthivel P (MS/ESF1-XC),RA7,Remote connection not possible,BCN authentication failed,New windows update,reconfigure BCN authentication via smartcard,Desktop,,,SW,PC,Yes,30
+22.04.26,RNG-C-004HT,,Dev,Padala Vineetha (MS/ESF1-XC),RA7,Relay card not working,Relay not powering up,Drivers uninstalled,install Drivers,Bench_HW,,,SW,PC,No,240
+23.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Lauterbach not working,target power fail,lauterbach JTAg not connected,connect Lauterbach properly,Debugger,,,HW,Trace32,Yes,10
+23.04.26,ABT-C-003WR,,Sys,Bose Aswathy (MS/EOV4-SWC),RA7,Bus off testing,,,Support for ETH disconnect test,Vector_HW,,,HW,Bench,Yes,45
+23.04.26,ABT-C-003WR,,Sys,Chethan B (MS/EOV4-SWC),RA7,Flashing failed via VX Box,Flashing failed via VX tool,SW unstability,flash with lauterbach,Debugger,,,SW,ECU,Yes,30
+23.04.26,RNG-C-004LR,,Dev,Mbarek Ons (ME/PJ-SW4),RA7,Relay card not working,incorrect Relay card use,user bench knowledge lacking,teach setup and use,Bench_HW,,,HW,Bench,Yes,20
+24.04.26,LR-C-00410,,Dev,Sneesha K P (MS/ENE-ESH1-XC),RA7,Luaterbach boot failing,Lauterbach application not opening,scripts issues,reinstall lauterbach installation,PC,,,SW,PC,Yes,30
+24.04.26,ABT-C-0047Q,,Sys,Singh Kuljeet (MS/EPE-SYT12-XC),RA7,Monitor setup on 47Q,monitor required for smartcard access,,setup monitor,Setup_Change,,,HW,Bench,Yes,10
+24.04.26,ABT-C-0047D,,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,ETH and lauterbach connection check,no communication observed,"sample not flashed properly, counters not running",erase and reflash ,ECU_SW,,,SW,ECU,No,20
+27.04.26,ABT-C-003X3,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Sample changes required,sample swapping as per use case,,change samples,Setup_Change,,,HW,Bench,Yes,10
+27.04.26,ABT-C-0047Q,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Sample Flashing not working via lauterbach,Sample bricked ,sample showing unusual behaviour,change samples,ECU,,,HW,ECU,No,120
+27.04.26,ABT-C-0047Q,,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,CR sample COM Debugging,Communication not happening,vector hardware manager config changed,configure ethernet ports again ,Vector_HW,,,SW,VN5650,No,15
+27.04.26,ABT-C-0047D,,Dev,Mithun B V (MS/EOV4-SWC),RA7,CR sample recovery ,sample bricked ,Incorrect SW flashing,dediprog Flash erase,ECU_SW,,,HW,ECU,Yes,15
+27.04.26,LR-C-004G0,,Dev,Hussien Walid Farouk Mohamed (ME/PJ-SW4),RA7,Fatal Error from InterCOM-Driver for T32 Device,Cannot bind read socket,previous lauterbach session not closed properly,Restart PC,Debugger,,,HW,Trace32,No,30
+27.04.26,LR-C-000EY,,Dev,Metri Prashant (MS/ENE-ESH1-XC),RA7,Bench not reachable remotely,"Windows update, BCN Blocked",Windows update,reconfigure BCN authentication settings,PC,,,HW,PC,Yes,30
+27.04.26,ABT-C-003X3,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,No Sample communication,Communication not happening,Unknown,,ECU,,,SW,ECU,Yes,60
+27.04.26,ABT-C-003W1,,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,No Sample Communication,Communication not happening,VHM config correction,swap communication channels on RBS,Vector_HW,,,HW,Bench,Yes,20
+28.04.26,RNG-C-004DQ,,Dev,Arunachalam Uma Saranya (XC-AC/ENS5),RA7P,Bench not reachable remotely,"Windows update, BCN Blocked",Windows update,take PC to IT space as login blocked,PC,,,SW,PC,Yes,40
+28.04.26,RNG-C-004HT,,Dev,Padala Vineetha (MS/ESF1-XC),RA7,Target power fail on Lauterbach ,ECU not detecting,sample not drawing power,check relay and reopen T32 application,Debugger,,,HW,Trace32,No,20
+29.04.26,RNG-C-004VJ,,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA7,Lauterbach connection fail,lauterbach not powering on,wiring setup wrong,change wiring,Bench_HW,,,HW,Bench,Yes,45
+29.04.26,ABT-C-003WR,,Sys,Sharma Kanika (MS/EPE-SYT12-XC),RA7,Powersupply unit not connecting,no remote control for PSU,connection loose,reconnect and hard reset,Bench_HW,,,HW,Bench,Yes,10
+29.04.26,ABT-C-0047Q,,Sys,Singh Kuljeet (MS/EPE-SYT12-XC),RA7,VN box to PC connection,D-Link not established,using USB-C ,change with D-Link,Bench_HW,,,HW,Bench,Yes,25
+29.04.26,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,lauterbach connection fail,lauterbach not connected,check lauterbach connection,connect JTAG properly,Bench_HW,,,HW,Bench,Yes,10
+29.04.26,ABT-C-0047Q,,Sys,Patil Divya (MS/EOV4-SWC),RA7,lauterbach not allowing erase,flash erase script not running fully,suspect issue with ECU SW,dediprog Flash erase,Debugger,,,SW,Trace32,Yes,30
+29.04.26,ABT-C-0047D,,Sys,Prathap Jayaramappa (MS/EPE-SYT12-XC),RA7,Failure injection test,CAN off testing,,setup MPR,ECU,,,HW,Bench,Yes,30
+30.04.26,LR-C-00410,,Dev,Sneesha K P (MS/ENE-ESH1-XC),RA7P,Sample bricked,,,,,,,,,,15
+30.04.26,ABT-C-003W1,,Sys,Sharma Kanika (MS/EPE-SYT12-XC),RA7,Antenna Status detection not working,,,,,,,,,,30
+30.04.26,ABT-C-0047Q,,Sys,Patil Divya (MS/EOV4-SWC),RA7,Sample counters run only for 1 second and then breaks,,,,,,,,,,20
+30.04.26,LR-C-000L4,,Dev,Vempaty Sai Sasank (MS/ESF1-XC),RA7,PDU not connecting,,,,,,,,,,15
+30.04.26,LR-C-00410,,Dev,Sakthivel P (MS/ESF1-XC),RA7P,Sample bricked,,,,,,,,,,10
+30.04.26,LR-C-00410,,Dev,Thahseen K Muhammed (MS/ENE-ESH1-XC),RA7P,Sample bricked,,,,,,,,,,10
+30.04.26,LR-C-00410,,Dev,Thahseen K Muhammed (MS/ENE-ESH1-XC),RA7P,Sample bricked,,,,,,,,,,10
+30.04.26,ABT-C-0047Q,,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,Connect T32 to Cr sample ,,,,,,,,,,5
+30.04.26,ABT-C-0047Q,RA7 C1 CR,Sys,Anusha Shivanna (MS/EPE-SYT12-XC),RA7,Communication not happening,,,,,,,,,,25
+30.04.26,RNG-C-0004UG,,Dev,Kablan Ismail (XC-AC/ENS5),RA7P,New Testbench build,,,,,,,,,,300
+04.05.26,LR-C-002CY,RA7 B2_02 FR,Dev,Vayila Balasubramanyam (MS/ENE-EAB1-XC),RA7,Relay Card not functioning,,,,,,,,,,
+,ABT-C-005PC,,Sys,Pattnayak Piyush Darshan (MS/EOV4-SWC),Cariad,No remote connection,"Remote desktop service session ended, desktop shutting down",PC auto update,PC reset Required,Desktop,Auto_Update,Restart_PC,HW,PC,Yes,10
+,ABT-C-003WR,RA7 C1,Sys,Chethan B (MS/EOV4-SWC),RA7,ETH connection fail,"ETH fail on CANoe, ETH physically connected",Connection detection fail,Disconnect and reconnect,ECU_HW,Detection_Issue_CANoe,Disconnect_Reconnect,HW,VN5650,Yes,5
+,ABT-C-003WR,RA7 C1,Sys,Sravani Joshi (MS/EPE-SYT12-XC),RA7,Sample power down,PSU not working Remotely,PSU detection fail,PSU reset,Bench_HW,Hardware_Connection_Fail,Hard_Reset,HW,PSU,Yes,5
+,LR-C-002CY,RA7 B2,Dev,Kummara Subhash (MS/ENE-EAB1-XC),RA7,Target system down,Sample not going into prepare mode,Target system down,Powercycle and warm reset,Debugger,Connectivity_Issue_Debugger,Warm_Reset,SW,Trace32,No,15
+,LR-C-000EY,,Dev,Chandriah Lokpal Brahmapal (XC-AC/ENS2),RA7,EY PC duration expired,Old PC needs to be returned,PC expired,New PC RNG-C-004TG inplace,Desktop,Hardware_Expiration,PC_Replacement,HW,PC,Yes,30
+,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sensor Heating Setup required,,Special usecase testing,Setup Sensor Heating,Setup_Change,New_Use_Case,New_Setup,HW,Bench,Yes,40
+,LR-C-001F2,,Dev,Metri Prashant (MS/ENE-ESH1-XC),RA7P,Bench Offline,PC not connecting to Bosch network,"IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,Connectivity_Issue_Network,"Restart_PC, Configuration_Change",HW,PC,Yes,10
+,ABT-C-00483,RA7 B5,Sys,Prathap Jayaramappa (MS/EPE-SYT12-XC),RA7,new sensor required,,Special uscase testing,Swap sample,Setup_Change,New_Use_Case,New_Setup,HW,Bench,Yes,10
+,LR-C-00301,,Dev,Jeske Mark (XC-AC/ENS6),RA6,bench sometimes does not connect,PC goes to sleep mode,PC sleeps,change system setting,Desktop,PC_Settings,Configuration_Change,HW,PC,No,5
+,ABT-C-003WE,,Sys,Sonnad Pooja (MS/EOV4-SWC),RA7,Invalid CANope liscense,unable to open Vector SW,Vector SW fail,"Restart PC, install correct Canape TBE license",Vector_SW,Missing_LIcense,Install_License,SW,PC,No,20
+,ABT-C-0047D,,Sys,Nelamalli Naveenkumar (MS/EPE-SYT12-XC),Ra7,No remote connection,"No network on PC, after update","IP change, BCN authentication","PC update, configure IP authentication settings",PC_Connection,Connectivity_Issue_Network,"Restart_PC, Configuration_Change",HW,PC,Yes,20
+,RNG-C-004QP,RA7P ,,Sandra Dimpu Sai Prasad Chowdary (MS/ENE-ESH1-XC),RA7P,Sample Change B to A required,,New sample,Swap sample,Setup_Change,Sample_Swap,Sample_Swap,HW,ECU,Yes,5
+,ABT-C-003X8,,Sys,Sanchita Mohan Rao (MS/EOV4-SWC),RA6,Canape offline,Canope license not detected,Vector license connection,"PC restart, License update",Vector_SW,Connectivity_Issue_Vector,License_Update,SW,Vector,No,15
+,LR-C-001F2,RA7P,Dev,Arunachalam Uma Saranya (XC-AC/ENS5),RA7P,Bench offline,Network authentication required,New IP not updated on RTB ,New IP,PC_Connection,Connectivity_Issue_Network,IP_change,HW,PC,Yes,30
+,ABT-C-003WR,,Sys,Chethan B (MS/EOV4-SWC),RA7,no current for VX box,Relay 15 not on,Incorrect_relay usage,toggle relay 15 for VX box,Vector_HW,User_Incorrect_Use,User_correction,HW,VX1161,No,5
+,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Target power down,Sample not detected properly on Trace32,2 Trace32 devices detected,Turn off second Trace32 device,Debugger,User_Incorrect_Use,User_correction,HW,Trace32,No,10
+,ABT-C-00483,RA7 C1,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sample counters not running,Counters not incrementing,Incorrect Flashing,"Restart Device, ReFlash",Debugger,Improper_flash,Erase_Reflash,SW,Trace32,No,20
+,LR-C-000FA,,Dev,Nayak Pabitra Kiran (XC-AC/ENS4),RA7,No remote connection,"Unable to login in, requires known User",No network,IT support,PC_Connection,Connectivity_Issue_Network,IT_support,HW,PC,Yes,45
+,ABT-C-00483,RA6 C2 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA6,Lauterbach not detected,Trace32 device not powered on,Trace32 device not powered,Use PMB to switch on Trace32 device,Debugger,User_Incorrect_Use,User_Correction,HW,Trace32,No,5
+,ABT-C-00483,RA6 C2 FR,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA6,Sample not going into attach mode,bus error at address DAP:0x80038FE0  & EC14:0x7 ,Sample Bricked,DediProg Flash erase and RA6 recovery steps,ECU_SW,ECU_Bricked,Erase_Reflash,SW,ECU,Yes,30
+,ABT-C-00483,RA7 B5,Sys,Prathap Jayaramappa (MS/EPE-SYT12-XC),RA7,Debugger not working,Sample not going into prepare mode,Incorrect Trace32 device usage,Correct Device and configuration,Debugger,Connectivity_Issue_Debugger,Configuration_Change,HW,Trace32,No,10
+,RNG-C-004RY,,Dev,Lauff Uwe (XC-AC/ENS5),RA7,L4 PC duration expired ,Old PC needs to be returned,PC expired,New PC RNG-C-004RY inplace,Desktop,Hardware_Expiration,PC_Replacement,HW,PC,Yes,20
+,ABT-C-005PC,RA7 TI FR,Sys,Tanveer Muhammad (XC-AC/ENS2),Cariad,FR TI testing blocked,5P6 broken,PC broken,Move 5P6 sample to 5PC,Desktop,PC_Broken,New_Setup,HW,Bench,Yes,5
+,LR-C-000FA,,Dev,Nayak Pabitra Kiran (XC-AC/ENS4),RA7,Trace32 device not detected,no Debugger Device detection,Trace32 detection fail,Device hard reset,Debugger,Debugger,Hard_Reset,HW,Trace32,Yes,5
+,LR-C-0000EX,,Dev,Sakthivel P (MS/ESF1-XC),RA7,PC not reachable,"Unable to login in, black screen after login",No network,PC needs replacement,PC_Connection,Connectivity_Issue_Network,IT_support,HW,PC,Yes,45
+,ABT-C-00483,,Sys,Harish Kumar (MS/EPE-SYT12-XC),RA7,Sensor Heating Setup  change required,,Special usecase testing,Setup Sensor Heating,Setup_Change,New_Use_Case,New_Setup,HW,Bench,Yes,20
