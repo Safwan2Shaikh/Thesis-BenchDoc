@@ -20,6 +20,16 @@ class Trace32Agent:
         agent_id = os.getenv("TRACE32_AGENT_ID")
         self.agent_id = agent_id
 
+        if not token:
+            raise RuntimeError(
+                "TRACE32_AGENT_TOKEN is not configured. Main diagnosis can continue without Trace32 specialist advice."
+            )
+
+        if not agent_id:
+            raise RuntimeError(
+                "TRACE32_AGENT_ID is not configured. Main diagnosis can continue without Trace32 specialist advice."
+            )
+
         try:
             from openai import OpenAI
         except ImportError as exc:
@@ -39,10 +49,20 @@ class Trace32Agent:
         )
 
     def ask(self, prompt):
-        response = self.client.chat.completions.create(
-            model=self.agent_id,
-            messages=[{"role": "user", "content": prompt}],
-            stream=False,
-        )
+        try:
+            response = self.client.chat.completions.create(
+                model=self.agent_id,
+                messages=[{"role": "user", "content": prompt}],
+                stream=False,
+            )
+        except Exception as exc:
+            message = str(exc)
+            if "Error code: 500" in message or "server_error" in message:
+                raise RuntimeError(
+                    "Trace32 specialist agent service returned HTTP 500/server_error. Main diagnosis can continue without Trace32 specialist advice; retry the Trace32 agent later."
+                ) from exc
+            raise RuntimeError(
+                f"Trace32 specialist agent request failed: {message}"
+            ) from exc
 
         return response.choices[0].message.content

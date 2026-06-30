@@ -387,15 +387,31 @@ def build_execution_trace(
         lines.append("- None configured")
 
     for name, info in agents.items():
+        status = "used" if info.get("used", False) else "not_used"
+        if info.get("routed", False) and info.get("error"):
+            status = "unavailable"
+
         line = (
             f"- {name}: routed={info.get('routed', False)}, "
-            f"used={info.get('used', False)}"
+            f"used={info.get('used', False)}, "
+            f"status={status}"
         )
         if info.get("elapsed_ms") is not None:
             line += f", elapsed_ms={info.get('elapsed_ms')}"
-        if info.get("error"):
-            line += f", error={info.get('error')}"
+        if info.get("error_type"):
+            line += f", error_type={info.get('error_type')}"
+        if info.get("retryable") is not None:
+            line += f", retryable={info.get('retryable')}"
         lines.append(line)
+
+        if info.get("error"):
+            lines.append(
+                f"  reason={info.get('error')}"
+            )
+        if info.get("fallback"):
+            lines.append(
+                f"  fallback={info.get('fallback')}"
+            )
 
     lines.extend(
         [

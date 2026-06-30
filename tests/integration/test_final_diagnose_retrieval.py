@@ -139,3 +139,51 @@ def test_diagnostic_execution_trace_includes_retrievers(monkeypatch):
     assert "inventory: used | count=1 | elapsed_ms=1.2" in result
     assert "trace32: routed=True, used=False" in result
     assert "retrieval_total_elapsed_ms: 3.4" in result
+
+
+def test_diagnostic_execution_trace_formats_trace32_500(monkeypatch):
+    from thesis.intelligence.orchestrator import diagnostic_engine
+
+    class FakeLLMClient:
+        def ask(self, messages):
+            return {"reply": "diagnostic-body"}
+
+    monkeypatch.setattr(
+        diagnostic_engine,
+        "_get_llm_client",
+        lambda: FakeLLMClient(),
+    )
+
+    result = diagnostic_engine.run_diagnostic(
+        user_input="trace32 attach fails",
+        bench="ABT-C-0047D",
+        device_result={
+            "bench_devices": ["Trace32"],
+            "query_devices": ["Trace32"],
+            "valid_devices": ["Trace32"],
+            "invalid_devices": [],
+        },
+        retrieval_context={
+            "metadata": {
+                "sources": {},
+                "retrievers": {},
+                "external_agents": {
+                    "trace32": {
+                        "routed": True,
+                        "used": False,
+                        "error": "Trace32 specialist agent service returned HTTP 500/server_error.",
+                        "error_type": "service_unavailable",
+                        "retryable": True,
+                        "fallback": "Main diagnosis continued without Trace32 specialist advice. Retry the Trace32 agent later.",
+                    }
+                },
+                "total_elapsed_ms": 2.0,
+            }
+        },
+    )
+
+    assert "trace32: routed=True, used=False, status=unavailable" in result
+    assert "error_type=service_unavailable" in result
+    assert "retryable=True" in result
+    assert "reason=Trace32 specialist agent service returned HTTP 500/server_error." in result
+    assert "fallback=Main diagnosis continued without Trace32 specialist advice. Retry the Trace32 agent later." in result

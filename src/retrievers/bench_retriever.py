@@ -7,7 +7,6 @@ Bench identification from: b
 2. IP Address
 """
 
-import os
 import re
 import pandas as pd
 from thesis.infra.paths import knowledge_base_dir
@@ -21,15 +20,33 @@ FILE_PATH = knowledge_base_dir() / "Bench_mapping.csv"
 
 print("Loading Bench Mapping...")
 
-df = pd.read_csv(FILE_PATH)
+def _load_bench_mapping():
+    raw = pd.read_csv(
+        FILE_PATH,
+        header=None,
+        names=["bench_name", "ip", "hostname"],
+        dtype=str,
+        keep_default_na=False,
+        engine="python",
+    )
+
+    if not raw.empty and str(raw.iloc[0, 0]).strip().lower() in {"bench name", "bench_name"}:
+        raw = raw.iloc[1:].reset_index(drop=True)
+
+    raw = raw.map(
+        lambda value: value.strip()
+        if isinstance(value, str)
+        else value
+    )
+
+    raw = raw[
+        raw["bench_name"].astype(str).str.strip() != ""
+    ]
+
+    return raw
 
 
-df.columns = (
-    df.columns
-    .str.strip()
-    .str.lower()
-    .str.replace(" ", "_")
-)
+df = _load_bench_mapping()
 
 print(
     f"SUCCESS - Bench mappings loaded: {len(df)}"
@@ -54,7 +71,8 @@ def find_by_bench_name(query):
 
             return {
                 "bench_name": bench_name,
-                "ip": row["ip"]
+                "ip": row["ip"],
+                "hostname": row.get("hostname", "")
             }
 
     return None
@@ -87,7 +105,8 @@ def find_by_ip(query):
 
     return {
         "bench_name": row["bench_name"],
-        "ip": row["ip"]
+        "ip": row["ip"],
+        "hostname": row.get("hostname", "")
     }
 
 
@@ -124,7 +143,8 @@ def list_benches():
 
         benches.append({
             "bench_name": bench_name,
-            "ip": row.get("ip", "")
+            "ip": row.get("ip", ""),
+            "hostname": row.get("hostname", "")
         })
 
     return benches

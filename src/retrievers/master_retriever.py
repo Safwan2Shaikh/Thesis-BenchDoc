@@ -36,6 +36,34 @@ from thesis.intelligence.agents.trace32_agent import (
 )
 
 
+def _classify_trace32_error(error):
+    message = str(error)
+    lower_message = message.lower()
+
+    if "http 500" in lower_message or "server_error" in lower_message or "error code: 500" in lower_message:
+        return {
+            "error_type": "service_unavailable",
+            "retryable": True,
+            "message": "Trace32 specialist agent service returned HTTP 500/server_error.",
+            "fallback": "Main diagnosis continued without Trace32 specialist advice. Retry the Trace32 agent later.",
+        }
+
+    if "not configured" in lower_message:
+        return {
+            "error_type": "configuration_missing",
+            "retryable": False,
+            "message": message,
+            "fallback": "Main diagnosis continued without Trace32 specialist advice. Configure TRACE32_AGENT_TOKEN and TRACE32_AGENT_ID to enable it.",
+        }
+
+    return {
+        "error_type": "request_failed",
+        "retryable": True,
+        "message": message,
+        "fallback": "Main diagnosis continued without Trace32 specialist advice.",
+    }
+
+
 def retrieve_context(
     user_query,
     bench=None
@@ -251,6 +279,8 @@ def retrieve_context(
 
     try:
 
+        agent_started = None
+
         if needs_trace32_agent(
             user_query
         ):
@@ -307,10 +337,23 @@ Focus only on Lauterbach / Trace32 expertise.
 
     except Exception as e:
 
-        context["metadata"]["external_agents"]["trace32"]["error"] = str(e)
+        failure = _classify_trace32_error(e)
+
+        update = {
+            "used": False,
+            "error": failure["message"],
+            "error_type": failure["error_type"],
+            "retryable": failure["retryable"],
+            "fallback": failure["fallback"],
+        }
+
+        if agent_started is not None:
+            update["elapsed_ms"] = round((perf_counter() - agent_started) * 1000, 2)
+
+        context["metadata"]["external_agents"]["trace32"].update(update)
 
         print(
-            f"Trace32 agent failed: {e}"
+            f"Trace32 agent failed: {failure['message']} {failure['fallback']}"
         )
 
     context["metadata"]["total_elapsed_ms"] = round(
