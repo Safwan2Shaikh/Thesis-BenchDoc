@@ -285,6 +285,130 @@ Confidence:
 
 
 # ==================================================
+# BUILD EXECUTION TRACE
+# ==================================================
+
+def build_execution_trace(
+    bench,
+    device_result,
+    retrieval_context
+):
+
+    metadata = retrieval_context.get(
+        "metadata",
+        {}
+    )
+
+    lines = [
+        "",
+        "================================================",
+        "DIAGNOSTIC EXECUTION TRACE",
+        "================================================",
+        f"Bench: {bench}",
+        "",
+        "Device Detection:",
+        f"- Bench devices: {device_result.get('bench_devices', [])}",
+        f"- Query devices: {device_result.get('query_devices', [])}",
+        f"- Validated devices: {device_result.get('valid_devices', [])}",
+        f"- Invalid devices: {device_result.get('invalid_devices', [])}",
+        "",
+        "Knowledge Sources:",
+    ]
+
+    sources = metadata.get(
+        "sources",
+        {}
+    )
+
+    for name, path in sources.items():
+        lines.append(
+            f"- {name}: {path}"
+        )
+
+    lines.extend(
+        [
+            "",
+            "Retrievers Used:",
+        ]
+    )
+
+    retrievers = metadata.get(
+        "retrievers",
+        {}
+    )
+
+    if not retrievers:
+        lines.append("- None recorded")
+
+    for name, info in retrievers.items():
+        line = (
+            f"- {name}: {info.get('status', 'unknown')} | "
+            f"count={info.get('count', 0)} | "
+            f"elapsed_ms={info.get('elapsed_ms', 0)}"
+        )
+
+        if info.get("error"):
+            line += f" | error={info.get('error')}"
+
+        lines.append(line)
+
+        details = info.get(
+            "details",
+            {}
+        )
+
+        if details.get("files"):
+            lines.append(
+                f"  files={details.get('files')}"
+            )
+        if details.get("top_scores"):
+            lines.append(
+                f"  top_scores={details.get('top_scores')}"
+            )
+        if "connections" in details or "rules" in details:
+            lines.append(
+                f"  topology_connections={details.get('connections', 0)}, "
+                f"rules={details.get('rules', 0)}"
+            )
+
+    lines.extend(
+        [
+            "",
+            "External Agents:",
+        ]
+    )
+
+    agents = metadata.get(
+        "external_agents",
+        {}
+    )
+
+    if not agents:
+        lines.append("- None configured")
+
+    for name, info in agents.items():
+        line = (
+            f"- {name}: routed={info.get('routed', False)}, "
+            f"used={info.get('used', False)}"
+        )
+        if info.get("elapsed_ms") is not None:
+            line += f", elapsed_ms={info.get('elapsed_ms')}"
+        if info.get("error"):
+            line += f", error={info.get('error')}"
+        lines.append(line)
+
+    lines.extend(
+        [
+            "",
+            "Performance:",
+            f"- retrieval_total_elapsed_ms: {metadata.get('total_elapsed_ms', 0)}",
+        ]
+    )
+
+    return "\n".join(lines)
+
+
+# ==================================================
 # RUN DIAGNOSTIC
 # ==================================================
 
@@ -317,4 +441,10 @@ def run_diagnostic(
 
     response = _get_llm_client().ask(messages)
 
-    return response["reply"]
+    trace = build_execution_trace(
+        bench=bench,
+        device_result=device_result,
+        retrieval_context=retrieval_context
+    )
+
+    return f"{response['reply']}\n{trace}"

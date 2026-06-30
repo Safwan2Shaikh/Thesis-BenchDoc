@@ -39,11 +39,6 @@ Thesis/
   tests/
     unit/
     integration/
-  legacy/                         # archived pre-migration folders
-    Health_Check/
-    knowledgeBase/
-    logfiles/
-    processed_kb/
 ```
 
 ## How To Use
@@ -93,7 +88,27 @@ Set these in your environment/.env for full LLM operation:
   - historical issues,
   - knowledge markdown chunks,
   - bench topology rules.
-- Legacy folders are archived under legacy/ and kept for traceability/rollback.
+
+## Diagnostic Transparency
+LLM diagnosis responses include a `DIAGNOSTIC EXECUTION TRACE` section showing:
+- which knowledge/data paths were used,
+- which retrievers ran,
+- how many records/chunks/rules were returned,
+- retriever elapsed time in milliseconds,
+- whether external agents such as Trace32 were routed or used.
+
+## Legacy Layout
+The old pre-restructure folder layout is no longer kept in the active branch. It is preserved in Git under:
+
+```powershell
+git switch archive/legacy-layout
+```
+
+Return to the active refactored branch with:
+
+```powershell
+git switch feature/trace32-agent
+```
 
 ## Testing
 Run full suite:

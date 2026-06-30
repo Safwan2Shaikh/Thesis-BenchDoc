@@ -35,3 +35,67 @@ def test_diagnose_run_with_monkeypatch(monkeypatch):
 
     out = diagnose_workflow.run("psu issue on ABT-C-00483")
     assert out == "ok-diagnosis"
+
+
+def test_diagnostic_execution_trace_includes_retrievers(monkeypatch):
+    from thesis.intelligence.orchestrator import diagnostic_engine
+
+    class FakeLLMClient:
+        def ask(self, messages):
+            return {
+                "reply": "diagnostic-body",
+                "tokens": 12,
+            }
+
+    monkeypatch.setattr(
+        diagnostic_engine,
+        "_get_llm_client",
+        lambda: FakeLLMClient(),
+    )
+
+    result = diagnostic_engine.run_diagnostic(
+        user_input="trace32 issue on ABT-C-00483",
+        bench="ABT-C-00483",
+        device_result={
+            "bench_devices": ["Trace32", "PSU"],
+            "query_devices": ["Trace32"],
+            "valid_devices": ["Trace32"],
+            "invalid_devices": [],
+        },
+        retrieval_context={
+            "inventory": {"psu": "EA-PS"},
+            "similar_issues": [],
+            "knowledge_chunks": [],
+            "bench_topology": {},
+            "trace32_advice": None,
+            "metadata": {
+                "sources": {
+                    "knowledge_base_dir": "data/knowledge_base",
+                    "processed_dir": "data/processed",
+                },
+                "retrievers": {
+                    "inventory": {
+                        "status": "used",
+                        "elapsed_ms": 1.2,
+                        "count": 1,
+                        "details": {},
+                    }
+                },
+                "external_agents": {
+                    "trace32": {
+                        "routed": True,
+                        "used": False,
+                        "error": "not configured",
+                    }
+                },
+                "total_elapsed_ms": 3.4,
+            },
+        },
+    )
+
+    assert "diagnostic-body" in result
+    assert "DIAGNOSTIC EXECUTION TRACE" in result
+    assert "knowledge_base_dir: data/knowledge_base" in result
+    assert "inventory: used | count=1 | elapsed_ms=1.2" in result
+    assert "trace32: routed=True, used=False" in result
+    assert "retrieval_total_elapsed_ms: 3.4" in result
