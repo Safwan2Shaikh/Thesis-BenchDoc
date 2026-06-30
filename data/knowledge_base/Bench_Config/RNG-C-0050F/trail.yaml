@@ -1,0 +1,93 @@
+bench:
+  id: RNG-C-0050F
+  description: RadarECU development bench - HSW
+  status: draft_needs_verification
+
+devices:
+
+  pc:
+    type: HostPC
+    role:
+      - TestExecution
+      - Logging
+      - Diagnostics
+      - DeviceControl
+      - BenchControl
+      - Hardware software testing
+
+  pdu:
+    type: PowerDistributionUnit
+
+    outputs:
+      port_1:
+        powers: null
+
+      port_2:
+        powers: null
+
+      port_3:
+        powers: pmb
+        status: needs_verification
+
+  psu:
+    type: Toellner TOE 8952
+
+    interfaces:
+      ethernet:
+        connected_to: pc
+        purpose:
+          - Control
+          - Monitoring
+          - Readback
+
+    channels:
+
+      channel_1: null
+
+      channel_2:
+        supplies: ecu
+
+  pmb:
+    type: PowerManagementBoard Energenie
+
+    usb:
+      connected_to: pc
+
+    ports:
+
+      port_1:
+        connected_device: null
+
+      port_2:
+        connected_device: null
+
+      port_3:
+        connected_device: lauterbach
+
+      port_4:
+        connected_device: null
+        expected_device: ecu_2
+        status: unconfirmed
+
+
+  ecu:
+    type: RadarECU
+
+    power:
+      source: psu.channel_2
+
+    communication:
+      debug:
+        source: lauterbach
+        target: ecu
+        relation: debug
+
+  lauterbach:
+    type: Lauterbach
+
+    power:
+      source: pmb.port_3
+
+    communication:
+      ethernet:
+        connected_to: pc

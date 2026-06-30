@@ -19,6 +19,24 @@ def test_retrievers_read_new_knowledge_base():
     assert inventory is not None
 
 
+def test_bench_config_folders_are_discovered():
+    from thesis.intelligence.retrieval.bench_topology_retriever import (
+        get_bench_context,
+        list_bench_configs,
+    )
+
+    configs = list_bench_configs()
+
+    assert "ABT-C-0047D" in configs
+    assert "ABT-C-003WE" in configs
+    assert "RNG-C-0050F" in configs
+
+    context = get_bench_context("ecu not reachable", bench="ABT-C-003WE")
+
+    assert context["bench_id"] == "ABT-C-003WE"
+    assert context["bench_info"]["devices"]["ecu_2"]["status"] == "expected_but_not_connected"
+
+
 def test_diagnose_run_with_monkeypatch(monkeypatch):
     from thesis.workflows import diagnose_workflow
     from thesis.intelligence.orchestrator import chat_service
@@ -35,6 +53,28 @@ def test_diagnose_run_with_monkeypatch(monkeypatch):
 
     out = diagnose_workflow.run("psu issue on ABT-C-00483")
     assert out == "ok-diagnosis"
+
+
+def test_diagnose_run_uses_selected_bench(monkeypatch):
+    from thesis.workflows import diagnose_workflow
+    from thesis.intelligence.orchestrator import chat_service
+
+    captured = {}
+
+    monkeypatch.setattr(chat_service, "get_bench_inventory", lambda b: {"psu": "Toellner", "lauterbach1": "Lauterbach"})
+    monkeypatch.setattr(chat_service, "identify_devices", lambda q, i: {"bench_devices": ["PSU"], "query_devices": ["PSU"], "valid_devices": ["PSU"], "invalid_devices": []})
+
+    def fake_retrieve_context(user_query, bench):
+        captured["bench"] = bench
+        return {"inventory": {}, "similar_issues": [], "knowledge_chunks": [], "bench_topology": {}, "trace32_advice": None}
+
+    monkeypatch.setattr(chat_service, "retrieve_context", fake_retrieve_context)
+    monkeypatch.setattr(chat_service, "run_diagnostic", lambda **kwargs: kwargs["bench"])
+
+    out = diagnose_workflow.run("psu issue", selected_bench="RNG-C-0050F")
+
+    assert out == "RNG-C-0050F"
+    assert captured["bench"] == "RNG-C-0050F"
 
 
 def test_diagnostic_execution_trace_includes_retrievers(monkeypatch):

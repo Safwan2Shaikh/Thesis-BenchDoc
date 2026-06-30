@@ -20,6 +20,11 @@ from thesis.intelligence.retrieval.master_retriever import (
     retrieve_context
 )
 
+from thesis.intelligence.retrieval.bench_topology_retriever import (
+    has_bench_config,
+    get_bench_context
+)
+
 
 DEVICE_LIST_INTENTS = [
 
@@ -33,7 +38,7 @@ DEVICE_LIST_INTENTS = [
     "which devices",
 
     "connected devices",
-    "devices connected"
+    "devices connected",
 
     "available hardware",
     "show hardware",
@@ -45,17 +50,55 @@ DEVICE_LIST_INTENTS = [
 ]
 
 
-def chat(user_input):
+def _devices_from_topology(bench_name):
+    if not bench_name or not has_bench_config(bench_name):
+        return {}
+
+    topology = get_bench_context("", bench=bench_name)
+    devices = topology.get("bench_info", {}).get("devices", {})
+
+    return {
+        name: details.get("type", "configured")
+        if isinstance(details, dict)
+        else str(details)
+        for name, details in devices.items()
+    }
+
+
+def _build_device_result(user_input, bench_inventory, bench_name):
+    if bench_inventory:
+        return identify_devices(
+            user_input,
+            bench_inventory
+        )
+
+    topology_devices = _devices_from_topology(bench_name)
+
+    return {
+        "bench_devices": list(topology_devices.keys()),
+        "query_devices": [],
+        "valid_devices": [],
+        "invalid_devices": []
+    }
+
+
+def chat(user_input, selected_bench=None, general_session=False):
 
     # ============================================
     # BENCH IDENTIFICATION
     # ============================================
 
-    bench_result = identify_bench(
-        user_input
-    )
+    if selected_bench:
+        bench_result = {
+            "bench_name": selected_bench,
+            "ip": None
+        }
+    else:
+        bench_result = identify_bench(
+            user_input
+        )
 
-    if not bench_result:
+    if not bench_result and not general_session:
 
         return """
 WARNING - Bench could not be identified.
@@ -82,21 +125,26 @@ Short names such as:
 are not supported.
 """
 
-    bench_name = bench_result[
-        "bench_name"
-    ]
+    bench_name = (
+        bench_result["bench_name"]
+        if bench_result
+        else None
+    )
 
     # ============================================
     # INVENTORY
     # ============================================
 
-    bench_inventory = (
-        get_bench_inventory(
-            bench_name
-        )
-    )
+    bench_inventory = None
 
-    if not bench_inventory:
+    if bench_name:
+        bench_inventory = (
+            get_bench_inventory(
+                bench_name
+            )
+        )
+
+    if bench_name and not bench_inventory and not has_bench_config(bench_name):
 
         return f"""
 WARNING - Bench found:
@@ -118,18 +166,18 @@ But no inventory exists.
     ):
 
         response = [
-            f"Bench: {bench_name}",
+            f"Bench: {bench_name or 'General session'}",
             ""
         ]
 
-        for key, value in (
-            bench_inventory.items()
-        ):
+        devices = bench_inventory or _devices_from_topology(bench_name)
+
+        for key, value in devices.items():
 
             if not value:
                 continue
 
-            if value.strip():
+            if str(value).strip():
 
                 response.append(
                     f"{key}: {value}"
@@ -141,9 +189,10 @@ But no inventory exists.
     # DEVICE IDENTIFICATION
     # ============================================
 
-    device_result = identify_devices(
+    device_result = _build_device_result(
         user_input,
-        bench_inventory
+        bench_inventory,
+        bench_name
     )
 
     # ============================================
@@ -163,7 +212,7 @@ But no inventory exists.
 
     return run_diagnostic(
         user_input=user_input,
-        bench=bench_name,
+        bench=bench_name or "General session",
         device_result=device_result,
         retrieval_context=retrieval_context
     )

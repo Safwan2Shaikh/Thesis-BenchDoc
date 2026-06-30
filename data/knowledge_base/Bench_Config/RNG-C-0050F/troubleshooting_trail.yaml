@@ -1,0 +1,52 @@
+dependencies:
+
+  ecu:
+
+    power_chain:
+      - psu.channel_2
+
+    debug_chain:
+      - pc
+      - lauterbach
+      - ecu
+
+failure_modes:
+
+  pdu_failure:
+
+    symptoms:
+      - lauterbach_offline
+
+    affected_devices:
+      - lauterbach
+
+  psu_channel_2_failure:
+
+    symptoms:
+      - ecu_no_power
+      - no_current_consumption
+
+    affected_devices:
+      - ecu
+  
+diagnostic_rules:
+
+  - condition: ecu_not_reachable
+
+    check_order:
+      - psu
+      - pdu
+      - lauterbach
+      - pc
+
+  - condition: lauterbach_not_reachable
+
+    check_order:
+      - pdu.port_3_power
+      - lauterbach_power
+
+  - condition: ecu_attach_failure
+    check_order:
+      - psu.channel_2_power
+      - pdu.port_3_power
+      - lauterbach_ecu_board_connection

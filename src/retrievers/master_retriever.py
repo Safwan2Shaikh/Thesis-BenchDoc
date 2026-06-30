@@ -38,7 +38,7 @@ from thesis.intelligence.agents.trace32_agent import (
 
 def retrieve_context(
     user_query,
-    bench
+    bench=None
 ):
 
     started_at = perf_counter()
@@ -52,6 +52,7 @@ def retrieve_context(
         "metadata": {
             "bench": bench,
             "query": user_query,
+            "scope": "bench" if bench else "general",
             "sources": {
                 "knowledge_base_dir": str(knowledge_base_dir()),
                 "processed_dir": str(processed_dir())
@@ -96,6 +97,7 @@ def retrieve_context(
             get_bench_inventory(
                 bench
             )
+            if bench else None
         )
 
         record_retriever(
@@ -128,7 +130,8 @@ def retrieve_context(
 
         context["similar_issues"] = (
             find_similar_issues(
-                user_query
+                user_query,
+                bench=bench
             )
         )
 
@@ -208,7 +211,8 @@ def retrieve_context(
 
         context["bench_topology"] = (
             get_bench_context(
-                user_query
+                user_query,
+                bench=bench
             )
         )
 
@@ -221,7 +225,10 @@ def retrieve_context(
             count=len(topology.get("connections", [])) + len(topology.get("rules", [])),
             details={
                 "connections": len(topology.get("connections", [])),
-                "rules": len(topology.get("rules", []))
+                "rules": len(topology.get("rules", [])),
+                "bench_id": topology.get("bench_id"),
+                "config_folder": topology.get("config_folder"),
+                "searched_benches": topology.get("metadata", {}).get("searched_benches", [])
             }
         )
 

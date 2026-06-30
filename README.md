@@ -27,6 +27,10 @@ Thesis/
       infra/                      # shared path/config helpers
   data/
     knowledge_base/               # migrated bench knowledge source files
+      Bench_Config/
+        ABT-C-003WE/              # trail.yaml, graph_trail.yaml, troubleshooting_trail.yaml
+        ABT-C-0047D/              # trail.yaml, graph_trail.yaml, troubleshooting_trail.yaml
+        RNG-C-0050F/              # trail.yaml, graph_trail.yaml, troubleshooting_trail.yaml
     logs/
       raw/                        # migrated runtime/diagnostic logs
       diagnostic/                 # generated diagnostic outputs
@@ -69,10 +73,16 @@ Interactive mode:
 c:/Users/shs2rng/.conda/envs/trail_test/python.exe scripts/run_diagnose.py --interactive
 ```
 
+Interactive mode asks for a session scope first:
+- choose a specific bench to restrict retrieval to that bench inventory/issues/topology, or
+- choose `General session` when the query should not be forced to one bench.
+
 Single query mode:
 
 ```powershell
 c:/Users/shs2rng/.conda/envs/trail_test/python.exe scripts/run_diagnose.py "ABT-C-00483 vector not detected"
+c:/Users/shs2rng/.conda/envs/trail_test/python.exe scripts/run_diagnose.py --bench ABT-C-003WE "ecu not reachable"
+c:/Users/shs2rng/.conda/envs/trail_test/python.exe scripts/run_diagnose.py --general "vector startup workflow"
 ```
 
 ### 3. Required Environment Variables (LLM)
@@ -88,6 +98,9 @@ Set these in your environment/.env for full LLM operation:
   - historical issues,
   - knowledge markdown chunks,
   - bench topology rules.
+- When a bench is selected, bench topology retrieval reads only that bench folder under data/knowledge_base/Bench_Config.
+- Historical issue retrieval is filtered to the selected bench when raw issue-log bench names are available.
+- Notes on missing config details are tracked in docs/BENCH_CONFIG_EXPANSION_NOTES.md.
 
 ## Diagnostic Transparency
 LLM diagnosis responses include a `DIAGNOSTIC EXECUTION TRACE` section showing:

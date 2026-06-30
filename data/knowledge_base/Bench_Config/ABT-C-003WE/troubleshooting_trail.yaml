@@ -1,0 +1,163 @@
+dependencies:
+
+  ecu_1:
+
+    power_chain:
+      - pdu.port_1
+      - psu.channel_1
+      - pmb.port_1
+
+    communication_chains:
+      can_ethernet:
+        - pc
+        - vn5650
+        - can13
+        - eth1
+      vx_pod:
+        - pc
+        - vx1161
+        - hs_cable
+        - pod
+
+    debug_chain:
+      - pc
+      - vx1161
+      - HS cable
+      - POD
+      - ecu_1
+
+  ecu_2:
+
+    status: expected_but_not_connected
+
+    power_chain:
+      - pdu.port_1
+      - psu.channel_1
+      - pmb.port_4
+
+    communication_chain:
+      - pc
+      - vn5650
+      - can14
+      - eth2
+
+    debug_chain:
+      - pc
+      - vx1161
+      - hs_cable
+      - pod
+      - ecu_2
+
+failure_modes:
+
+  pdu_failure:
+
+    symptoms:
+      - psu_offline
+      - pmb_offline
+      - vn5650_offline
+      - vx1161_offline
+
+    affected_devices:
+      - psu
+      - pmb
+      - vn5650
+      - vx1161
+      - ecu_1
+      - ecu_2
+
+  psu_channel_1_failure:
+
+    symptoms:
+      - ecu_1_no_power
+      - ecu_2_no_power
+      - no_current_consumption
+
+    affected_devices:
+      - ecu_1
+      - ecu_2
+  
+
+  vn5650_failure:
+
+    symptoms:
+      - no_can_communication
+      - no_ethernet_communication
+      - measurement_unavailable
+
+    affected_devices:
+      - ecu_1
+      - ecu_2
+
+  vx1161_failure:
+
+    symptoms:
+      - no_debug_access
+      - no_trace_data
+      - vx_1161_connection_fail
+      - ecu_not_detected
+      - POD_not_detected
+
+    affected_devices:
+      - ecu_1
+      - ecu_2
+      - POD_1
+      - POD_2
+
+  netgear_switch_failure:
+
+    symptoms:
+      - pmb_unreachable
+      - vn5650_unreachable
+      - vx1161_unreachable
+      - rt_rack_unreachable
+
+    affected_devices:
+      - pmb
+      - vn5650
+      - vx1161
+      - rt_rack
+
+diagnostic_rules:
+
+  - condition: ecu_1_not_reachable
+
+    check_order:
+      - pdu
+      - psu
+      - pmb
+      - vn5650
+      - ecu_1
+
+  - condition: ecu_2_not_reachable
+
+    check_order:
+      - pdu
+      - psu
+      - pmb
+      - vn5650
+      - ecu_2
+
+  - condition: vx1161_cannot_connect_to_ecu_1
+
+    check_order:
+      - vx1161_power
+      - vx1161_ethernet
+      - POD_1_connection
+      - ecu_1_power
+
+  - condition: vx1161_cannot_connect_to_ecu_2
+
+    check_order:
+      - vx1161_power
+      - vx1161_ethernet
+      - POD_2_connection
+      - ecu_2_power
+
+  - condition: no_can_communication
+
+    check_order:
+      - vn5650_power
+      - vn5650_connection_to_pc
+      - can_channel_mapping
+      - ecu_power

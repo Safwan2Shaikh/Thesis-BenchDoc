@@ -1,0 +1,51 @@
+nodes:
+
+  - pc
+  - pdu
+  - psu
+  - pmb
+  - lauterbach
+  - ecu
+  - netgear_switch
+
+edges:
+
+  # PDU POWER
+
+  - source: pdu.port_3
+    target: pmb
+    relation: powers
+    status: needs_verification
+    note: Verify port number against the physical bench PDU mapping.
+
+  # PSU TO ECU
+
+  - source: psu.channel_1
+    target: null
+    relation: powers
+    status: unused
+
+  - source: psu.channel_2
+    target: ecu
+    relation: powers
+
+  # PC CONNECTIONS
+
+  - source: pc
+    target: psu
+    relation: ethernet
+    note: IP-based connection for control and monitoring.
+
+  - source: pc
+    target: lauterbach
+    relation: ethernet
+
+  - source: pdu
+    target: pc
+    relation: usb
+
+  # DEBUG PATH
+
+  - source: lauterbach
+    target: ecu
+    relation: debug

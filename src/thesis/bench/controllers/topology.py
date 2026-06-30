@@ -6,7 +6,12 @@ from thesis.infra.paths import knowledge_base_dir
 class BenchTopology:
     def __init__(self, graph_file: str = None):
         if graph_file is None:
-            graph_file = str(knowledge_base_dir() / "Bench_Config" / "47D_graph_trail.yaml")
+            graph_file = str(
+                knowledge_base_dir()
+                / "Bench_Config"
+                / "ABT-C-0047D"
+                / "graph_trail.yaml"
+            )
         self.graph_file = Path(graph_file)
         self.graph = self._load_graph()
 

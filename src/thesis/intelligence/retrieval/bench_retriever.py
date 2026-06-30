@@ -112,3 +112,19 @@ def identify_bench(query):
         return result
 
     return None
+
+
+def list_benches():
+    benches = []
+
+    for _, row in df.iterrows():
+        bench_name = str(row.get("bench_name", "")).strip()
+        if not bench_name or bench_name.lower() == "nan":
+            continue
+
+        benches.append({
+            "bench_name": bench_name,
+            "ip": row.get("ip", "")
+        })
+
+    return benches

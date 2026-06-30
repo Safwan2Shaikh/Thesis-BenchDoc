@@ -1,0 +1,125 @@
+nodes:
+
+  - pc
+  - rt_rack
+  - pdu
+  - psu
+  - pmb
+  - vn5650
+  - vx1161
+  - pod
+  - ecu_1
+  - ecu_2
+  - netgear_switch
+
+edges:
+
+  # PDU POWER
+
+  - source: pdu.port_1
+    target: psu
+    relation: powers
+
+  - source: pdu.port_2
+    target: vn5650
+    relation: powers
+
+  - source: pdu.port_3
+    target: pmb
+    relation: powers
+
+  # PSU TO PMB
+
+  - source: psu.channel_1
+    target: pmb.ports_1_8
+    relation: powers
+
+  - source: psu.channel_2
+    target: pmb.ports_9_16
+    relation: powers
+
+  # PMB DUT CONNECTIONS
+
+  - source: pmb.port_1
+    target: ecu_1
+    relation: powers
+
+  - source: pmb.port_4
+    target: ecu_2
+    relation: powers
+    status: missing_on_current_bench
+
+  - source: pmb.port_15
+    target: vx1161
+    relation: powers
+
+  # VN5650 CAN
+
+  - source: vn5650.can13
+    target: ecu_1
+    relation: can
+    note: Uses ECU COM2.
+
+  - source: vn5650.can14
+    target: ecu_2
+    relation: can
+    status: missing_on_current_bench
+
+  # VN5650 ETHERNET
+
+  - source: vn5650.eth1
+    target: ecu_1
+    relation: ethernet
+
+  - source: vn5650.eth2
+    target: ecu_2
+    relation: ethernet
+    status: missing_on_current_bench
+
+  # PC CONNECTIONS
+
+  - source: pc
+    target: psu
+    relation: usb
+
+  - source: pc
+    target: vn5650
+    relation: ethernet
+    note: RT rack also participates in the bench network.
+
+  # NETWORK
+
+  - source: pmb
+    target: netgear_switch
+    relation: ethernet
+
+  - source: vx1161
+    target: netgear_switch
+    relation: ethernet
+
+  - source: pdu
+    target: netgear_switch
+    relation: ethernet
+
+  - source: rt_rack
+    target: netgear_switch
+    relation: ethernet
+
+  - source: netgear_switch
+    target: pc
+    relation: ethernet
+
+  # DEBUG PATH
+
+  - source: vx1161
+    target: pod
+    relation: debug
+
+  - source: pod
+    target: ecu_1
+    relation: debug
+
+  - source: pod
+    target: ecu_2
+    relation: debug
+    status: missing_on_current_bench

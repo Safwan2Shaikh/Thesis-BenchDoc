@@ -1,6 +1,6 @@
 bench:
-  id: ABT-C-0047D
-  description: RadarECU debugger system bench
+  id: ABT-C-003WE
+  description: RadarECU system bench - ADAS_HiL_CANoe_v17_MT_FE_001 (RA7)
 
 devices:
 
@@ -12,6 +12,7 @@ devices:
       - Diagnostics
       - DeviceControl
       - BenchControl
+      - RT_RackControl_RealTimeMeasurement
 
   pdu:
     type: PowerDistributionUnit
@@ -25,9 +26,6 @@ devices:
 
       port_3:
         powers: pmb
-
-      port_4:
-        powers: lauterbach
 
   psu:
     type: EA_PS 2342 10-B
@@ -79,10 +77,12 @@ devices:
         connected_device: null
 
       port_3:
-        connected_device: debugger_mux
+        connected_device: null
 
       port_4:
-        connected_device: ecu_2
+        connected_device: null
+        expected_device: ecu_2
+        status: missing_on_current_bench
 
       port_5:
         connected_device: null
@@ -115,28 +115,10 @@ devices:
         connected_device: null
 
       port_15:
-        connected_device: null
+        connected_device: vx1161
 
       port_16:
         connected_device: null
-
-  debugger_mux:
-    type: LauterbachDebuggerMultiplexer
-
-    power:
-      source: pmb.port_3
-
-    purpose: >
-      Routes Lauterbach debug interfaces between ECU1 and ECU2
-      without requiring manual cable changes.
-
-    switch_positions:
-
-      position_1:
-        target: ecu_1
-
-      position_2:
-        target: ecu_2
 
   ecu_1:
     type: RadarECU_FR
@@ -150,13 +132,16 @@ devices:
 
   ecu_2:
     type: RadarECU_CR
+    status: expected_but_not_connected
 
     power:
       source: pmb.port_4
+      status: missing_on_current_bench
 
     communication:
       can_channel: can14
       ethernet_channel: eth2
+      status: missing_on_current_bench
 
   vn5650:
     type: Vector_VN5650
@@ -170,9 +155,6 @@ devices:
         source_port: 1G_front
         destination: pc
 
-      subd9_usb:
-        destination: pc
-
     can_channels:
 
       can13:
@@ -180,6 +162,7 @@ devices:
 
       can14:
         connected_device: ecu_2
+        status: missing_on_current_bench
 
     ethernet_channels:
 
@@ -188,18 +171,22 @@ devices:
 
       eth2:
         connected_device: ecu_2
+        status: missing_on_current_bench
 
-  lauterbach:
-    type: Lauterbach
+  vx1161:
+    type: VX1161
 
     power:
-      source: pdu.port_4
-
-    usb:
-      connected_to: pc
+      source: pmb.port_15
 
     debug_interface:
-      connected_to: debugger_mux
+      path:
+        - vx1161
+        - hs_cable
+        - pod
+        - ecu
+      note: VX box connects to the ECU through the HS cable and POD.
+
 
   netgear_switch:
     type: EthernetSwitch
