@@ -13,10 +13,10 @@ edges:
   # PDU POWER
 
   - source: pdu.port_3
-    target: pmb
+    target: lauterbach
     relation: powers
     status: needs_verification
-    note: Verify port number against the physical bench PDU mapping.
+    note: currently lauterbach has constant power and is not connected to port 3
 
   # PSU TO ECU
 

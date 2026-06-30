@@ -89,5 +89,5 @@ devices:
       source: pmb.port_3
 
     communication:
-      ethernet:
+      usb:
         connected_to: pc
