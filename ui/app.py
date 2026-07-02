@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -23,6 +24,28 @@ INVENTORY_FILE = KB_DIR / "TB_Inventory.csv"
 ISSUES_FILE = KB_DIR / "Logged_Issues.csv"
 CONFIG_FILES = ["trail.yaml", "graph_trail.yaml", "troubleshooting_trail.yaml"]
 
+DEVICE_FIELD_LABELS = {
+    "psu": "PSU",
+    "vector_box_1": "Vector Box 1",
+    "vector_box_2": "Vector Box 2",
+    "relay_card": "Relay Card",
+    "netgear": "Netgear",
+    "pdu": "PDU",
+    "lauterbach_1": "Lauterbach 1",
+    "lauterbach_2": "Lauterbach 2",
+}
+
+DEVICE_VALUE_FIELDS = [
+    "psu",
+    "vector_box_1",
+    "vector_box_2",
+    "relay_card",
+    "netgear",
+    "pdu",
+    "lauterbach_1",
+    "lauterbach_2",
+]
+
 
 st.set_page_config(
     page_title="Radar ECU Testbench Assistant",
@@ -41,6 +64,17 @@ st.markdown(
         padding: 1rem;
         background: #ffffff;
         min-height: 6.5rem;
+    }
+    .bench-title {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.25;
+        margin-bottom: 0.4rem;
+    }
+    .bench-subtitle {
+        font-size: 0.95rem;
+        color: #334155;
     }
     .metric-row {
         border: 1px solid #e2e8f0;
@@ -157,6 +191,137 @@ def get_config_status(bench: str) -> dict[str, bool]:
     }
 
 
+def is_installed(value: Any) -> bool:
+    if value is None or pd.isna(value):
+        return False
+    text = str(value).strip().lower()
+    return text not in {"", "no", "none", "nan", "null"}
+
+
+def clean_device_value(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value).strip())
+
+
+def truncate_words(text: str, max_words: int = 150) -> str:
+    words = text.split()
+    if len(words) <= max_words:
+        return text
+    return " ".join(words[:max_words]).strip() + " ..."
+
+
+def compact_assistant_response(raw_text: str) -> str:
+    if not raw_text:
+        return "Likely Cause:\nNo diagnosis was returned.\n\nRecommended Checks:\n• Verify bench power and communication links.\n• Re-run the diagnostic query.\n• Review bench configuration files."
+
+    text = str(raw_text).replace("\r", "")
+
+    # Hide retrieval/diagnostic traces and internal sections.
+    cut_tokens = [
+        "DIAGNOSTIC EXECUTION TRACE",
+        "Issue Analysis",
+        "Supporting Evidence",
+        "Retriever",
+        "Knowledge Sources",
+        "Performance",
+        "External Agents",
+    ]
+    for token in cut_tokens:
+        if token in text:
+            text = text.split(token, 1)[0]
+
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
+
+    bullet_lines = []
+    for line in lines:
+        normalized = line.lstrip()
+        if normalized.startswith(("-", "•", "*")) or re.match(r"^\d+[\).]\s+", normalized):
+            bullet_lines.append(re.sub(r"^[-•*]\s*|^\d+[\).]\s*", "", normalized).strip())
+
+    prose_lines = [
+        line
+        for line in lines
+        if line not in bullet_lines and not re.match(r"^(likely cause|recommended checks)\s*:?$", line.lower())
+    ]
+    prose_text = " ".join(prose_lines)
+    prose_text = re.sub(r"\s+", " ", prose_text).strip()
+
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", prose_text) if s.strip()]
+    likely_cause = " ".join(sentences[:2]).strip()
+    if not likely_cause:
+        likely_cause = "Likely cause is a communication or power-path issue on the selected bench."
+
+    checks = []
+    for item in bullet_lines:
+        if item and item not in checks:
+            checks.append(item)
+        if len(checks) == 3:
+            break
+
+    if len(checks) < 3:
+        fallback = [
+            "Verify power state and cable connections of affected devices.",
+            "Confirm interface/channel mapping and bench configuration.",
+            "Restart the relevant hardware/software component and retest.",
+        ]
+        for item in fallback:
+            if item not in checks:
+                checks.append(item)
+            if len(checks) == 3:
+                break
+
+    result = (
+        "Likely Cause:\n"
+        f"{likely_cause}\n\n"
+        "Recommended Checks:\n"
+        f"• {checks[0]}\n"
+        f"• {checks[1]}\n"
+        f"• {checks[2]}"
+    )
+
+    return truncate_words(result, max_words=150)
+
+
+def get_connected_devices(bench: str) -> list[str]:
+    inventory = get_inventory(bench)
+    if inventory.empty:
+        return []
+
+    row = inventory.iloc[0]
+    devices = []
+    for field in DEVICE_VALUE_FIELDS:
+        if field not in row:
+            continue
+        value = row.get(field)
+        if not is_installed(value):
+            continue
+        cleaned = clean_device_value(value)
+        if cleaned and cleaned not in devices:
+            devices.append(cleaned)
+
+    return devices
+
+
+def get_connected_device_status(bench: str) -> list[dict[str, Any]]:
+    inventory = get_inventory(bench)
+    if inventory.empty:
+        return []
+
+    row = inventory.iloc[0]
+    status = []
+
+    for field, label in DEVICE_FIELD_LABELS.items():
+        value = row.get(field, None)
+        status.append(
+            {
+                "label": label,
+                "installed": is_installed(value),
+                "raw": value,
+            }
+        )
+
+    return status
+
+
 def clear_cached_data() -> None:
     discover_testbenches.clear()
     read_csv_safe.clear()
@@ -184,7 +349,12 @@ def render_home() -> None:
             status = get_config_status(bench)
             available = sum(1 for exists in status.values() if exists)
             st.markdown(
-                f"<div class='bench-card'><strong>{bench}</strong><br>{available}/{len(CONFIG_FILES)} config files available</div>",
+                (
+                    "<div class='bench-card'>"
+                    f"<div class='bench-title'>{bench}</div>"
+                    f"<div class='bench-subtitle'>{available}/{len(CONFIG_FILES)} config files available</div>"
+                    "</div>"
+                ),
                 unsafe_allow_html=True,
             )
             if st.button("Open Workspace", key=f"open-{bench}", use_container_width=True):
@@ -218,23 +388,18 @@ def render_sidebar(bench: str) -> None:
 
 
 def render_summary(bench: str) -> None:
-    inventory = get_inventory(bench)
+    connected_devices = get_connected_devices(bench)
     issues = get_logged_issues(bench)
     status = get_config_status(bench)
+    connected_count = len(connected_devices)
+    config_count = sum(1 for exists in status.values() if exists)
 
     st.subheader(f"Testbench: {bench}")
 
-    col_files, col_inventory, col_issues = st.columns(3)
-    with col_files:
-        st.markdown("**Available Config Files**")
-        for file_name, exists in status.items():
-            st.write(f"{'✓' if exists else '-'} {file_name}")
-
-    with col_inventory:
-        st.metric("Inventory Records", len(inventory))
-
-    with col_issues:
-        st.metric("Logged Issues", len(issues))
+    c1, c3, c4 = st.columns(3)
+    c1.metric("Connected Devices", connected_count)
+    c3.metric("Config Files", config_count)
+    c4.metric("Logged Issues", len(issues))
 
 
 def get_history(bench: str) -> list[dict[str, str]]:
@@ -255,6 +420,8 @@ def run_chat_prompt(bench: str, prompt: str, source: str = "chat") -> None:
     except Exception as exc:
         response = f"The assistant could not complete the request: {exc}"
 
+    response = compact_assistant_response(response)
+
     history.append({"role": "assistant", "content": response})
     st.session_state["last_diagnostic"][bench] = {
         "source": source,
@@ -265,24 +432,68 @@ def run_chat_prompt(bench: str, prompt: str, source: str = "chat") -> None:
 
 def render_chat_tab(bench: str) -> None:
     st.caption("Chat uses the existing troubleshooting assistant with retrieval scoped to the selected testbench. External agents are disabled in this UI.")
+    st.markdown(f"**Current Context: {bench}**")
 
     for message in get_history(bench):
+        role_label = "You" if message["role"] == "user" else "Assistant"
         with st.chat_message(message["role"]):
+            st.markdown(f"**{role_label}:**")
             st.markdown(message["content"])
 
     prompt = st.chat_input(f"Ask about {bench}")
     if prompt:
-        run_chat_prompt(bench, prompt)
+        history = get_history(bench)
+        history.append({"role": "user", "content": prompt})
+
+        with st.chat_message("user"):
+            st.markdown("**You:**")
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            progress = st.progress(0)
+            with st.spinner("Thinking..."):
+                progress.progress(25)
+            with st.spinner("Searching documentation..."):
+                progress.progress(55)
+            try:
+                with st.spinner("Running diagnostics..."):
+                    response = run_diagnosis(
+                        prompt,
+                        selected_bench=bench,
+                        include_external_agents=False,
+                        include_general_chunks=False,
+                    )
+                    progress.progress(100)
+            except Exception as exc:
+                response = f"The assistant could not complete the request: {exc}"
+                progress.progress(100)
+
+            response = compact_assistant_response(response)
+
+            progress.empty()
+            st.markdown("**Assistant:**")
+            st.markdown(response)
+
+        history.append({"role": "assistant", "content": response})
+        st.session_state["last_diagnostic"][bench] = {
+            "source": "chat",
+            "prompt": prompt,
+            "response": response,
+        }
         st.rerun()
 
 
 def render_inventory_tab(bench: str) -> None:
-    inventory = get_inventory(bench)
-    st.write(f"Inventory records: {len(inventory)}")
-    if inventory.empty:
+    connected_devices = get_connected_devices(bench)
+    if not connected_devices:
         st.info("No inventory rows found for this testbench.")
         return
-    st.dataframe(inventory, use_container_width=True, hide_index=True)
+
+    st.subheader("Connected Devices")
+    st.metric("Connected Devices", len(connected_devices))
+
+    for device in connected_devices:
+        st.write(f"• {device}")
 
 
 def render_issues_tab(bench: str) -> None:
@@ -291,7 +502,27 @@ def render_issues_tab(bench: str) -> None:
     if issues.empty:
         st.info("No logged issues found for this testbench.")
         return
-    st.dataframe(issues, use_container_width=True, hide_index=True)
+
+    drop_patterns = [
+        "reporter",
+        "author",
+        "created_by",
+        "createdby",
+        "time_invested",
+        "effort",
+    ]
+
+    filtered = issues.copy()
+    columns_to_drop = [
+        column
+        for column in filtered.columns
+        if any(pattern in str(column).lower() for pattern in drop_patterns)
+    ]
+
+    if columns_to_drop:
+        filtered = filtered.drop(columns=columns_to_drop, errors="ignore")
+
+    st.dataframe(filtered, use_container_width=True, hide_index=True)
 
 
 def render_configuration_tab(bench: str) -> None:
