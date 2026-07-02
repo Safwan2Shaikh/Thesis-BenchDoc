@@ -66,7 +66,9 @@ def _classify_trace32_error(error):
 
 def retrieve_context(
     user_query,
-    bench=None
+    bench=None,
+    include_external_agents=True,
+    include_general_chunks=True
 ):
 
     started_at = perf_counter()
@@ -90,7 +92,8 @@ def retrieve_context(
                 "trace32": {
                     "routed": False,
                     "used": False,
-                    "error": None
+                    "error": None,
+                    "enabled": include_external_agents
                 }
             },
             "total_elapsed_ms": 0
@@ -201,11 +204,12 @@ def retrieve_context(
             retrieve_chunks(
                 user_query
             )
+            if include_general_chunks else []
         )
 
         record_retriever(
             "knowledge_chunks",
-            "used" if context["knowledge_chunks"] else "empty",
+            "used" if context["knowledge_chunks"] else "disabled" if not include_general_chunks else "empty",
             (perf_counter() - retriever_started) * 1000,
             count=len(context["knowledge_chunks"]),
             details={
@@ -281,7 +285,7 @@ def retrieve_context(
 
         agent_started = None
 
-        if needs_trace32_agent(
+        if include_external_agents and needs_trace32_agent(
             user_query
         ):
 

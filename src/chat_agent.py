@@ -82,7 +82,36 @@ def _build_device_result(user_input, bench_inventory, bench_name):
     }
 
 
-def chat(user_input, selected_bench=None, general_session=False):
+def _retrieve_context_for_chat(
+    user_input,
+    bench_name,
+    include_external_agents,
+    include_general_chunks
+):
+    try:
+        return retrieve_context(
+            user_query=user_input,
+            bench=bench_name,
+            include_external_agents=include_external_agents,
+            include_general_chunks=include_general_chunks
+        )
+    except TypeError as exc:
+        if "unexpected keyword argument" not in str(exc):
+            raise
+
+        return retrieve_context(
+            user_query=user_input,
+            bench=bench_name
+        )
+
+
+def chat(
+    user_input,
+    selected_bench=None,
+    general_session=False,
+    include_external_agents=True,
+    include_general_chunks=True
+):
 
     # ============================================
     # BENCH IDENTIFICATION
@@ -200,9 +229,11 @@ But no inventory exists.
     # ============================================
 
     retrieval_context = (
-        retrieve_context(
-            user_query=user_input,
-            bench=bench_name
+        _retrieve_context_for_chat(
+            user_input=user_input,
+            bench_name=bench_name,
+            include_external_agents=include_external_agents,
+            include_general_chunks=include_general_chunks
         )
     )
 
