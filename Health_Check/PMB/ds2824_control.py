@@ -26,7 +26,7 @@ def main():
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    IP_ADDRESS = "192.168.0.10"            #raw_input("Enter IP: ")
+    IP_ADDRESS = "192.168.0.123"            #raw_input("Enter IP: ")
     PORT = 17123                            #int(raw_input("Enter port: "))
     cnt=0
     if (command_to_execute!=""):
