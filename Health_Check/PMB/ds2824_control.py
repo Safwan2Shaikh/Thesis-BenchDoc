@@ -5,77 +5,93 @@ Controls and monitors the DS2824 PMB (Power Management Board) module.
 Handles relay control and voltage monitoring.
 """
 
-
 import socket
 import sys
 import time
-# This python script toggles relay 1 on a dS module each time it is run.
-# The dS module must be setup to binary mode on the TCP/IP config page.
-# Set the IP address and Port number for the dS module, below.
 
 
-def main():
-    if (len(sys.argv)>1):
-        command_to_execute=str(sys.argv[1])
-        print("command_to_execute (raw) = ",command_to_execute)
-        command_to_execute=command_to_execute.replace("_"," ")
-        print("command_to_execute = ",command_to_execute)
-    else:
-        command_to_execute=""
-        print("!!!MISSING ARGUMENTS like <SR_1_on>")
+def execute_command(command_to_execute):
+    """
+    Execute a DS2824 command.
+
+    Args:
+        command_to_execute (str): Command to send, e.g.
+                                  "SR 1 on"
+                                  "SR 1 off"
+                                  "all off"
+                                  "all on"
+
+    Returns:
+        int: Return code (0 = success, >0 = error)
+    """
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    IP_ADDRESS = "192.168.0.123"            #raw_input("Enter IP: ")
-    PORT = 17123                            #int(raw_input("Enter port: "))
-    cnt=0
-    if (command_to_execute!=""):
-        # Try to connect to the module
+    IP_ADDRESS = "192.168.0.123"
+    PORT = 17123
+    cnt = 0
+
+    if command_to_execute != "":
         try:
             print("Connecting")
-            #s.close()
             s.connect((IP_ADDRESS, PORT))
         except:
             print("can not connect")
-            #s.close()
-            cnt=cnt+1
+            cnt = cnt + 1
 
         try:
-            #s.sendall(b'SR 17 on')
-            if (command_to_execute.find("all on")>=0):
+            if command_to_execute.find("all on") >= 0:
                 for el in range(24):
-                    str_to_send="SR "+str(el+1)+" on"
-                    #print(str_to_send)
+                    str_to_send = "SR " + str(el + 1) + " on"
                     s.sendall(str_to_send.encode())
                     time.sleep(0.01)
+
             else:
-                if (command_to_execute=="all off"):
+                if command_to_execute == "all off":
                     for el in range(24):
-                        str_to_send = 'SR ' + str(el + 1) + ' off'
-                        #print(str_to_send)
-                        iRet=s.sendall(str_to_send.encode())
+                        str_to_send = "SR " + str(el + 1) + " off"
+                        iRet = s.sendall(str_to_send.encode())
                         print(iRet)
                         time.sleep(0.01)
+
                 else:
                     s.sendall(command_to_execute.encode())
+
         except:
             print("can not send on TCP")
             cnt = cnt + 1
 
         try:
             s.close()
-            pass
         except:
             pass
 
-        if (cnt==0):
+        if cnt == 0:
             print("Successfully Done")
 
         print("Return Code = ", cnt)
-        return(cnt)
+
+    return cnt
+
+
+def main():
+    if len(sys.argv) > 1:
+        command_to_execute = str(sys.argv[1])
+
+        print("command_to_execute (raw) = ", command_to_execute)
+
+        command_to_execute = command_to_execute.replace("_", " ")
+
+        print("command_to_execute = ", command_to_execute)
+
+        return execute_command(command_to_execute)
+
+    else:
+        print("!!!MISSING ARGUMENTS like <SR_1_on>")
+
 
 if __name__ == "__main__":
-    print('Number of arguments:', len(sys.argv), 'arguments.')
-    print('Argument List:', str(sys.argv))
+    print("Number of arguments:", len(sys.argv), "arguments.")
+    print("Argument List:", str(sys.argv))
 
     main()

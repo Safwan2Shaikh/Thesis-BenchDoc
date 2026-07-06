@@ -2,52 +2,77 @@
 pmb_fullcheck.py
 
 Full system check for PMB (Power Management Board).
-Performs comprehensive diagnostics on all PMB functions.
+
+Uses ds2824_control.py to verify communication and relay control.
 """
 
-from ds2824_control import DS2824Controller
+import time
+from ds2824_control import execute_command
 
 
-def run_full_pmb_check(i2c_address: int = 0x40) -> dict:
+def run_full_pmb_check():
     """
-    Run full PMB diagnostics.
-    
-    Args:
-        i2c_address: I2C address of the PMB
-    
+    Run PMB communication test.
+
     Returns:
-        dict: Full check results
+        dict: PMB check results
     """
+
     results = {
-        "pmb_address": hex(i2c_address),
         "accessible": False,
-        "relays": {},
-        "voltages": {},
+        "relay_tests": {},
         "errors": []
     }
-    
+
     try:
-        controller = DS2824Controller(i2c_address)
-        results["accessible"] = True
-        results["relays"] = controller.get_relay_status()
-        
-        # Check voltage on typical channels
-        for channel in range(1, 5):
-            try:
-                voltage = controller.read_voltage(channel)
-                results["voltages"][f"ch{channel}"] = voltage
-            except Exception as exc:
-                results["errors"].append(f"Channel {channel} read failed: {exc}")
-    
+        # Relay 1 Test
+        rc = execute_command("SR 1 on")
+
+        if rc == 0:
+            results["accessible"] = True
+            results["relay_tests"]["relay_1_on"] = "PASS"
+
+            time.sleep(0.5)
+
+            rc = execute_command("SR 1 off")
+
+            if rc == 0:
+                results["relay_tests"]["relay_1_off"] = "PASS"
+            else:
+                results["relay_tests"]["relay_1_off"] = "FAIL"
+
+        else:
+            results["relay_tests"]["relay_1_on"] = "FAIL"
+
+        # Relay 4 Test
+        rc = execute_command("SR 4 on")
+
+        if rc == 0:
+            results["relay_tests"]["relay_4_on"] = "PASS"
+
+            time.sleep(0.5)
+
+            rc = execute_command("SR 4 off")
+
+            if rc == 0:
+                results["relay_tests"]["relay_4_off"] = "PASS"
+            else:
+                results["relay_tests"]["relay_4_off"] = "FAIL"
+
+        else:
+            results["relay_tests"]["relay_4_on"] = "FAIL"
+
     except Exception as exc:
-        results["errors"].append(f"PMB initialization failed: {exc}")
-    
+        results["errors"].append(str(exc))
+
     return results
 
 
 if __name__ == "__main__":
-    print("Running PMB full check...")
-    result = run_full_pmb_check()
-    
     import json
+
+    print("Running PMB full check...")
+
+    result = run_full_pmb_check()
+
     print(json.dumps(result, indent=2))
