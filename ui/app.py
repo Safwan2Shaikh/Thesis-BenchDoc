@@ -24,17 +24,6 @@ INVENTORY_FILE = KB_DIR / "TB_Inventory.csv"
 ISSUES_FILE = KB_DIR / "Logged_Issues.csv"
 CONFIG_FILES = ["trail.yaml", "graph_trail.yaml", "troubleshooting_trail.yaml"]
 
-DEVICE_FIELD_LABELS = {
-    "psu": "PSU",
-    "vector_box_1": "Vector Box 1",
-    "vector_box_2": "Vector Box 2",
-    "relay_card": "Relay Card",
-    "netgear": "Netgear",
-    "pdu": "PDU",
-    "lauterbach_1": "Lauterbach 1",
-    "lauterbach_2": "Lauterbach 2",
-}
-
 DEVICE_VALUE_FIELDS = [
     "psu",
     "vector_box_1",
@@ -45,6 +34,8 @@ DEVICE_VALUE_FIELDS = [
     "lauterbach_1",
     "lauterbach_2",
 ]
+
+SENSOR_COLUMN_PREFIX = "sample"
 
 
 st.set_page_config(
@@ -202,6 +193,144 @@ def clean_device_value(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value).strip())
 
 
+def _contains_any_keyword(value: Any, keywords: tuple[str, ...]) -> bool:
+    if value is None or pd.isna(value):
+        return False
+    text = str(value).strip().lower()
+    if not text or text in {"no", "none", "nan", "null"}:
+        return False
+    return any(keyword in text for keyword in keywords)
+
+
+def _normalize_label(text: str) -> str:
+    return str(text).replace("_", " ").strip().title()
+
+
+def _get_trail_config(bench: str) -> dict[str, Any]:
+    trail_path = BENCH_CONFIG_DIR / bench / "trail.yaml"
+    _, parsed, _ = read_yaml_text(trail_path)
+    if isinstance(parsed, dict):
+        return parsed
+    return {}
+
+
+def _extract_sensors_from_inventory_row(row: pd.Series) -> list[str]:
+    sensors: list[str] = []
+    for column in row.index:
+        if not str(column).startswith(SENSOR_COLUMN_PREFIX):
+            continue
+        value = row.get(column)
+        if not is_installed(value):
+            continue
+        sensor = clean_device_value(value)
+        if sensor and sensor not in sensors:
+            sensors.append(sensor)
+    return sensors
+
+
+def _extract_sensors_from_trail(config: dict[str, Any]) -> list[str]:
+    devices = config.get("devices") if isinstance(config, dict) else None
+    if not isinstance(devices, dict):
+        return []
+
+    sensors: list[str] = []
+    for key, info in devices.items():
+        if not isinstance(info, dict):
+            continue
+        device_type = str(info.get("type", "")).lower()
+        is_sensor = (
+            key.lower().startswith("ecu")
+            or key.lower().startswith("sensor")
+            or "radarecu" in device_type
+            or "sensor" in device_type
+        )
+        if not is_sensor:
+            continue
+
+        label = _normalize_label(key)
+        if label and label not in sensors:
+            sensors.append(label)
+
+    return sensors
+
+
+def _extract_relay_mappings(config: dict[str, Any]) -> list[dict[str, str]]:
+    devices = config.get("devices") if isinstance(config, dict) else None
+    if not isinstance(devices, dict):
+        return []
+
+    pmb = devices.get("pmb")
+    if not isinstance(pmb, dict):
+        return []
+
+    ports = pmb.get("ports")
+    if not isinstance(ports, dict):
+        return []
+
+    mappings: list[dict[str, str]] = []
+    for relay_id, relay_info in ports.items():
+        if not isinstance(relay_info, dict):
+            continue
+        sensor_name = relay_info.get("connected_device")
+        if not is_installed(sensor_name):
+            continue
+        mappings.append(
+            {
+                "Sensor Name": _normalize_label(str(sensor_name)),
+                "Relay ID": str(relay_id),
+            }
+        )
+
+    return mappings
+
+
+def get_testbench_details(bench: str) -> dict[str, Any]:
+    inventory = get_inventory(bench)
+    trail_config = _get_trail_config(bench)
+
+    has_mt = False
+    has_debug = False
+    sensors: list[str] = []
+
+    if not inventory.empty:
+        row = inventory.iloc[0]
+        sensors.extend(_extract_sensors_from_inventory_row(row))
+        for value in row.values:
+            has_mt = has_mt or _contains_any_keyword(value, ("vx1161",))
+            has_debug = has_debug or _contains_any_keyword(value, ("lauterbach", "t32"))
+
+    devices = trail_config.get("devices") if isinstance(trail_config, dict) else None
+    if isinstance(devices, dict):
+        for key, info in devices.items():
+            info_type = ""
+            if isinstance(info, dict):
+                info_type = str(info.get("type", "")).lower()
+            key_text = str(key).lower()
+            has_mt = has_mt or ("vx1161" in key_text) or ("vx1161" in info_type)
+            has_debug = has_debug or any(token in key_text for token in ("lauterbach", "t32")) or any(
+                token in info_type for token in ("lauterbach", "t32")
+            )
+
+    sensors.extend(_extract_sensors_from_trail(trail_config))
+    unique_sensors = list(dict.fromkeys(sensors))
+    relay_mappings = _extract_relay_mappings(trail_config)
+
+    if has_mt and has_debug:
+        bench_type = "MT + Debug Bench"
+    elif has_mt:
+        bench_type = "MT Bench"
+    elif has_debug:
+        bench_type = "Debug Bench"
+    else:
+        bench_type = "Unknown"
+
+    return {
+        "bench_type": bench_type,
+        "sensors": unique_sensors,
+        "relay_mappings": relay_mappings,
+    }
+
+
 def truncate_words(text: str, max_words: int = 150) -> str:
     words = text.split()
     if len(words) <= max_words:
@@ -301,27 +430,6 @@ def get_connected_devices(bench: str) -> list[str]:
     return devices
 
 
-def get_connected_device_status(bench: str) -> list[dict[str, Any]]:
-    inventory = get_inventory(bench)
-    if inventory.empty:
-        return []
-
-    row = inventory.iloc[0]
-    status = []
-
-    for field, label in DEVICE_FIELD_LABELS.items():
-        value = row.get(field, None)
-        status.append(
-            {
-                "label": label,
-                "installed": is_installed(value),
-                "raw": value,
-            }
-        )
-
-    return status
-
-
 def clear_cached_data() -> None:
     discover_testbenches.clear()
     read_csv_safe.clear()
@@ -388,18 +496,30 @@ def render_sidebar(bench: str) -> None:
 
 
 def render_summary(bench: str) -> None:
-    connected_devices = get_connected_devices(bench)
-    issues = get_logged_issues(bench)
-    status = get_config_status(bench)
-    connected_count = len(connected_devices)
-    config_count = sum(1 for exists in status.values() if exists)
+    details = get_testbench_details(bench)
+    sensors = details["sensors"]
+    relay_mappings = details["relay_mappings"]
 
     st.subheader(f"Testbench: {bench}")
 
-    c1, c3, c4 = st.columns(3)
-    c1.metric("Connected Devices", connected_count)
-    c3.metric("Config Files", config_count)
-    c4.metric("Logged Issues", len(issues))
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Bench Type", details["bench_type"])
+    c2.metric("Sensor Count", len(sensors))
+    c3.metric("Relay Mappings", len(relay_mappings))
+
+    st.markdown("**Sensors**")
+    if sensors:
+        for sensor in sensors:
+            st.write(f"- {sensor}")
+    else:
+        st.info("No sensors detected for this testbench.")
+
+    st.markdown("**Relay Mapping**")
+    if relay_mappings:
+        relay_df = pd.DataFrame(relay_mappings, columns=["Sensor Name", "Relay ID"])
+        st.dataframe(relay_df, use_container_width=True, hide_index=True)
+    else:
+        st.info("No sensor to relay mappings found for this testbench.")
 
 
 def get_history(bench: str) -> list[dict[str, str]]:
