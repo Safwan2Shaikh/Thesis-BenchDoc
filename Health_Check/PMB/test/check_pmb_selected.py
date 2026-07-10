@@ -11,16 +11,16 @@ from shs2rng.BenchDoc.Thesis-BenchDoc.Health_Check.PMB.ds2824_control import exe
 def test_pmb_relay_control():
     """Test relay 1 and relay 4 operation."""
 
-    relay1_on = execute_command("SR 1 on") == 0
+    relay1_on = execute_command("SR_01_on") == 0
     time.sleep(0.5)
 
-    relay1_off = execute_command("SR 1 off") == 0
+    relay1_off = execute_command("SR_01_off") == 0
     time.sleep(0.5)
 
-    relay4_on = execute_command("SR 4 on") == 0
+    relay4_on = execute_command("SR_04_on") == 0
     time.sleep(0.5)
 
-    relay4_off = execute_command("SR 4 off") == 0
+    relay4_off = execute_command("SR_04_off") == 0
 
     success = relay1_on and relay1_off and relay4_on and relay4_off
 
